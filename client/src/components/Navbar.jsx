@@ -1,26 +1,28 @@
-import React, { useState } from 'react';
-import { 
-  Bell, 
-  User, 
-  LogOut, 
-  Settings, 
-  UserCircle,
-  Menu,
-  X
-} from 'lucide-react';
+
+import React, { useState, useContext } from 'react';
+import { Bell, User, LogOut, Settings, Menu, X } from 'lucide-react';
+import { ThemeContext } from '../App';
+import logo from "../assets/1734760408581.jpeg";
 
 const Navbar = () => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [notifications] = useState(3); // Example notification count
+  const [notifications] = useState(3);
+  
+  const { darkMode, toggleDarkMode } = useContext(ThemeContext);
 
-  const toggleProfile = () => {
-    setIsProfileOpen(!isProfileOpen);
-  };
+  const navLinks = [
+    { href: "/", label: "Home" },
+    { href: "/events", label: "Events" },
+    { href: "/contact", label: "Contact" },
+    { href: "/about", label: "About Us" }
+  ];
 
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
-  };
+  const profileMenuItems = [
+    { icon: <User size={16} />, label: "Profile", action: () => {} },
+    { icon: <Settings size={16} />, label: "Settings", action: () => {} },
+    { icon: <LogOut size={16} />, label: "Logout", action: () => {} }
+  ];
 
   return (
     <nav className="bg-white shadow-md dark:bg-gray-800">
@@ -31,7 +33,7 @@ const Navbar = () => {
             <div className="flex-shrink-0 flex items-center">
               <img
                 className="h-8 w-8"
-                src="/api/placeholder/32/32"
+                src={logo}
                 alt="Logo"
               />
               <span className="ml-2 text-xl font-bold text-gray-800 dark:text-white">
@@ -42,22 +44,27 @@ const Navbar = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            <a href="/" className="text-gray-600 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-400">
-              Home
-            </a>
-            <a href="/events" className="text-gray-600 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-400">
-              Events
-            </a>
-            <a href="/contact" className="text-gray-600 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-400">
-              Contact
-            </a>
-            <a href="/about" className="text-gray-600 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-400">
-              About Us
-            </a>
+            {navLinks.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                className="text-gray-600 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-400"
+              >
+                {link.label}
+              </a>
+            ))}
           </div>
 
           {/* Right side icons */}
           <div className="hidden md:flex items-center space-x-4">
+            {/* Dark Mode Toggle */}
+            <button
+              onClick={toggleDarkMode}
+              className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
+            >
+              {darkMode ? '🌙' : '☀️'}
+            </button>
+
             {/* Notification Bell */}
             <div className="relative">
               <button className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700">
@@ -73,36 +80,24 @@ const Navbar = () => {
             {/* Profile Dropdown */}
             <div className="relative">
               <button
-                onClick={toggleProfile}
-                className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center"
+                onClick={() => setIsProfileOpen(!isProfileOpen)}
+                className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
               >
                 <User className="h-6 w-6 text-gray-600 dark:text-gray-300" />
               </button>
 
-              {/* Profile Dropdown Menu */}
               {isProfileOpen && (
-                <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg py-1 ring-1 ring-black ring-opacity-5">
-                  <a
-                    href="/profile"
-                    className="flex items-center px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
-                  >
-                    <UserCircle className="h-5 w-5 mr-2" />
-                    View Profile
-                  </a>
-                  <a
-                    href="/settings"
-                    className="flex items-center px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
-                  >
-                    <Settings className="h-5 w-5 mr-2" />
-                    Settings
-                  </a>
-                  <button
-                    onClick={() => console.log('Logout clicked')}
-                    className="flex items-center w-full px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
-                  >
-                    <LogOut className="h-5 w-5 mr-2" />
-                    Logout
-                  </button>
+                <div className="absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5">
+                  {profileMenuItems.map((item, index) => (
+                    <button
+                      key={index}
+                      onClick={item.action}
+                      className="flex items-center w-full px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                    >
+                      {item.icon}
+                      <span className="ml-2">{item.label}</span>
+                    </button>
+                  ))}
                 </div>
               )}
             </div>
@@ -111,8 +106,8 @@ const Navbar = () => {
           {/* Mobile menu button */}
           <div className="md:hidden flex items-center">
             <button
-              onClick={toggleMobileMenu}
-              className="p-2 rounded-md text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="p-2 rounded-md text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
             >
               {isMobileMenuOpen ? (
                 <X className="h-6 w-6" />
@@ -122,55 +117,22 @@ const Navbar = () => {
             </button>
           </div>
         </div>
-      </div>
 
-      {/* Mobile menu */}
-      {isMobileMenuOpen && (
-        <div className="md:hidden">
-          <div className="px-2 pt-2 pb-3 space-y-1">
-            <a
-              href="/"
-              className="block px-3 py-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
-            >
-              Home
-            </a>
-            <a
-              href="/events"
-              className="block px-3 py-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
-            >
-              Events
-            </a>
-            <a
-              href="/contact"
-              className="block px-3 py-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
-            >
-              Contact
-            </a>
-            <a
-              href="/about"
-              className="block px-3 py-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
-            >
-              About Us
-            </a>
-            <div className="flex items-center space-x-4 px-3 py-2">
-              <button className="relative">
-                <Bell className="h-6 w-6 text-gray-600 dark:text-gray-300" />
-                {notifications > 0 && (
-                  <span className="absolute top-0 right-0 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
-                    {notifications}
-                  </span>
-                )}
-              </button>
-              <button
-                onClick={toggleProfile}
-                className="flex items-center text-gray-700 dark:text-gray-300"
+        {/* Mobile menu */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden py-2">
+            {navLinks.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                className="block px-3 py-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
               >
-                <User className="h-6 w-6" />
-              </button>
-            </div>
+                {link.label}
+              </a>
+            ))}
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </nav>
   );
 };
