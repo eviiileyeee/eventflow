@@ -1,6 +1,6 @@
 
 import React, { useState, useContext } from 'react';
-import { Bell, User, LogOut, Settings, Menu, X } from 'lucide-react';
+import { Bell, User, LogOut, Settings, Menu, X , Sun , Moon} from 'lucide-react';
 import { ThemeContext } from '../App';
 import logo from "../assets/1734760408581.jpeg";
 
@@ -62,7 +62,7 @@ const Navbar = () => {
               onClick={toggleDarkMode}
               className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
             >
-              {darkMode ? '🌙' : '☀️'}
+              {darkMode ? <Sun/> : <Moon/>}
             </button>
 
             {/* Notification Bell */}
