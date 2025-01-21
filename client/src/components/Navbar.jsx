@@ -3,12 +3,14 @@ import { Bell, User, LogOut, Settings, Menu, X, Sun, Moon } from "lucide-react";
 import { ThemeContext } from "../App";
 import logo from "../assets/1734760408581.jpeg";
 import { useTheme } from './ThemeContext/ThemeContext';
+import { useNavigate } from "react-router-dom";
 
 
 const Navbar = () => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { darkMode, toggleDarkMode } = useTheme();
+  const navigate = useNavigate();
 
   const navLinks = [
     { href: "/", label: "Home" },
@@ -18,7 +20,7 @@ const Navbar = () => {
   ];
 
   const profileMenuItems = [
-    { icon: <User size={16} />, label: "Profile", action: () => {  }},
+    { icon: <User size={16} />, label: "Profile", action: () => {       navigate("/profile");    }},
     { icon: <Settings size={16} />, label: "Settings", action: () => {} },
     { icon: <LogOut size={16} />, label: "Logout", action: () => {} },
   ];
