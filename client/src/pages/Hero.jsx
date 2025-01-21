@@ -1,6 +1,9 @@
 import React from "react";
+import Projects from "../components/Projects";
+import Team from "../components/Team";
 
 const Hero = () => (
+    <>
   <section className="h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 px-6">
     <div className="container mx-auto text-center">
       <h1 className="text-5xl font-bold mb-6 text-gray-900 dark:text-white">
@@ -14,6 +17,9 @@ const Hero = () => (
       </button>
     </div>
   </section>
+  <Team/>
+  <Projects/>
+  </>
 );
 
 export default Hero;
