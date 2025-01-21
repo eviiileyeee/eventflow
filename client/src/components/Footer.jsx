@@ -1,18 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import logo from "../assets/1734760408581.jpeg";
-import { 
-  Github, 
-  Linkedin, 
-  Twitter, 
-  Mail, 
-  Phone, 
-  MapPin,
-  ChevronRight
-} from 'lucide-react';
+import { Github, Linkedin, Twitter, Mail, Phone, MapPin, ChevronRight } from 'lucide-react';
+import { ThemeContext } from "../App"; // Import ThemeContext
 
 const FooterSection = ({ title, children }) => (
   <div className="mb-8 md:mb-0">
-    <h3 className="text-lg font-semibold mb-4 text-white">{title}</h3>
+    <h3 className="text-lg font-semibold mb-4">{title}</h3>
     {children}
   </div>
 );
@@ -20,7 +13,7 @@ const FooterSection = ({ title, children }) => (
 const FooterLink = ({ href, children }) => (
   <a 
     href={href}
-    className="block mb-2 text-gray-400 hover:text-blue-400 transition-colors duration-200"
+    className="block mb-2 hover:text-blue-400 transition-colors duration-200"
   >
     <div className="flex items-center">
       <ChevronRight className="h-4 w-4 mr-1" />
@@ -31,9 +24,10 @@ const FooterLink = ({ href, children }) => (
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const { darkMode } = useContext(ThemeContext); // Use the ThemeContext
 
   return (
-    <footer className="bg-gray-900 text-gray-400">
+    <footer className={`${darkMode ? "bg-gray-900 text-gray-400" : "bg-gray-50 text-gray-900"}`}>
       {/* Main Footer Content */}
       <div className="max-w-7xl mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -114,16 +108,16 @@ const Footer = () => {
         </div>
 
         {/* Newsletter Subscription */}
-        <div className="border-t border-gray-800 mt-12 pt-8">
+        <div className="border-t mt-12 pt-8">
           <div className="max-w-md mx-auto text-center">
-            <h3 className="text-lg font-semibold mb-4 text-white">
+            <h3 className="text-lg font-semibold mb-4">
               Subscribe to Our Newsletter
             </h3>
             <div className="flex">
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="flex-grow px-4 py-2 bg-gray-800 rounded-l focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className={`flex-grow px-4 py-2 ${darkMode ? "bg-gray-800" : "bg-gray-200"} rounded-l focus:outline-none focus:ring-2 focus:ring-blue-500`}
               />
               <button className="px-6 py-2 bg-blue-600 text-white rounded-r hover:bg-blue-700 transition-colors">
                 Subscribe
@@ -133,7 +127,7 @@ const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-gray-800 mt-12 pt-8">
+        <div className="border-t mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="mb-4 md:mb-0">
               © {currentYear} Echelon Dev Society. All rights reserved.
