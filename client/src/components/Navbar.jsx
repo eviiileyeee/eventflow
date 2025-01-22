@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Bell, User, LogOut, Settings, Menu, X, Sun, Moon } from "lucide-react";
+import { Bell, User, Menu, X, Sun, Moon } from "lucide-react";
 import logo from "../assets/1734760408581.jpeg";
 import { useTheme } from '../components/ThemeContext/ThemeContext';
 import { useNavigate } from "react-router-dom";
@@ -36,13 +36,13 @@ const Navbar = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {navLinks.map((link) => (
-              <a
+              <button
                 key={link.label}
-                href={link.href}
+                onClick={()=>{navigate(link.href)}}
                 className="text-sm font-bold uppercase tracking-wide text-gray-600 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-400"
               >
                 {link.label}
-              </a>
+              </button>
             ))}
           </div>
           {/* Right-side icons */}
