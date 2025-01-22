@@ -90,7 +90,7 @@ const ContactPage = () => {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full bg-gray-900 border border-gray-800 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all shadow-md dark:shadow-white"
+                    className="w-full bg-gray-900 border border-gray-800 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all shadow-md dark:shadow-gray-600"
                   />
                 </div>
                 <div>
@@ -103,7 +103,7 @@ const ContactPage = () => {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full bg-gray-900 border border-gray-800 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all shadow-md dark:shadow-white"
+                    className="w-full bg-gray-900 border border-gray-800 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all shadow-md dark:shadow-gray-600"
                   />
                 </div>
               </div>
@@ -118,7 +118,7 @@ const ContactPage = () => {
                     name="company"
                     value={formData.company}
                     onChange={handleChange}
-                    className="w-full bg-gray-900 border border-gray-800 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all shadow-md dark:shadow-white"
+                    className="w-full bg-gray-900 border border-gray-800 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all shadow-md dark:shadow-gray-600"
                   />
                 </div>
                 <div>
@@ -130,7 +130,7 @@ const ContactPage = () => {
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
-                    className="w-full bg-gray-900 border border-gray-800 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all shadow-md dark:shadow-white"
+                    className="w-full bg-gray-900 border border-gray-800 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all shadow-md dark:shadow-gray-600"
                   />
                 </div>
               </div>
@@ -145,7 +145,7 @@ const ContactPage = () => {
                   value={formData.subject}
                   onChange={handleChange}
                   required
-                  className="w-full bg-gray-900 border border-gray-800 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all shadow-md dark:shadow-white"
+                  className="w-full bg-gray-900 border border-gray-800 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all shadow-md dark:shadow-gray-600"
                 />
               </div>
 
@@ -159,14 +159,14 @@ const ContactPage = () => {
                   onChange={handleChange}
                   required
                   rows={5}
-                  className="w-full bg-gray-900 border border-gray-800 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all shadow-md dark:shadow-white"
+                  className="w-full bg-gray-900 border border-gray-800 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all shadow-md dark:shadow-gray-600"
                 />
               </div>
 
               <button
                 type="submit"
                 disabled={status.loading}
-                className="w-full bg-gray-800 dark:bg-gray-900 hover:bg-blue-700 text-white font-medium py-3 rounded-lg transition-all flex items-center justify-center gap-2 shadow-md dark:shadow-white"
+                className="w-full bg-gray-800 dark:bg-gray-900 hover:bg-blue-700 text-white font-medium py-3 rounded-lg transition-all flex items-center justify-center gap-2 shadow-md dark:shadow-gray-600"
               >
                 {status.loading ? (
                   'Sending...'
@@ -190,9 +190,10 @@ const ContactPage = () => {
           </div>
 
           {/* Contact Information */}
-          <div className="space-y-8">
-            <div className="bg-gray-900 p-8 rounded-xl border border-gray-800">
-              <h3 className="text-xl font-semibold mb-6">Other Ways to Connect</h3>
+          <div className="space-y-8 ">
+          <div className="bg-gray-900 dark:bg-gray-900 shadow-lg dark:shadow-gray-600 p-8 rounded-xl border border-gray-800">
+  <h3 className="text-xl font-semibold mb-6">Other Ways to Connect</h3>
+
 
               <div className="space-y-6">
                 {/* Email Contact */}
@@ -252,14 +253,15 @@ const ContactPage = () => {
               </div>
             </div>
 
-            <div className="bg-gray-900 p-8 rounded-xl border border-gray-800">
-              <h3 className="text-xl font-semibold mb-4">Quick Info</h3>
-              <ul className="space-y-3 text-gray-400">
-                <li>• Typical response time: Within 24 hours</li>
-                <li>• Available Monday - Friday</li>
-                <li>• 9:00 AM - 6:00 PM (EST)</li>
-              </ul>
-            </div>
+            <div className="bg-gray-900 p-8 rounded-xl border border-gray-800 shadow-lg dark:shadow-gray-600">
+  <h3 className="text-xl font-semibold mb-4">Quick Info</h3>
+  <ul className="space-y-3 text-gray-400">
+    <li>• Typical response time: Within 24 hours</li>
+    <li>• Available Monday - Friday</li>
+    <li>• 9:00 AM - 6:00 PM (EST)</li>
+  </ul>
+</div>
+
           </div>
         </div>
       </div>
