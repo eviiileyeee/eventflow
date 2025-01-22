@@ -4,6 +4,9 @@ import logo from "../assets/1734760408581.jpeg";
 import { useTheme } from '../components/ThemeContext/ThemeContext'; 
 import { useNavigate } from "react-router-dom";
 
+
+
+
 const Navbar = () => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
