@@ -9,8 +9,9 @@ import About from "./components/About";
 import Footer from "./components/Footer";
 import Events from "./pages/Events";
 import { ThemeProvider } from './components/ThemeContext/ThemeContext';
-import Cursor from "./components/Cursor"; // Import the Cursor component
+import Cursor from "./components/Cursor"; 
 import ContactPage from "./pages/ContactPage";
+import NotificationPage from "./pages/NotificationPage";
 
 const DashboardLayout = ({ children }) => (
   <div id="main" className="relative overflow-hidden min-h-screen">
@@ -36,6 +37,8 @@ const App = () => {
           <Route path="/login" element={<LoginPage />} />
 
           <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/notification" element={<NotificationPage />} />
+
 
           <Route path="/events" element={
             <DashboardLayout>

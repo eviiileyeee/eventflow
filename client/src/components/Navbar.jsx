@@ -8,7 +8,6 @@ import { useNavigate } from "react-router-dom";
 
 
 const Navbar = () => {
-  const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { darkMode, toggleDarkMode } = useTheme();
   const navigate = useNavigate();
@@ -20,11 +19,6 @@ const Navbar = () => {
     { href: "/about", label: "About Us" },
   ];
 
-  const profileMenuItems = [
-    { icon: <User size={16} />, label: "Profile", action: () => {  } },
-    { icon: <Settings size={16} />, label: "Settings", action: () => { } },
-    { icon: <LogOut size={16} />, label: "Logout", action: () => { } },
-  ];
 
   return (
     <nav className="fixed top-0 left-0 w-full bg-white bg-opacity-30 backdrop-blur-md shadow-md dark:bg-gray-800 dark:bg-opacity-30 z-50">
@@ -63,7 +57,10 @@ const Navbar = () => {
 
             {/* Notification Bell */}
             <div className="relative">
-              <button className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700">
+              <button
+                className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
+                onClick={() => { navigate("/notification"); }}
+              >
                 <Bell className="h-6 w-6 text-gray-600 dark:text-gray-300" />
               </button>
             </div>
@@ -71,7 +68,7 @@ const Navbar = () => {
             <div className="relative">
               <button
                 className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
-                onClick={()=> {navigate("/profile");}}
+                onClick={() => { navigate("/profile"); }}
               >
                 <User className="h-6 w-6 text-gray-600 dark:text-gray-300" />
               </button>
@@ -110,29 +107,29 @@ const Navbar = () => {
               className=" p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
             >
               <div className="flex ">
-              {darkMode ? <Sun className="text-yellow-500" /> : <Moon className="text-gray-600" />}
-              <p className="px-1 py-1 rounded-md text-sm font-bold uppercase tracking-wide text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                {darkMode ? <Sun className="text-yellow-500" /> : <Moon className="text-gray-600" />}
+                <p className="px-1 py-1 rounded-md text-sm font-bold uppercase tracking-wide text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
                 >Theme</p>
-                </div>
+              </div>
             </button>
             <div className="relative">
               <button className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700">
                 <div className="flex">
-                <Bell className="h-6 w-6 text-gray-600 dark:text-gray-300" />
-                <p className="px-1 py-1 rounded-md text-sm font-bold uppercase tracking-wide text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
-                >Notifications</p>
+                  <Bell className="h-6 w-6 text-gray-600 dark:text-gray-300" />
+                  <p className="px-1 py-1 rounded-md text-sm font-bold uppercase tracking-wide text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                  >Notifications</p>
                 </div>
               </button>
             </div>
             <div className="relative">
               <button
                 className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
-                onClick={()=> {navigate("/profile");}}
+                onClick={() => { navigate("/profile"); }}
               >
                 <div className="flex">
-                <User className="h-6 w-6 text-gray-600 dark:text-gray-300" />
-                 <p className="px-1 py-1 rounded-md text-sm font-bold uppercase tracking-wide text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
-                >Profile</p>
+                  <User className="h-6 w-6 text-gray-600 dark:text-gray-300" />
+                  <p className="px-1 py-1 rounded-md text-sm font-bold uppercase tracking-wide text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                  >Profile</p>
                 </div>
               </button>
             </div>
@@ -147,7 +144,15 @@ export default Navbar;
 
 
 /*
-            Profile Dropdown 
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
+
+ const profileMenuItems = [
+    { icon: <User size={16} />, label: "Profile", action: () => {  } },
+    { icon: <Settings size={16} />, label: "Settings", action: () => { } },
+    { icon: <LogOut size={16} />, label: "Logout", action: () => { } },
+  ];
+
+           ----------------------- Profile Dropdown ------------------------------
 
 
                 onClick={() => setIsProfileOpen(!isProfileOpen)}
