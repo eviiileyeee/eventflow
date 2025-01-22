@@ -1,5 +1,5 @@
 import React from "react";
-import Projects from "../components/Projects";
+import Goals from "../components/Goals";
 import Team from "../components/Team";
 import Stars from "../components/Stars"; // Add this import
 import { useTheme } from "../components/ThemeContext/ThemeContext";
@@ -52,7 +52,7 @@ const Hero = () => {
           </button>
         </div>
       </section>
-      <Projects />
+      <Goals />
       <Team />
    
     </>
