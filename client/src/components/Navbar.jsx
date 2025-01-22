@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Bell, User, LogOut, Settings, Menu, X, Sun, Moon } from "lucide-react";
 import logo from "../assets/1734760408581.jpeg";
-import { useTheme } from '../components/ThemeContext/ThemeContext'; 
+import { useTheme } from '../components/ThemeContext/ThemeContext';
 import { useNavigate } from "react-router-dom";
 
 
@@ -21,9 +21,9 @@ const Navbar = () => {
   ];
 
   const profileMenuItems = [
-    { icon: <User size={16} />, label: "Profile", action: () => { navigate("/profile"); }},
-    { icon: <Settings size={16} />, label: "Settings", action: () => {} },
-    { icon: <LogOut size={16} />, label: "Logout", action: () => {} },
+    { icon: <User size={16} />, label: "Profile", action: () => {  } },
+    { icon: <Settings size={16} />, label: "Settings", action: () => { } },
+    { icon: <LogOut size={16} />, label: "Logout", action: () => { } },
   ];
 
   return (
@@ -68,29 +68,13 @@ const Navbar = () => {
               </button>
             </div>
 
-            {/* Profile Dropdown */}
             <div className="relative">
               <button
-                onClick={() => setIsProfileOpen(!isProfileOpen)}
                 className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
+                onClick={()=> {navigate("/profile");}}
               >
                 <User className="h-6 w-6 text-gray-600 dark:text-gray-300" />
               </button>
-
-              {isProfileOpen && (
-                <div className="absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5">
-                  {profileMenuItems.map((item, index) => (
-                    <button
-                      key={index}
-                      onClick={item.action}
-                      className="flex items-center w-full px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
-                    >
-                      {item.icon}
-                      <span className="ml-2">{item.label}</span>
-                    </button>
-                  ))}
-                </div>
-              )}
             </div>
           </div>
 
@@ -121,6 +105,37 @@ const Navbar = () => {
                 {link.label}
               </a>
             ))}
+            <button
+              onClick={toggleDarkMode}
+              className=" p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
+            >
+              <div className="flex ">
+              {darkMode ? <Sun className="text-yellow-500" /> : <Moon className="text-gray-600" />}
+              <p className="px-1 py-1 rounded-md text-sm font-bold uppercase tracking-wide text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                >Theme</p>
+                </div>
+            </button>
+            <div className="relative">
+              <button className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700">
+                <div className="flex">
+                <Bell className="h-6 w-6 text-gray-600 dark:text-gray-300" />
+                <p className="px-1 py-1 rounded-md text-sm font-bold uppercase tracking-wide text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                >Notifications</p>
+                </div>
+              </button>
+            </div>
+            <div className="relative">
+              <button
+                className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
+                onClick={()=> {navigate("/profile");}}
+              >
+                <div className="flex">
+                <User className="h-6 w-6 text-gray-600 dark:text-gray-300" />
+                 <p className="px-1 py-1 rounded-md text-sm font-bold uppercase tracking-wide text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                >Profile</p>
+                </div>
+              </button>
+            </div>
           </div>
         )}
       </div>
@@ -129,3 +144,25 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+
+/*
+            Profile Dropdown 
+
+
+                onClick={() => setIsProfileOpen(!isProfileOpen)}
+
+{isProfileOpen && (
+  <div className="absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5">
+    {profileMenuItems.map((item, index) => (
+      <button
+        key={index}
+        onClick={item.action}
+        className="flex items-center w-full px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+      >
+        {item.icon}
+        <span className="ml-2">{item.label}</span>
+      </button>
+    ))}
+  </div>
+)}*/
