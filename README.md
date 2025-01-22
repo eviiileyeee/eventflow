@@ -9,11 +9,11 @@ Echelon Dev Society is a community of passionate developers, designers, and tech
 - **Hackathon Series**: Quarterly hackathons focusing on solving real-world problems.
 
 ## Installation Instructions
-mkdir edc-project
-git clone https://github.com/eviiileyeee/EDC-LandingPage.git
-cd client
-npm install
-npm run dev
+mkdir edc-project <br>
+git clone https://github.com/eviiileyeee/EDC-LandingPage.git <br>
+cd client <br>
+npm install <br>
+npm run dev <br>
 
 ## Usage Instructions
 npm run build 
