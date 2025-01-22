@@ -3,7 +3,6 @@ import { Mail, Phone, Send, MessageCircle } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 
 const ContactPage = () => {
-  // Form state
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -18,12 +17,6 @@ const ContactPage = () => {
     error: null,
     success: false
   });
-
-  //const EMAIL_SERVICE_ID = 'YOUR_EMAIL_SERVICE_ID';
-  //const EMAIL_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
-  //const EMAIL_PUBLIC_KEY = 'YOUR_PUBLIC_KEY';
-
-  //const WHATSAPP_NUMBER = '+1234567890';
 
   const handleChange = (e) => {
     setFormData({
@@ -73,24 +66,22 @@ const ContactPage = () => {
   return (
     <div className="min-h-screen text-white bg-white dark:bg-gray-800">
       <div className="max-w-6xl mx-auto px-4 py-16">
-        {/* Header Section */}
         <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gray-800 dark:text-white ">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 pt-8 text-gray-800 dark:text-[#D2D9EF]">
             Get in Touch
           </h1>
-          <p className="max-w-2xl mx-auto text-gray-800 dark:text-white">
+          <p className="max-w-2xl mx-auto text-gray-800 dark:text-[#D2D9EF]">
             Have a question or want to work together? We'd love to hear from you.
             Choose your preferred way to reach us.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
-          {/* Contact Form */}
-          <div className="space-y-8 ">
+          <div className="space-y-8">
             <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 ">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-medium text-gray-800 mb-2 dark:text-gray-400">
+                  <label className="block text-sm font-medium dark:text-gray-400 text-gray-800 mb-2">
                     Name
                   </label>
                   <input
@@ -99,11 +90,11 @@ const ContactPage = () => {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full bg-gray-900 border border-gray-800 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+                    className="w-full bg-gray-900 border border-gray-800 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all shadow-md dark:shadow-white"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-800 mb-2 dark:text-gray-400">
+                  <label className="block text-sm font-medium dark:text-gray-400 text-gray-800 mb-2">
                     Email
                   </label>
                   <input
@@ -112,14 +103,14 @@ const ContactPage = () => {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full bg-gray-900 border border-gray-800 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+                    className="w-full bg-gray-900 border border-gray-800 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all shadow-md dark:shadow-white"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-medium text-gray-800 mb-2 dark:text-gray-400">
+                  <label className="block text-sm font-medium dark:text-gray-400 text-gray-800 mb-2">
                     Company
                   </label>
                   <input
@@ -127,11 +118,11 @@ const ContactPage = () => {
                     name="company"
                     value={formData.company}
                     onChange={handleChange}
-                    className="w-full bg-gray-900 border border-gray-800 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+                    className="w-full bg-gray-900 border border-gray-800 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all shadow-md dark:shadow-white"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-800 mb-2 dark:text-gray-400">
+                  <label className="block text-sm font-medium dark:text-gray-400 text-gray-800 mb-2">
                     Phone
                   </label>
                   <input
@@ -139,13 +130,13 @@ const ContactPage = () => {
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
-                    className="w-full bg-gray-900 border border-gray-800 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+                    className="w-full bg-gray-900 border border-gray-800 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all shadow-md dark:shadow-white"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-800 mb-2 dark:text-gray-400">
+                <label className="block text-sm font-medium dark:text-gray-400 text-gray-800 mb-2">
                   Subject
                 </label>
                 <input
@@ -154,12 +145,12 @@ const ContactPage = () => {
                   value={formData.subject}
                   onChange={handleChange}
                   required
-                  className="w-full bg-gray-900 border border-gray-800 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+                  className="w-full bg-gray-900 border border-gray-800 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all shadow-md dark:shadow-white"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-800 mb-2 dark:text-gray-400">
+                <label className="block text-sm font-medium dark:text-gray-400 text-gray-800 mb-2">
                   Message
                 </label>
                 <textarea
@@ -168,14 +159,14 @@ const ContactPage = () => {
                   onChange={handleChange}
                   required
                   rows={5}
-                  className="w-full bg-gray-900 border border-gray-800 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+                  className="w-full bg-gray-900 border border-gray-800 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all shadow-md dark:shadow-white"
                 />
               </div>
 
               <button
                 type="submit"
                 disabled={status.loading}
-                className="w-full bg-gray-800 hover:bg-blue-700 text-white font-medium py-3 rounded-lg transition-all flex items-center justify-center gap-2"
+                className="w-full bg-gray-800 dark:bg-gray-900 hover:bg-blue-700 text-white font-medium py-3 rounded-lg transition-all flex items-center justify-center gap-2 shadow-md dark:shadow-white"
               >
                 {status.loading ? (
                   'Sending...'
@@ -202,7 +193,7 @@ const ContactPage = () => {
           <div className="space-y-8">
             <div className="bg-gray-900 p-8 rounded-xl border border-gray-800">
               <h3 className="text-xl font-semibold mb-6">Other Ways to Connect</h3>
-              
+
               <div className="space-y-6">
                 {/* Email Contact */}
                 <div className="flex items-start gap-4">
@@ -261,7 +252,6 @@ const ContactPage = () => {
               </div>
             </div>
 
-            {/* FAQ or Additional Information */}
             <div className="bg-gray-900 p-8 rounded-xl border border-gray-800">
               <h3 className="text-xl font-semibold mb-4">Quick Info</h3>
               <ul className="space-y-3 text-gray-400">
