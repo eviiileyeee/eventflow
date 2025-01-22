@@ -1,32 +1,36 @@
 import React, { useState } from 'react';
 import { Calendar, MapPin, Upload, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import image01 from "../assets/image.png"
+import image02 from "../assets/img02.png"
+import image03 from "../assets/img03.png"
+
 
 const Events = () => {
   // Sample event data
   const [events, setEvents] = useState([
     {
       id: 1,
-      name: "Summer Music Festival",
-      description: "Join us for an unforgettable evening of live music performances featuring local and international artists. Experience the magic of music under the stars.",
-      date: "2024-06-15",
-      location: "Central Park, New York",
-      status: "upcoming",
+      name: "EDC Inaugral event",
+      description: "",
+      date: "2024-12-23",
+      location: "CDGI, Indore(MP)",
+      status: "completed",
       images: [
-        "https://placehold.co/600x400/4A90E2/ffffff?text=Concert+1",
-        "https://placehold.co/600x400/F5A623/ffffff?text=Concert+2",
-        "https://placehold.co/600x400/D0E6F1/333333?text=Concert+3"
+        image01,
+        image02,
+        image03
       ]
     },
     {
       id: 2,
-      name: "Tech Conference 2024",
-      description: "A premier technology conference bringing together industry leaders, innovators, and developers to share insights and explore the future of tech.",
-      date: "2024-03-20",
+      name: "EDC Internal Hackathon",
+      description: "Unleash your creativity and coding skills at our Hackathon! Collaborate with like-minded innovators to solve real-world challenges, develop cutting-edge solutions, and compete for exciting prizes. Whether you're a beginner or a pro, join us for 48 hours of learning, networking, and fun.",
+      date: "2025-03-20",
       location: "Convention Center, San Francisco",
-      status: "completed",
+      status: "upcoming",
       images: [
-        "https://placehold.co/600x400/4A90E2/ffffff?text=Tech+1",
-        "https://placehold.co/600x400/F5A623/ffffff?text=Tech+2"
+        "https://tse2.mm.bing.net/th?id=OIP.d19Qwsq0uAdXtU0bSUzDvgHaE7&pid=Api&P=0&h=180",
+        "https://ukfcet.ac.in/education4.0/wp-content/uploads/2021/04/hackathon.jpg"
       ]
     }
   ]);
@@ -50,11 +54,11 @@ const Events = () => {
     return (
       <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl">
         {/* Image Carousel */}
-        <div className="relative h-64 w-full">
+        <div className="relative h-auto w-full">
           <img 
             src={event.images[currentImageIndex]} 
             alt={`${event.name} - Image ${currentImageIndex + 1}`}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover "
           />
           
           {/* Carousel Controls */}
