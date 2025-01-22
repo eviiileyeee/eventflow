@@ -10,6 +10,7 @@ import Footer from "./components/Footer";
 import Events from "./pages/Events";
 import { ThemeProvider } from './components/ThemeContext/ThemeContext';
 import Cursor from "./components/Cursor"; // Import the Cursor component
+import ContactPage from "./pages/ContactPage";
 
 const DashboardLayout = ({ children }) => (
   <div id="main" className="relative overflow-hidden min-h-screen">
@@ -31,7 +32,7 @@ const App = () => {
               <Hero />
             </DashboardLayout>
           } />
-          
+
           <Route path="/login" element={<LoginPage />} />
 
           <Route path="/profile" element={<ProfilePage />} />
@@ -48,6 +49,11 @@ const App = () => {
             </DashboardLayout>
           } />
 
+          <Route path="/contact" element={
+            <DashboardLayout>
+              <ContactPage />
+            </DashboardLayout>
+          } />
           {/* 404 route */}
           <Route path="*" element={
             <DashboardLayout>
@@ -60,7 +66,7 @@ const App = () => {
             </DashboardLayout>
           } />
         </Routes>
-        <Cursor /> {/* Include the Cursor component */}
+        <Cursor /> 
       </BrowserRouter>
     </ThemeProvider>
   );

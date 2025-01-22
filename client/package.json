@@ -10,7 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
     "autoprefixer": "^10.4.20",
+    "dotenv": "^16.4.7",
     "gsap": "^3.12.7",
     "lucide-react": "^0.473.0",
     "postcss": "^8.5.1",
