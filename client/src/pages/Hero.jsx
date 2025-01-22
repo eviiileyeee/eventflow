@@ -52,8 +52,9 @@ const Hero = () => {
           </button>
         </div>
       </section>
-      <Team />
       <Projects />
+      <Team />
+   
     </>
   );
 };
