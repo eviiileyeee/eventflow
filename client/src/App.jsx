@@ -1,5 +1,5 @@
-import React, { useState, createContext } from "react";
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import React from "react";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ProfilePage from './pages/ProfilePage';
 import LoginPage from "./pages/LoginPage";
 import "./index.css";
@@ -9,18 +9,17 @@ import About from "./components/About";
 import Footer from "./components/Footer";
 import Events from "./pages/Events";
 import { ThemeProvider } from './components/ThemeContext/ThemeContext';
-
-
+import Cursor from "./components/Cursor"; // Import the Cursor component
 
 const DashboardLayout = ({ children }) => (
-  <div>
+  <div id="main" className="relative overflow-hidden min-h-screen">
     <Navbar />
     <main className="min-h-screen">{children}</main>
     <Footer />
   </div>
 );
-// Create ThemeContext for light/dark mode toggling
-export const ThemeContext = createContext();
+
+
 const App = () => {
   return (
     <ThemeProvider>
@@ -35,19 +34,17 @@ const App = () => {
           
           <Route path="/login" element={<LoginPage />} />
 
-          <Route path="/profile" element={
-                <ProfilePage />
-          } />
+          <Route path="/profile" element={<ProfilePage />} />
 
           <Route path="/events" element={
             <DashboardLayout>
-             <Events/>
+              <Events />
             </DashboardLayout>
           } />
 
           <Route path="/about" element={
             <DashboardLayout>
-             <About/>
+              <About />
             </DashboardLayout>
           } />
 
@@ -63,9 +60,9 @@ const App = () => {
             </DashboardLayout>
           } />
         </Routes>
+        <Cursor /> {/* Include the Cursor component */}
       </BrowserRouter>
-      </ThemeProvider>
-
+    </ThemeProvider>
   );
 };
 
