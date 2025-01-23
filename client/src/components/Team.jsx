@@ -6,9 +6,9 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const TeamMember = ({ name, role, image, linkedin, twitter, github }) => (
-  <div className="flex items-center bg-gray-200 dark:bg-gray-800 p-4 rounded-lg transition-transform duration-300 transform hover:scale-105">
+  <div className="flex items-center bg-gray-300 dark:bg-gray-800 p-4 rounded-lg transition-transform duration-300 transform hover:scale-105">
     <div className="w-1/3">
-      <img src={image} alt={name} className="w-24 h-24 rounded-full shadow-lg" />
+      <img src={image} alt={name} className="w-24 h-24 ml-8 rounded-full shadow-lg" />
     </div>
     <div className="w-2/3 pl-4">
       <h3 className="font-semibold text-lg text-gray-900 dark:text-white">{name}</h3>
@@ -56,7 +56,7 @@ const Team = () => {
   return (
     <section id="team" className="h-screen flex flex-col items-center justify-center bg-gradient-to-br from-[#C8CDD4] via-[#91A5CA] to-[#91A5CA] dark:bg-gradient-to-br dark:from-black dark:via-[#0E1421] dark:to-gray-900 px-6">
       <div className="container mx-auto px-6">
-        <h2 className="team-heading text-5xl font-bold text-center mb-12 text-gray-900 dark:text-white">
+        <h2 className="team-heading text-5xl  font-bold text-center mb-12 text-gray-900 dark:text-white">
           OUR TEAM MEMBERS
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
