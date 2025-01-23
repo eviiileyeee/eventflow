@@ -16,7 +16,7 @@ const Hero = () => {
         className={`relative h-screen flex items-center justify-center px-6 ${
           darkMode
             ? "bg-gradient-to-b from-[#101213] to-[#1d2c48] text-white"
-            : "bg-gradient-to-br from-gray-50 via-[#abc5eb] to-[#C8CDD4] text-black"
+            : "bg-gradient-to-br from-gray-50 via-[#91A5CA] to-[#C8CDD4] text-black"
         }`}
       >
         <Stars />
