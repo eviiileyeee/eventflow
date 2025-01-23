@@ -61,9 +61,9 @@ const Events = () => {
     };
 
     return (
-      <div onClick={handleClick} className="cursor-pointer bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl">
+      <div className="cursor-pointer bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl">
         {/* Image Carousel */}
-        <div className="relative h-auto w-full">
+        <div className="relative h-64 w-full">
           <img
             src={event.images[currentImageIndex]}
             alt={`${event.name} - Image ${currentImageIndex + 1}`}
@@ -92,8 +92,8 @@ const Events = () => {
                   <div
                     key={index}
                     className={`w-2 h-2 rounded-full transition-all ${index === currentImageIndex
-                        ? 'bg-white scale-125'
-                        : 'bg-white/50'
+                      ? 'bg-white scale-125'
+                      : 'bg-white/50'
                       }`}
                   />
                 ))}
@@ -130,8 +130,8 @@ const Events = () => {
               {event.name}
             </h3>
             <span className={`px-3 py-1 rounded-full text-sm font-medium ${event.status === 'upcoming'
-                ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-100'
-                : 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-100'
+              ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-100'
+              : 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-100'
               }`}>
               {event.status.charAt(0).toUpperCase() + event.status.slice(1)}
             </span>
@@ -140,22 +140,26 @@ const Events = () => {
           <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-2">
             {event.description}
           </p>
-
-          <div className="space-y-2">
-            <div className="flex items-center text-gray-600 dark:text-gray-300">
-              <Calendar className="w-4 h-4 mr-2" />
-              <span className="text-sm">
-                {new Date(event.date).toLocaleDateString('en-US', {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric'
-                })}
-              </span>
-            </div>
-            <div className="flex items-center text-gray-600 dark:text-gray-300">
-              <MapPin className="w-4 h-4 mr-2" />
-              <span className="text-sm">{event.location}</span>
-            </div>
+          <div className='flex flex-row'>
+            <div className="space-y-2">
+              <div className="flex items-center text-gray-600 dark:text-gray-300">
+                <Calendar className="w-4 h-4 mr-2" />
+                <span className="text-sm">
+                  {new Date(event.date).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                  })}
+                </span>
+              </div>
+              <div className="flex items-center text-gray-600 dark:text-gray-300">
+                <MapPin className="w-4 h-4 mr-2" />
+                <span className="text-sm">{event.location}</span>
+              </div>
+              <div>
+                <button onClick={handleClick} > View</button>
+              </div>
+            </div> 
           </div>
         </div>
       </div>
