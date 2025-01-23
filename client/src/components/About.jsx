@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 
 const About = () => {
   const [isVisible, setIsVisible] = useState(true);
-
   const handleExit = () => {
     setIsVisible(false);
   };
@@ -11,108 +10,108 @@ const About = () => {
   return (
     <section
       id="about"
-      className="h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 px-6"
-      onClick={handleExit} // Trigger exit animation on click (optional)
+      className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#F9FAFB] to-[#b1b8c2] dark:from-[#101213] dark:to-[#1d2c48] px-4 sm:px-6 lg:px-8"
+      onClick={handleExit}
     >
       <motion.div
-        className="container mx-auto px-6 flex" // Added flex here
+        className="container mx-auto flex flex-col lg:flex-row" 
         initial={{ opacity: 1 }}
         animate={{ opacity: 1 }}
-        exit={{ opacity: 0, y: 50 }} // Exit with fade-out and slide down
+        exit={{ opacity: 0, y: 50 }}
         transition={{ duration: 0.5, ease: "easeInOut" }}
       >
-        {/* Existing Section */}
+        {/* Left Section */}
         <motion.div
-          className="w-1/2 p-4"
-          initial={{ opacity: 0, x: -100 }} // Start from the left
-          animate={{ opacity: 1, x: 0 }}    // Animate to the normal position
-          exit={{ opacity: 0, y: 20 }}      // Fade-out and slide slightly down on exit
+          className="w-full lg:w-1/2 p-4 text-center lg:text-left"
+          initial={{ opacity: 0, x: -100 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, y: 20 }}
           transition={{ duration: 1, ease: "easeOut" }}
         >
           <motion.h2
-            className="text-4xl font-bold h-40 w-60 text-left mb-8 text-gray-900 dark:text-white uppercase flex items-center justify-start ml-12 pl-6 pt-16"
-            initial={{ opacity: 0, x: -100 }} // Start from the left
-            animate={{ opacity: 1, x: 0 }}    // Animate to the normal position
-            exit={{ opacity: 0, y: 20 }}      // Fade-out and slide slightly down on exit
-            transition={{ duration: 1, ease: "easeOut" }}
+            className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white uppercase mb-6 lg:ml-12"
           >
             About Us
           </motion.h2>
-
           <motion.p
-            className="text-gray-500 h-80 w-80 pb-20 dark:text-gray-600 max-w-3xl mx-auto text-left pl-8 ml-[39px] text-2xl  -translate-y-14"
-            initial={{ opacity: 0, x: -100 }} // Start from the left
-            animate={{ opacity: 1, x: 0 }}    // Animate to its normal position
-            exit={{ opacity: 0, y: 30 }}      // Exit with fade-out and slide up
+            className="text-base sm:text-xl text-gray-500 dark:text-gray-400 max-w-xl mx-auto lg:mx-0 lg:ml-12 mb-8"
+            initial={{ opacity: 0, x: -100 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, y: 30 }}
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
           >
-            Echelon Dev Society is a community of passionate developers, designers,
-            and tech enthusiasts. We foster innovation, collaboration, and
-            continuous learning through projects, workshops, and events.
+           At Echelon Dev Society, we believe in the power of hands-on experiences. 
+           Through a variety of projects, workshops, and events, we offer members the opportunity
+            to enhance their skills, work on real-world challenges, and bring their ideas to life. 
+            Our community is diverse, welcoming individuals from all backgrounds and expertise levels,
+             from beginners to seasoned professionals.
           </motion.p>
           <motion.div
-            className="flex justify-start mt-8 ml-[120px] -translate-y-14"
-            initial={{ opacity: 0, x: -100 }} // Start from the left
-            animate={{ opacity: 1, x: 0 }}    // Animate to the normal position
-            exit={{ opacity: 0, y: 20 }}      // Fade-out and slide slightly down on exit
-            transition={{ duration: 1, ease: "easeOut" }} // Same transition as "About Us"
+            className="flex justify-center lg:justify-start lg:ml-12"
+            initial={{ opacity: 0, x: -100 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            transition={{ duration: 1, ease: "easeOut" }}
           >
-            <button className="px-6 py-3 text-white bg-blue-600 rounded-lg shadow-lg hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-300">
+            <button 
+              className="px-6 py-3 text-white bg-[#111418] rounded-lg shadow-lg hover:bg-[#CCE0FF] 
+              focus:outline-none focus:ring focus:ring-blue-300"
+            > 
               Join Us
             </button>
           </motion.div>
         </motion.div>
 
-        {/* New Section */}
+        {/* Right Section */}
         <motion.div
-          className="w-1/2 p-4 flex flex-col justify-center items-start" // Added flex and flex-col here
-          initial={{ opacity: 0, x: 100 }} // Start from the right
-          animate={{ opacity: 1, x: 0 }}    // Animate to the normal position
-          exit={{ opacity: 0, y: 20 }}      // Fade-out and slide slightly down on exit
-          transition={{ duration: 1, ease: "easeOut", delay: 2 }} // Delay to synchronize with the old section
+          className="w-full lg:w-1/2 p-4 mt-8 lg:mt-0"
+          initial={{ opacity: 0, x: 100 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, y: 20 }}
+          transition={{ duration: 1, ease: "easeOut", delay: 2 }}
         >
           {/* Box 1 */}
           <motion.div
-            className="box bg-gray-800 text-white p-6 rounded-lg flex items-center mb-4"
-            initial={{ opacity: 0, x: -100 }} // Start from the left
-            animate={{ opacity: 1, x: 0 }}    // Animate to the normal position
-            exit={{ opacity: 0, y: 50 }}      // Exit with fade-out and slide down
-            transition={{ duration: 0.5, ease: "easeOut", delay: 2 }} // Delay to synchronize with the old section
+            className="box bg-gradient-to-r from-gray-800 to-gray-600 text-white p-4 sm:p-6 rounded-lg flex items-center mb-4 dark:from-gray-900 dark:to-gray-700"
+            initial={{ opacity: 0, x: -100 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, y: 50 }}
+            transition={{ duration: 0.5, ease: "easeOut", delay: 2 }}
           >
-            <div className="circle bg-blue-900 rounded-full h-12 w-12 flex-shrink-0"></div>
+            <div className="circle bg-[#94A8CD] rounded-full h-10 w-10 sm:h-12 sm:w-12 flex-shrink-0"></div>
             <div className="content ml-4">
-              <h3 className="text-xl font-bold">Creative Coders Workshop</h3>
-              <p>Box content goes here. Description or information about this box.</p>
+              <h3 className="text-base sm:text-xl font-bold">Creative Coders Workshop</h3>
+              <p className="text-sm sm:text-base">Box content goes here. Description or information about this box.</p>
             </div>
           </motion.div>
 
           {/* Box 2 */}
           <motion.div
-            className="box bg-gray-800 text-white p-6 rounded-lg flex items-center mb-4"
-            initial={{ opacity: 0, x: -100 }} // Start from the left with a delay
+            className="box bg-gradient-to-r from-gray-800 to-gray-600 text-white p-4 sm:p-6 rounded-lg flex items-center mb-4 dark:from-gray-900 dark:to-gray-700"
+            initial={{ opacity: 0, x: -100 }}
             animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, y: 50 }}      // Exit with fade-out and slide down
-            transition={{ duration: 0.5, ease: "easeOut", delay: 3 }} // Delay to synchronize with the old section
+            exit={{ opacity: 0, y: 50 }}
+            transition={{ duration: 0.5, ease: "easeOut", delay: 3 }}
           >
-            <div className="circle bg-blue-900 rounded-full h-12 w-12 flex-shrink-0"></div>
+            <div className="circle bg-[#94A8CD] rounded-full h-10 w-10 sm:h-12 sm:w-12 flex-shrink-0"></div>
             <div className="content ml-4">
-              <h3 className="text-xl font-bold">Innovate Together</h3>
-              <p>Box content goes here. Description or information about this box.</p>
+              <h3 className="text-base sm:text-xl font-bold">Innovate Together</h3>
+              <p className="text-sm sm:text-base">Box content goes here. Description or information about this box.</p>
             </div>
           </motion.div>
 
           {/* Box 3 */}
           <motion.div
-            className="box bg-gray-800 text-white p-6 rounded-lg flex items-center"
-            initial={{ opacity: 0, x: -100 }} // Start from the left with a delay
+            className="box bg-gradient-to-r from-gray-800 to-gray-600 text-white p-4 sm:p-6 rounded-lg flex items-center dark:from-gray-900 dark:to-gray-700"
+            initial={{ opacity: 0, x: -100 }}
             animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, y: 50 }}      // Exit with fade-out and slide down
-            transition={{ duration: 0.5, ease: "easeOut", delay: 4 }} // Delay to synchronize with the old section
+            exit={{ opacity: 0, y: 50 }}
+            transition={{ duration: 0.5, ease: "easeOut", delay: 4 }}
           >
-            <div className="circle bg-blue-900 rounded-full h-12 w-12 flex-shrink-0"></div>
+            <div className="circle bg-[#94A8CD] rounded-full h-10 w-10 sm:h-12 sm:w-12 flex-shrink-0"></div>
             <div className="content ml-4">
-              <h3 className="text-xl font-bold">Code and Create</h3>
-              <p>Box content goes here. Description or information about this box.</p>
+              <h3 className="text-base sm:text-xl font-bold">Code and Create</h3>
+              <p className="text-sm sm:text-base">Box content goes here. Description or information about this box.</p>
             </div>
           </motion.div>
         </motion.div>

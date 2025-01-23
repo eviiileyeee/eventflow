@@ -2,6 +2,7 @@ import React from "react";
 import Goals from "../components/Goals";
 import Team from "../components/Team";
 import Stars from "../components/Stars";
+//import DottedBg from "../components/DottedBg";
 import { useTheme } from "../components/ThemeContext/ThemeContext";
 
 const Hero = () => {
@@ -31,15 +32,15 @@ const Hero = () => {
           </p>
           <h1
   id="hero-heading"
-  className={`text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight mb-6 font-Madefor ${
+  className={`text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight mb-6 font-Madefor
+     bg-gradient-to-r from-white to-transparent bg-clip-text text-transparent ${
     darkMode
-      ? "bg-gradient-to-r from-white to-transparent bg-clip-text text-transparent text-[#d2d9ef]"
-      : "text-[#192439]"
+      ? "text-[#d2d9ef]"
+      : "text-[#192439] "
   }`}
 >
   EMPOWER YOUR <br /> HACKATHON SKILLS
 </h1>
-
 
           <p
             className={`bounding-elem text-xl mb-8 mx-auto max-w-2xl font-Madefor ${
