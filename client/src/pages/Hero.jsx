@@ -2,7 +2,6 @@ import React from "react";
 import Goals from "../components/Goals";
 import Team from "../components/Team";
 import Stars from "../components/Stars";
-//import DottedBg from "../components/DottedBg";
 import { useTheme } from "../components/ThemeContext/ThemeContext";
 
 const Hero = () => {
@@ -17,10 +16,9 @@ const Hero = () => {
         className={`relative h-screen flex items-center justify-center px-6 ${
           darkMode
             ? "bg-gradient-to-b from-[#101213] to-[#1d2c48] text-white"
-            : "bg-gradient-to-b from-[#F9FAFB] to-[#b1b8c2] text-black"
+            : "bg-gradient-to-br from-gray-50 via-[#abc5eb] to-[#C8CDD4] text-black"
         }`}
       >
-        {/* {!darkMode && <DottedBg />} Dotted background only in light mode */}
         <Stars />
         <div className="container mx-auto text-center pt-16">
           <p
@@ -31,17 +29,15 @@ const Hero = () => {
             Hands-on learning experiences
           </p>
           <h1
-  id="hero-heading"
-  className={`text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight mb-6 font-Madefor
-     bg-gradient-to-r from-white to-transparent bg-clip-text text-transparent ${
-    darkMode
-      ? "text-[#d2d9ef]"
-      : "text-[#192439] "
-  }`}
->
-  EMPOWER YOUR <br /> HACKATHON SKILLS
-</h1>
-
+            id="hero-heading"
+            className={`text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight mb-6 font-Madefor ${
+              darkMode
+                ? "bg-gradient-to-r from-white to-transparent bg-clip-text text-transparent text-[#d2d9ef]"
+                : "text-[#151C29]"
+            }`}
+          >
+            EMPOWER YOUR <br /> HACKATHON SKILLS
+          </h1>
           <p
             className={`bounding-elem text-xl mb-8 mx-auto max-w-2xl font-Madefor ${
               darkMode ? "text-[#A6B7D5]" : "text-[#7f8183]"

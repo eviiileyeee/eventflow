@@ -64,13 +64,13 @@ const ContactPage = () => {
   };
 
   return (
-    <div className="min-h-screen text-white bg-white dark:bg-gray-800">
+    <div className="min-h-screen text-gray-900 bg-gradient-to-br from-gray-50 via-[#d4deed] to-[#C8CDD4] dark:from-gray-800 dark:via-gray-900 dark:to-black dark:text-white">
       <div className="max-w-6xl mx-auto px-4 py-16">
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-bold mb-4 pt-8 text-gray-800 dark:text-[#D2D9EF]">
             Get in Touch
           </h1>
-          <p className="max-w-2xl mx-auto text-gray-800 dark:text-[#D2D9EF]">
+          <p className="max-w-2xl mx-auto text-gray-700 dark:text-[#D2D9EF]">
             Have a question or want to work together? We'd love to hear from you.
             Choose your preferred way to reach us.
           </p>
@@ -81,7 +81,7 @@ const ContactPage = () => {
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-medium dark:text-gray-400 text-gray-800 mb-2">
+                  <label className="block text-sm font-medium text-gray-600 dark:text-gray-300 mb-2">
                     Name
                   </label>
                   <input
@@ -90,11 +90,11 @@ const ContactPage = () => {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full bg-gray-900 border border-gray-800 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all shadow-md dark:shadow-gray-600"
+                    className="w-full bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all shadow-sm"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium dark:text-gray-400 text-gray-800 mb-2">
+                  <label className="block text-sm font-medium text-gray-600 dark:text-gray-300 mb-2">
                     Email
                   </label>
                   <input
@@ -103,14 +103,14 @@ const ContactPage = () => {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full bg-gray-900 border border-gray-800 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all shadow-md dark:shadow-gray-600"
+                    className="w-full bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all shadow-sm"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-medium dark:text-gray-400 text-gray-800 mb-2">
+                  <label className="block text-sm font-medium text-gray-600 dark:text-gray-300 mb-2">
                     Company
                   </label>
                   <input
@@ -118,11 +118,11 @@ const ContactPage = () => {
                     name="company"
                     value={formData.company}
                     onChange={handleChange}
-                    className="w-full bg-gray-900 border border-gray-800 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all shadow-md dark:shadow-gray-600"
+                    className="w-full bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all shadow-sm"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium dark:text-gray-400 text-gray-800 mb-2">
+                  <label className="block text-sm font-medium text-gray-600 dark:text-gray-300 mb-2">
                     Phone
                   </label>
                   <input
@@ -130,13 +130,13 @@ const ContactPage = () => {
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
-                    className="w-full bg-gray-900 border border-gray-800 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all shadow-md dark:shadow-gray-600"
+                    className="w-full bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all shadow-sm"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-medium dark:text-gray-400 text-gray-800 mb-2">
+                <label className="block text-sm font-medium text-gray-600 dark:text-gray-300 mb-2">
                   Subject
                 </label>
                 <input
@@ -145,12 +145,12 @@ const ContactPage = () => {
                   value={formData.subject}
                   onChange={handleChange}
                   required
-                  className="w-full bg-gray-900 border border-gray-800 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all shadow-md dark:shadow-gray-600"
+                  className="w-full bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all shadow-sm"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium dark:text-gray-400 text-gray-800 mb-2">
+                <label className="block text-sm font-medium text-gray-600 dark:text-gray-300 mb-2">
                   Message
                 </label>
                 <textarea
@@ -159,14 +159,14 @@ const ContactPage = () => {
                   onChange={handleChange}
                   required
                   rows={5}
-                  className="w-full bg-gray-900 border border-gray-800 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all shadow-md dark:shadow-gray-600"
+                  className="w-full bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all shadow-sm"
                 />
               </div>
 
               <button
                 type="submit"
                 disabled={status.loading}
-                className="w-full bg-gray-800 dark:bg-gray-900 hover:bg-blue-700 text-white font-medium py-3 rounded-lg transition-all flex items-center justify-center gap-2 shadow-md dark:shadow-gray-600"
+                className="w-full bg-gray-800 dark:bg-gray-900 hover:bg-blue-700 text-white font-medium py-3 rounded-lg transition-all flex items-center justify-center gap-2 shadow-md"
               >
                 {status.loading ? (
                   'Sending...'
@@ -190,20 +190,19 @@ const ContactPage = () => {
           </div>
 
           {/* Contact Information */}
-          <div className="space-y-8 ">
-          <div className="bg-gray-900 dark:bg-gray-900 shadow-lg dark:shadow-gray-600 p-8 rounded-xl border border-gray-800">
-  <h3 className="text-xl font-semibold mb-6">Other Ways to Connect</h3>
-
+          <div className="space-y-8">
+            <div className="bg-gray-100 dark:bg-gray-800 shadow-lg p-8 rounded-xl border border-gray-200 dark:border-gray-700">
+              <h3 className="text-xl font-semibold mb-6 text-gray-800 dark:text-[#D2D9EF]">Other Ways to Connect</h3>
 
               <div className="space-y-6">
                 {/* Email Contact */}
                 <div className="flex items-start gap-4">
-                  <div className="bg-gray-800 p-3 rounded-lg">
+                  <div className="bg-gray-200 dark:bg-gray-700 p-3 rounded-lg">
                     <Mail className="w-6 h-6 text-blue-500" />
                   </div>
                   <div>
-                    <h4 className="font-medium mb-1">Email</h4>
-                    <p className="text-gray-400 text-sm">
+                    <h4 className="font-medium mb-1 text-gray-800 dark:text-[#D2D9EF]">Email</h4>
+                    <p className="text-gray-600 dark:text-gray-400 text-sm">
                       contact@yourcompany.com
                     </p>
                     <a
@@ -217,12 +216,12 @@ const ContactPage = () => {
 
                 {/* WhatsApp Contact */}
                 <div className="flex items-start gap-4">
-                  <div className="bg-gray-800 p-3 rounded-lg">
+                  <div className="bg-gray-200 dark:bg-gray-700 p-3 rounded-lg">
                     <MessageCircle className="w-6 h-6 text-green-500" />
                   </div>
                   <div>
-                    <h4 className="font-medium mb-1">WhatsApp</h4>
-                    <p className="text-gray-400 text-sm">
+                    <h4 className="font-medium mb-1 text-gray-800 dark:text-[#D2D9EF]">WhatsApp</h4>
+                    <p className="text-gray-600 dark:text-gray-400 text-sm">
                       Available for quick chats and updates
                     </p>
                     <button
@@ -236,12 +235,12 @@ const ContactPage = () => {
 
                 {/* Phone Contact */}
                 <div className="flex items-start gap-4">
-                  <div className="bg-gray-800 p-3 rounded-lg">
+                  <div className="bg-gray-200 dark:bg-gray-700 p-3 rounded-lg">
                     <Phone className="w-6 h-6 text-purple-500" />
                   </div>
                   <div>
-                    <h4 className="font-medium mb-1">Phone</h4>
-                    <p className="text-gray-400 text-sm">+1 (234) 567-8900</p>
+                    <h4 className="font-medium mb-1 text-gray-800 dark:text-[#D2D9EF]">Phone</h4>
+                    <p className="text-gray-600 dark:text-gray-400 text-sm">+1 (234) 567-8900</p>
                     <a
                       href="tel:+12345678900"
                       className="text-purple-500 text-sm hover:text-purple-400 transition-colors mt-1 inline-block"
@@ -253,15 +252,14 @@ const ContactPage = () => {
               </div>
             </div>
 
-            <div className="bg-gray-900 p-8 rounded-xl border border-gray-800 shadow-lg dark:shadow-gray-600">
-  <h3 className="text-xl font-semibold mb-4">Quick Info</h3>
-  <ul className="space-y-3 text-gray-400">
-    <li>• Typical response time: Within 24 hours</li>
-    <li>• Available Monday - Friday</li>
-    <li>• 9:00 AM - 6:00 PM (EST)</li>
-  </ul>
-</div>
-
+            <div className="bg-gray-100 dark:bg-gray-800 p-8 rounded-xl border border-gray-200 dark:border-gray-700 shadow-lg">
+              <h3 className="text-xl font-semibold mb-4 text-gray-800 dark:text-[#D2D9EF]">Quick Info</h3>
+              <ul className="space-y-3 text-gray-600 dark:text-gray-400">
+                <li>• Typical response time: Within 24 hours</li>
+                <li>• Available Monday - Friday</li>
+                <li>• 9:00 AM - 6:00 PM (EST)</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
