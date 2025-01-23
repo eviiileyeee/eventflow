@@ -54,7 +54,8 @@ const Goals = () => {
   return (
     <section
       id="projects"
-      className="min-h-screen bg-gradient-to-br from-white to-gray-100 dark:bg-gradient-to-br
+      className="min-h-screen bg-gradient-to-br from-[#91A5CA] via-[#C8CDD4] to-[#91A5CA]
+       dark:bg-gradient-to-br
        dark:from-[#111927] dark:via-black dark:to-gray-900 flex items-center justify-center px-6 py-12 pt-16"
     >
       <div className="container mx-auto">
