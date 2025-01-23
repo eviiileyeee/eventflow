@@ -2,7 +2,6 @@ import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-// Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
 
 const ProjectCard = ({ title, description, image }) => {
@@ -55,11 +54,11 @@ const Goals = () => {
   return (
     <section
       id="projects"
-      className="min-h-screen bg-gradient-to-b from-[#b1b8c2] to-[#EEF0F2] dark:from-[#111519] dark:to-[#1d2c48] border-[#6b8dcf] dark:border-[#D5D9DE] flex items-center justify-center px-6 py-12 pt-16"
+      className="min-h-screen bg-gradient-to-br from-white to-gray-100 dark:bg-gradient-to-br dark:from-gray-900 dark:via-gray-800 dark:to-black flex items-center justify-center px-6 py-12 pt-16"
     >
       <div className="container mx-auto">
         {/* Section Title - Updated with dark text in light mode */}
-        <h2 
+        <h2
           ref={titleRef}
           className="text-5xl font-bold text-gray-800 dark:text-[#D2D9EF] text-center mb-16 pb-12 uppercase"
         >
@@ -75,7 +74,7 @@ const Goals = () => {
           <ProjectCard
             title="Tech Workshops"
             description="Describe the product here. Include important features, pricing and other relevant info."
-            image='https://th.bing.com/th/id/OIP.OVeLai0N0LCeDmds0PG-JgHaE8?rs=1&pid=ImgDetMain'
+            image='https://th.bing.com/th/id/OIP.OVeLai0N0LCeDmds0PG-JgHaE7?rs=1&pid=ImgDetMain'
           />
           <ProjectCard
             title="Hackathon Series"

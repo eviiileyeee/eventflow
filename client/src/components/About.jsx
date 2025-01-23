@@ -10,7 +10,7 @@ const About = () => {
   return (
     <section
       id="about"
-      className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#F9FAFB] to-[#b1b8c2] dark:from-[#101213] dark:to-[#1d2c48] px-4 sm:px-6 lg:px-8"
+      className="min-h-screen flex items-center justify-center bg-gradient-to-br from-white to-gray-100 dark:bg-gradient-to-br dark:from-gray-900 dark:via-gray-800 dark:to-black px-4 sm:px-6 lg:px-8"
       onClick={handleExit}
     >
       <motion.div

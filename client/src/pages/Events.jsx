@@ -12,7 +12,7 @@ const Events = () => {
     {
       id: 1,
       name: "EDC Inaugral event",
-      description: "The inauguration was a huge success, filled with excitement, energy, and a lot of passion for innovation. A big thank you to everyone who made it happen and to all the incredible people who joined us. We’re just getting started, and we can't wait for the journey ahead! 🚀💻💡",
+      description: "The inauguration was a huge success, filled with excitement, energy, and a lot of passion for innovation. A big thank you to everyone who made it happen and to all the incredible people who joined us. We're just getting started, and we can't wait for the journey ahead! 🚀💻💡",
       date: "2024-12-23",
       location: "CDGI, Indore(MP)",
       status: "completed",
@@ -146,7 +146,7 @@ const Events = () => {
   };
 
   return (
-    <div className="relative top-10 min-h-screen bg-gray-100 dark:bg-gray-900 p-8">
+    <div className="relative top-10 min-h-screen bg-gradient-to-br from-white to-gray-100 dark:bg-gradient-to-br dark:from-gray-900 dark:via-gray-800 dark:to-black  p-8">
       <div className="max-w-6xl mx-auto">
         <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-8">
           Events
