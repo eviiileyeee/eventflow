@@ -11,9 +11,3 @@
   }
   
 
-  .marquee {
-    display: flex;
-    width: 200%; /* Ensure the content spans beyond the container width*/
-    animation: marquee 15s linear infinite;
-  }
-  
