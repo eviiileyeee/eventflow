@@ -107,7 +107,7 @@ const Footer = () => {
               </div>
               <div className="flex items-center">
                 <MapPin className="h-5 w-5 mr-2" />
-                <span>123 Tech Street, Silicon Valley, CA 94025</span>
+                <span>Chameli Devi Group of Institutions, khandwa-naka Road, Indore (MP)</span>
               </div>
             </div>
           </FooterSection>
