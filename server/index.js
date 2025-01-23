@@ -1,23 +1,29 @@
 const express = require('express');
-const mongoose = require('mongoose');
-const authRoutes = require('./routes/authRoutes');
+const cors = require('cors');
+const morgan = require('morgan');
+const connectDB = require('./config/db');
+const eventRoutes = require('./routes/eventRoutes');
 require('dotenv').config();
+//const errorHandler = require('./middleware/errorHandler');
 
 const app = express();
-const port = process.env.PORT || 3000; // Default to 3000 if PORT is not set
+
+// Connect to database
+connectDB();
 
 // Middleware
+app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(morgan('dev'));
 
 // Routes
-app.use('/api/auth', authRoutes);
+app.use('/api/v1/events', eventRoutes);
 
-// Connect to MongoDB
-mongoose.connect(process.env.CONNECTION_STRING)
-    .then(() => {
-        console.log('Connected to MongoDB');
-        app.listen(port, () => {
-            console.log(`Server running on http://localhost:${port}`);
-        });
-    })
-    .catch(err => console.error('Could not connect to MongoDB:', err));
+// Error handling
+//app.use(errorHandler);
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
