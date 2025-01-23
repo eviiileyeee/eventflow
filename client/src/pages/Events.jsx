@@ -156,7 +156,7 @@ const Events = () => {
     <div className=" min-h-screen bg-gradient-to-br from-[#91A5CA] via-[#C8CDD4] to-[#91A5CA]
      dark:bg-gradient-to-br dark:from-gray-900 dark:via-gray-800 dark:to-black  p-8">
       <div className=" relative top-10 max-w-6xl mx-auto">
-        <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-8">
+        <h1 className="text-4xl uppercase font-bold text-gray-800 mt-3 dark:text-white mb-8">
           Events
         </h1>
 
