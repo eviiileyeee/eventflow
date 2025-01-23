@@ -33,7 +33,7 @@ const ProfilePage = () => {
   );
 
   const ProfileHeader = () => (
-    <div className="flex items-center space-x-4 mb-8 p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+    <div className="flex items-center space-x-4 mb-8 p-4 bg-gray-200 dark:bg-gray-800 rounded-lg shadow">
       <img
         src="/api/placeholder/80/80"
         alt="Profile"
@@ -52,7 +52,7 @@ const ProfilePage = () => {
 
   const GeneralSettings = () => (
     <div className="space-y-6">
-      <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+      <div className="bg-gray-200 dark:bg-gray-800 p-6 rounded-lg shadow">
         <h3 className="text-lg font-medium mb-4 dark:text-white">Personal Information</h3>
         <div className="space-y-4">
           <div>
@@ -78,7 +78,7 @@ const ProfilePage = () => {
         </div>
       </div>
 
-      <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+      <div className="bg-gray-200 dark:bg-gray-800 p-6 rounded-lg shadow">
         <h3 className="text-lg font-medium mb-4 dark:text-white">Preferences</h3>
         <div className="space-y-4">
           <div className="flex items-center justify-between">
@@ -117,8 +117,8 @@ const ProfilePage = () => {
   );
 
   const SecuritySettings = () => (
-    <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow space-y-6">
-      <h3 className="text-lg font-medium mb-4 dark:text-white">Security Settings</h3>
+    <div className="bg-gray-200 dark:bg-gray-800 p-6 rounded-lg shadow space-y-6">
+      <h3 className="text-lg bg-gray-200 font-medium mb-4 dark:text-white">Security Settings</h3>
       
       <div className="space-y-4">
         <div>
@@ -145,7 +145,7 @@ const ProfilePage = () => {
   );
 
   const BillingSettings = () => (
-    <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow space-y-6">
+    <div className="bg-gray-200 dark:bg-gray-800 p-6 rounded-lg shadow space-y-6">
       <h3 className="text-lg font-medium mb-4 dark:text-white">Billing Information</h3>
       
       <div className="space-y-4">
@@ -198,7 +198,8 @@ const ProfilePage = () => {
               <SidebarLink icon={Building} text="Teams" tab="teams" />
               
               <div className="pt-4 mt-4 border-t dark:border-gray-700">
-                <button className="w-full flex items-center space-x-3 px-4 py-2 text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors">
+                <button className="w-full flex items-center bg-gray-200
+                 space-x-3 px-4 py-2 text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors">
                   <LogOut className="h-5 w-5" />
                   <span>Logout</span>
                 </button>
