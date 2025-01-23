@@ -28,6 +28,6 @@ router.post('/:id/register', eventController.registerForEvent);
 // Admin only routes
 router.use(authMiddleware.restrictTo('admin'));
 
-router.patch('/:id/feature', eventController.toggleFeatureEvent);
+//router.patch('/:id/feature', eventController.toggleFeatureEvent);
 
 module.exports = router;
