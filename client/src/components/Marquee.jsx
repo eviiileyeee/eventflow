@@ -1,11 +1,11 @@
 import React from "react";
 import Marquee from "react-marquee-slider";
-
+import Twitterlogo  from "../assets/twitterLogo.webp";
 const brands = [
   { name: "Dribbble", src: "/src/assets/dribbble.png" },
   { name: "Instagram", src: "/path_to_perplexity_logo.png" },
   { name: "LinkedIn", src: "/path_to_spacex_logo.png" },
-  { name: "Twitter", src: "/path_to_quora_logo.png" },
+  { name: "Twitter", src: Twitterlogo },
   { name: "Notion", src: "/path_to_lark_logo.png" },
   { name: "Miro", src: "/path_to_miro_logo.png" },
   { name: "Zapier", src: "/path_to_zapier_logo.png" },
