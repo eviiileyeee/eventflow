@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import Goals from "../components/Goals";
 import Team from "../components/Team";
 import Stars from "../components/Stars";
@@ -6,6 +7,12 @@ import Stars from "../components/Stars";
 import { useTheme } from "../components/ThemeContext/ThemeContext";
 
 const Hero = () => {
+  
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/events`);
+  };
   const { darkMode } = useTheme();
 
   return (
@@ -52,6 +59,7 @@ const Hero = () => {
             to code, create, and succeed!"
           </p>
           <button
+            onClick={handleClick}
             id="herofooter"
             className={`py-3 px-8 text-lg rounded-full font-bold font-Madefor transition duration-300 ease-in-out ${
               darkMode

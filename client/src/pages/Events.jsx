@@ -12,7 +12,7 @@ const Events = () => {
     {
       id: 1,
       name: "EDC Inaugral event",
-      description: "",
+      description: "The inauguration was a huge success, filled with excitement, energy, and a lot of passion for innovation. A big thank you to everyone who made it happen and to all the incredible people who joined us. We’re just getting started, and we can't wait for the journey ahead! 🚀💻💡",
       date: "2024-12-23",
       location: "CDGI, Indore(MP)",
       status: "completed",
@@ -100,27 +100,6 @@ const Events = () => {
               </div>
             </>
           )}
-
-          {/* Upload Overlay */}
-          <div
-            className={`absolute inset-0 bg-black/50 flex items-center justify-center transition-opacity ${isUploadActive ? 'opacity-100' : 'opacity-0 pointer-events-none'
-              }`}
-            onDragOver={(e) => {
-              e.preventDefault();
-              setIsUploadActive(true);
-            }}
-            onDragLeave={() => setIsUploadActive(false)}
-            onDrop={(e) => {
-              e.preventDefault();
-              setIsUploadActive(false);
-              // Handle file upload here
-            }}
-          >
-            <div className="text-white text-center">
-              <Upload className="mx-auto mb-2" />
-              <p>Drop images here or click to upload</p>
-            </div>
-          </div>
         </div>
 
         {/* Content */}
@@ -167,7 +146,7 @@ const Events = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 p-8">
+    <div className="relative top-10 min-h-screen bg-gray-100 dark:bg-gray-900 p-8">
       <div className="max-w-6xl mx-auto">
         <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-8">
           Events
