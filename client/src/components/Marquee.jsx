@@ -1,37 +1,53 @@
 import React from "react";
 import Marquee from "react-marquee-slider";
-import Twitterlogo  from "../assets/twitterLogo.webp";
+import { useTheme } from "../components/ThemeContext/ThemeContext";
+import { 
+  FaDribbble, 
+  FaInstagram, 
+  FaLinkedin, 
+  FaTwitter, 
+  FaBookOpen, 
+  FaTasks, 
+  FaAmazonPay
+} from "react-icons/fa";
+
 const brands = [
-  { name: "Dribbble", src: "/src/assets/dribbble.png" },
-  { name: "Instagram", src: "/path_to_perplexity_logo.png" },
-  { name: "LinkedIn", src: "/path_to_spacex_logo.png" },
-  { name: "Twitter", src: Twitterlogo },
-  { name: "Notion", src: "/path_to_lark_logo.png" },
-  { name: "Miro", src: "/path_to_miro_logo.png" },
-  { name: "Zapier", src: "/path_to_zapier_logo.png" },
+  { name: "Dribbble", icon: FaDribbble },
+  { name: "Instagram", icon: FaInstagram },
+  { name: "LinkedIn", icon: FaLinkedin },
+  { name: "Twitter", icon: FaTwitter },
+  { name: "Notion", icon: FaBookOpen },
+  { name: "Miro", icon: FaTasks },
+  { name: "Zapier", icon: FaAmazonPay }
 ];
 
 const MarqueeComponent = () => {
+  const { darkMode } = useTheme();
   return (
-    <div className="bg-gray-800 py-4">
+    <div className="bg-gradient-to-br from-[#91A5CA] via-[#AAB7CE] to-[#C6CBD3]
+     dark:bg-gradient-to-tb dark:from-[#101726] dark:via-[#090E16] dark:to-[#020304]
+      py-4">
       <Marquee
         velocity={20}
-        direction="rtl" // Changed direction to right-to-left
+        direction="rtl"
         scatterRandomly={false}
         repeat={true}
-        minScale={0.8} // Adjust scale to make logos slightly smaller to fit better
-        pauseOnHover={false} // Makes it continue while hovered (if you want that)
+        minScale={0.9}
+        pauseOnHover={false}
       >
-        {/* Duplicate the brands to create a smooth, continuous effect */}
-        {brands.concat(brands).map((brand, index) => (
-          <div key={index} className="px-4">
-            <img
-              src={brand.src}
-              alt={brand.name}
-              className="h-12 w-auto object-contain"
-            />
-          </div>
-        ))}
+        {brands.concat(brands).map((brand, index) => {
+          const IconComponent = brand.icon;
+          return (
+            <div 
+              key={index} 
+              className="px-8 mx-4 transition-all duration-300 hover:scale-110 hover:text-[#F0F0F0]"
+            >
+              <IconComponent 
+                className={`h-8 w-8 text-[#6A6E77] ${darkMode ? "text-white" : ""}`} 
+              />
+            </div>
+          );
+        })}
       </Marquee>
     </div>
   );
