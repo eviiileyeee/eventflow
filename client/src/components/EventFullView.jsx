@@ -47,9 +47,9 @@ const EventFullView = ({ event }) => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-gradient-to-br from-[#91A5CA] via-[#C8CDD4] to-[#91A5CA] dark:bg-gradient-to-br dark:from-gray-900 dark:via-gray-800 dark:to-black">
       {/* Navigation Bar */}
-      <nav className="sticky top-0 z-50 bg-white dark:bg-gray-800 shadow-sm">
+      <nav className="sticky top-0 z-50 bg-gradient-to-br from-transparent via-[rgba(145,165,202,0.4)] to-transparent dark:bg-gradient-to-br dark:from-transparent dark:via-[rgba(55,65,81,0.4)] dark:to-transparent shadow-sm backdrop-blur-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <button
@@ -100,11 +100,7 @@ const EventFullView = ({ event }) => {
                     {event.images.map((_, idx) => (
                       <div
                         key={idx}
-                        className={`w-2 h-2 rounded-full ${
-                          idx === currentImageIndex
-                            ? 'bg-white'
-                            : 'bg-white/50'
-                        }`}
+                        className={`w-2 h-2 rounded-full ${idx === currentImageIndex ? 'bg-white' : 'bg-white/50'}`}
                       />
                     ))}
                   </div>
@@ -113,7 +109,7 @@ const EventFullView = ({ event }) => {
             </div>
 
             {/* Event Details */}
-            <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 mb-8">
+            <div className="bg-gray-200 dark:bg-gray-800 rounded-2xl p-6 mb-8">
               <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
                 {event.name}
               </h1>
@@ -152,7 +148,7 @@ const EventFullView = ({ event }) => {
             </div>
 
             {/* Agenda/Schedule */}
-            <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 mb-8">
+            <div className="bg-gray-200 dark:bg-gray-800 rounded-2xl p-6 mb-8">
               <h2 className="text-xl font-semibold mb-4 flex items-center">
                 <BookOpen className="w-5 h-5 mr-2" />
                 Event Schedule
@@ -180,7 +176,7 @@ const EventFullView = ({ event }) => {
           {/* Sidebar - Registration */}
           <div className="lg:col-span-1">
             <div className="sticky top-24">
-              <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg">
+              <div className="bg-gray-200 dark:bg-gray-800 rounded-2xl p-6 shadow-lg">
                 <div className="mb-6">
                   <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
                     {event.price === 0 ? 'Free' : `$${event.price}`}
