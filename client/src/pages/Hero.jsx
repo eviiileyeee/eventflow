@@ -4,14 +4,15 @@ import Goals from "../components/Goals";
 import Team from "../components/Team";
 import Stars from "../components/Stars";
 import { useTheme } from "../components/ThemeContext/ThemeContext";
+import Marquee from "../components/Marquee"; // Import the Marquee component
 
 const Hero = () => {
-  
   const navigate = useNavigate();
 
   const handleClick = () => {
     navigate(`/events`);
   };
+
   const { darkMode } = useTheme();
 
   return (
@@ -67,6 +68,10 @@ const Hero = () => {
           </button>
         </div>
       </section>
+
+      {/* Add the marquee */}
+      <Marquee />
+
       <Goals />
       <Team />
     </>

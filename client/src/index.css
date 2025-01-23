@@ -3,3 +3,17 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+    font-family: 'GeneralSans-Regular';
+    src: url('./assets/fonts/GeneralSans-Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+
+  .marquee {
+    display: flex;
+    width: 200%; /* Ensure the content spans beyond the container width*/
+    animation: marquee 15s linear infinite;
+  }
+  

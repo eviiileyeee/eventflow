@@ -7,14 +7,11 @@ gsap.registerPlugin(ScrollTrigger);
 const ProjectCard = ({ title, description, image }) => {
   return (
     <div className="bg-gray-800 bg-opacity-75 p-6 rounded-xl flex flex-col items-center max-w-sm mx-auto transform hover:scale-105 transition-transform">
-      {/* Image Section */}
       <div className="w-32 h-32 rounded-half overflow-hidden bg-gray-700 flex items-center justify-center mb-6">
         <img src={image} alt={title} className="w-full h-full object-cover" />
       </div>
-      {/* Text Section */}
       <h3 className="text-white text-2xl font-bold mb-3">{title}</h3>
       <p className="text-base text-gray-400 mb-6 text-center">{description}</p>
-      {/* Button Section */}
       <button className="px-6 py-3 bg-[#6B85B6] text-white font-semibold rounded-full hover:bg-[#94a8cd] transition">
         View more
       </button>
@@ -26,30 +23,34 @@ const Goals = () => {
   const titleRef = useRef(null);
 
   useEffect(() => {
-    // Initial setup - move title off-screen to the left
-    gsap.set(titleRef.current, {
-      x: -200,
-      opacity: 0
-    });
+    breakTheText();
 
-    // Create the animation
-    gsap.to(titleRef.current, {
-      x: 0,
-      opacity: 1,
-      duration: 1,
-      ease: "power3.out",
+    const h2 = document.querySelector(".goals-heading");
+    gsap.from(".goals-heading span", {
+      y: 100,
+      opacity: 0,
+      duration: 0.8,
+      stagger: 0.1,
       scrollTrigger: {
-        trigger: titleRef.current,
-        start: "top center+=100",
-        toggleActions: "play none none reverse"
+        trigger: h2,
+        start: "top 80%",
+        toggleActions: "play none none none"
       }
     });
-
-    // Cleanup
-    return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-    };
   }, []);
+
+  const breakTheText = () => {
+    const h2 = document.querySelector(".goals-heading");
+    const h2Text = h2.textContent;
+    const splittedText = h2Text.split("");
+    let clutter = "";
+
+    splittedText.forEach((elem) => {
+      clutter += `<span>${elem}</span>`;
+    });
+
+    h2.innerHTML = clutter;
+  };
 
   return (
     <section
@@ -59,14 +60,12 @@ const Goals = () => {
        dark:from-[#111927] dark:via-black dark:to-gray-900 flex items-center justify-center px-6 py-12 pt-16"
     >
       <div className="container mx-auto">
-        {/* Section Title - Updated with dark text in light mode */}
         <h2
           ref={titleRef}
-          className="text-5xl font-bold text-gray-800 dark:text-[#D2D9EF] text-center mb-16 pb-12 uppercase"
+          className="goals-heading text-5xl font-extrabold text-gray-800 dark:text-[#D2D9EF] text-center mb-16 pb-12 uppercase"
         >
           Our Goals
         </h2>
-        {/* Cards Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
           <ProjectCard
             title="Open Source Initiative"
