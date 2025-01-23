@@ -55,7 +55,7 @@ const Goals = () => {
   return (
     <section
       id="projects"
-      className="min-h-screen bg-gradient-to-b from-[#D5D9DE] to-[#6A86B5] dark:from-[#111519] dark:to-[#1d2c48] border-[#6b8dcf] dark:border-[#D5D9DE] flex items-center justify-center px-6 py-12 pt-16"
+      className="min-h-screen bg-gradient-to-b from-[#b1b8c2] to-[#EEF0F2] dark:from-[#111519] dark:to-[#1d2c48] border-[#6b8dcf] dark:border-[#D5D9DE] flex items-center justify-center px-6 py-12 pt-16"
     >
       <div className="container mx-auto">
         {/* Section Title - Updated with dark text in light mode */}
