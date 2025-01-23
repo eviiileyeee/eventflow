@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Calendar, MapPin, Upload, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import image01 from "../assets/image.png"
 import image02 from "../assets/img02.png"
@@ -36,57 +37,64 @@ const Events = () => {
   ]);
 
   const EventCard = ({ event }) => {
+
+    const navigate = useNavigate();
+
+    const handleClick = () => {
+      navigate(`/events/${event.id}`);
+    };
+
+
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [isUploadActive, setIsUploadActive] = useState(false);
 
     const nextImage = () => {
-      setCurrentImageIndex((prev) => 
+      setCurrentImageIndex((prev) =>
         prev === event.images.length - 1 ? 0 : prev + 1
       );
     };
 
     const prevImage = () => {
-      setCurrentImageIndex((prev) => 
+      setCurrentImageIndex((prev) =>
         prev === 0 ? event.images.length - 1 : prev - 1
       );
     };
 
     return (
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl">
+      <div onClick={handleClick} className="cursor-pointer bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl">
         {/* Image Carousel */}
         <div className="relative h-auto w-full">
-          <img 
-            src={event.images[currentImageIndex]} 
+          <img
+            src={event.images[currentImageIndex]}
             alt={`${event.name} - Image ${currentImageIndex + 1}`}
             className="w-full h-full object-cover "
           />
-          
+
           {/* Carousel Controls */}
           {event.images.length > 1 && (
             <>
-              <button 
+              <button
                 onClick={prevImage}
                 className="absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/30 text-white hover:bg-black/50 transition-all"
               >
                 <ChevronLeft size={20} />
               </button>
-              <button 
+              <button
                 onClick={nextImage}
                 className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/30 text-white hover:bg-black/50 transition-all"
               >
                 <ChevronRight size={20} />
               </button>
-              
+
               {/* Image Indicators */}
               <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1">
                 {event.images.map((_, index) => (
-                  <div 
+                  <div
                     key={index}
-                    className={`w-2 h-2 rounded-full transition-all ${
-                      index === currentImageIndex 
-                        ? 'bg-white scale-125' 
+                    className={`w-2 h-2 rounded-full transition-all ${index === currentImageIndex
+                        ? 'bg-white scale-125'
                         : 'bg-white/50'
-                    }`}
+                      }`}
                   />
                 ))}
               </div>
@@ -94,10 +102,9 @@ const Events = () => {
           )}
 
           {/* Upload Overlay */}
-          <div 
-            className={`absolute inset-0 bg-black/50 flex items-center justify-center transition-opacity ${
-              isUploadActive ? 'opacity-100' : 'opacity-0 pointer-events-none'
-            }`}
+          <div
+            className={`absolute inset-0 bg-black/50 flex items-center justify-center transition-opacity ${isUploadActive ? 'opacity-100' : 'opacity-0 pointer-events-none'
+              }`}
             onDragOver={(e) => {
               e.preventDefault();
               setIsUploadActive(true);
@@ -122,11 +129,10 @@ const Events = () => {
             <h3 className="text-xl font-semibold text-gray-800 dark:text-white">
               {event.name}
             </h3>
-            <span className={`px-3 py-1 rounded-full text-sm font-medium ${
-              event.status === 'upcoming' 
+            <span className={`px-3 py-1 rounded-full text-sm font-medium ${event.status === 'upcoming'
                 ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-100'
                 : 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-100'
-            }`}>
+              }`}>
               {event.status.charAt(0).toUpperCase() + event.status.slice(1)}
             </span>
           </div>
@@ -162,7 +168,7 @@ const Events = () => {
         <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-8">
           Events
         </h1>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {events.map(event => (
             <EventCard key={event.id} event={event} />

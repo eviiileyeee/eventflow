@@ -9,9 +9,10 @@ import About from "./components/About";
 import Footer from "./components/Footer";
 import Events from "./pages/Events";
 import { ThemeProvider } from './components/ThemeContext/ThemeContext';
-import Cursor from "./components/Cursor"; 
+import Cursor from "./components/Cursor";
 import ContactPage from "./pages/ContactPage";
 import NotificationPage from "./pages/NotificationPage";
+import EventFullViewWrapper from "./components/EventFullViewWrapper";
 
 const DashboardLayout = ({ children }) => (
   <div id="main" className="relative overflow-hidden min-h-screen">
@@ -45,6 +46,7 @@ const App = () => {
               <Events />
             </DashboardLayout>
           } />
+          <Route path="/events/:id" element={<EventFullViewWrapper />} />
 
           <Route path="/about" element={
             <DashboardLayout>
@@ -69,7 +71,7 @@ const App = () => {
             </DashboardLayout>
           } />
         </Routes>
-        <Cursor /> 
+        <Cursor />
       </BrowserRouter>
     </ThemeProvider>
   );
