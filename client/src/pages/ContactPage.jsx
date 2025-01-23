@@ -64,7 +64,8 @@ const ContactPage = () => {
   };
 
   return (
-    <div className="min-h-screen text-gray-900 bg-gradient-to-br from-gray-50 via-[#d4deed] to-[#C8CDD4] dark:from-gray-800 dark:via-gray-900 dark:to-black dark:text-white">
+    <div className="min-h-screen text-gray-900 bg-gradient-to-br from-gray-50 via-[#91A5CA] to-[#C8CDD4]
+     dark:from-gray-800 dark:via-gray-900 dark:to-black dark:text-white">
       <div className="max-w-6xl mx-auto px-4 py-16">
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-bold mb-4 pt-8 text-gray-800 dark:text-[#D2D9EF]">
