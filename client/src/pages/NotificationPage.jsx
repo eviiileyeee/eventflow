@@ -84,7 +84,8 @@ const NotificationPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-gradient-to-br from-[#91A5CA] via-[#C8CDD4] to-[#91A5CA] 
+    dark:bg-gradient-to-br dark:from-gray-900 dark:via-gray-800 dark:to-black">
       <div className="max-w-4xl mx-auto px-4 py-8">
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
@@ -93,7 +94,8 @@ const NotificationPage = () => {
             <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
               Notifications
             </h1>
-            <span className="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">
+            <span className="bg-blue-100 text-blue-800 text-xs
+             font-medium px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">
               {notifications.filter(n => !n.read).length} new
             </span>
           </div>
@@ -154,7 +156,7 @@ const NotificationPage = () => {
           {filteredNotifications.map((notification) => (
             <div
               key={notification.id}
-              className={`bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 transition-all ${
+              className={`bg-gray-200 dark:bg-gray-800 rounded-lg shadow-sm p-4 transition-all ${
                 !notification.read ? 'border-l-4 border-blue-500' : ''
               }`}
             >
