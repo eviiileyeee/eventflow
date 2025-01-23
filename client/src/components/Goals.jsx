@@ -55,7 +55,7 @@ const Goals = () => {
     <section
       id="projects"
       className="min-h-screen bg-gradient-to-br from-white to-gray-100 dark:bg-gradient-to-br
-       dark:from-[#1E2837] dark:via-black dark:to-gray-900 flex items-center justify-center px-6 py-12 pt-16"
+       dark:from-[#111927] dark:via-black dark:to-gray-900 flex items-center justify-center px-6 py-12 pt-16"
     >
       <div className="container mx-auto">
         {/* Section Title - Updated with dark text in light mode */}
