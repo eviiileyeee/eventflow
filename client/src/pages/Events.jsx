@@ -146,8 +146,8 @@ const Events = () => {
   };
 
   return (
-    <div className="relative top-10 min-h-screen bg-gradient-to-br from-white to-gray-100 dark:bg-gradient-to-br dark:from-gray-900 dark:via-gray-800 dark:to-black  p-8">
-      <div className="max-w-6xl mx-auto">
+    <div className=" min-h-screen bg-gradient-to-br from-white to-gray-100 dark:bg-gradient-to-br dark:from-gray-900 dark:via-gray-800 dark:to-black  p-8">
+      <div className=" relative top-10 max-w-6xl mx-auto">
         <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-8">
           Events
         </h1>
