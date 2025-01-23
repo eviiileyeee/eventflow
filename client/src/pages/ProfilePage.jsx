@@ -184,7 +184,7 @@ const ProfilePage = () => {
 
   return (
     <div className={darkMode ? 'dark' : ''}>
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 p-6">
+      <div className="min-h-screen bg-gradient-to-br from-[#91A5CA] via-[#C8CDD4] to-[#91A5CA] dark:bg-gradient-to-br dark:from-gray-900 dark:via-gray-800 dark:to-black p-6">
         <div className="max-w-6xl mx-auto">
           <ProfileHeader />
           
