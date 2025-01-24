@@ -1,17 +1,17 @@
 
-Here’s an enhanced and creative version of your README with proper formatting, highlights, and additional details:
 
-🌟 Echelon Dev Society 🌟
-🚀 About Us
+#🌟 Echelon Dev Society 🌟
+
+##🚀 About Us <br>
 Echelon Dev Society (EDC) is a vibrant community of passionate developers, designers, and tech enthusiasts.
 Our mission is to foster innovation, collaboration, and continuous learning through impactful projects, hands-on workshops, and exciting events.
 
 
-🔥 Our Goals
-🎯 Open Source Initiative
+##🔥 Our Goals <br>
+###🎯 Open Source Initiative
 We contribute to various open-source projects, helping improve the global developer ecosystem while mentoring new contributors.
 
-🛠️ Tech Workshops
+##🛠️ Tech Workshops
 Regular workshops on emerging technologies like React, GSAP, and more, focusing on hands-on learning and real-world applications.
 
 💡 Hackathon Series
