@@ -30,6 +30,7 @@ const App = () => {
   return (
     <ThemeProvider>
       <BrowserRouter>
+      <AuthProvider>
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
         <Routes>
@@ -89,6 +90,7 @@ const App = () => {
           } />
         </Routes>
         <Cursor />
+        </AuthProvider>
       </BrowserRouter>
     </ThemeProvider>
   );
