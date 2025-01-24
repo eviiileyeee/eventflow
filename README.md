@@ -1,6 +1,6 @@
 
 
-#🌟 Echelon Dev Society 🌟
+#🌟 Echelon Dev Society 🌟#
 
 ##🚀 About Us <br>
 Echelon Dev Society (EDC) is a vibrant community of passionate developers, designers, and tech enthusiasts.
