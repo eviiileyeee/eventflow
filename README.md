@@ -20,7 +20,7 @@ Quarterly hackathons to solve real-world problems, inspire creativity, and build
 
 #💻 Installation Instructions
 To get started with the EDC project locally, follow these steps:
-`
+
 <p>
 > mkdir edc-project
 > git clone https://github.com/eviiileyeee/EDC-LandingPage.git
@@ -28,7 +28,7 @@ To get started with the EDC project locally, follow these steps:
 > npm install
 > npm run dev
 </p>
-`
+
 
 # 🌟 Features
 ## 🎨 Interactive UI
