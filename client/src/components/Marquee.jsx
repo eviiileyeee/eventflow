@@ -29,7 +29,7 @@ const MarqueeComponent = () => {
       className={`py-4 ${
         darkMode
           ? "dark:bg-gradient-to-bl dark:from-[#020305] dark:via-[#05070B] dark:via-[#0B0F19] dark:to-[#121928]"
-          : "bg-gradient-to-t from-[#101726] via-[#1D2036] via-[#0F121C] to-[#010202]"
+          : "bg-gradient-to-t from-[#94A7CB] via-[#AAB7CE] via-[#AAB7CE] to-[#C3C9D3]"
       }`}
     >
       <Marquee
