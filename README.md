@@ -20,24 +20,15 @@ Quarterly hackathons to solve real-world problems, inspire creativity, and build
 
 #💻 Installation Instructions
 To get started with the EDC project locally, follow these steps:
-
-
-### 1️⃣ Create a new project directory
-mkdir edc-project
-
-### 2️⃣ Clone the repository
-git clone https://github.com/eviiileyeee/EDC-LandingPage.git
-
-### 3️⃣ Navigate to the client folder
-cd client
-
-### 4️⃣ Install dependencies
-npm install
-
-### 5️⃣ Start the development server
-npm run dev
-
-
+`
+<p>
+> mkdir edc-project
+> git clone https://github.com/eviiileyeee/EDC-LandingPage.git
+> cd client
+> npm install
+> npm run dev
+</p>
+`
 
 # 🌟 Features
 ## 🎨 Interactive UI
@@ -53,6 +44,6 @@ Easily register for upcoming events and explore a history of past events to stay
 
 
 ##🌍 Live Preview
-👉 View the Live Project Here: https://echelon-dev-society.netlify.app/
+> View the Live Project Here: https://echelon-dev-society.netlify.app/
 
 🖼️ Preview of the Website
