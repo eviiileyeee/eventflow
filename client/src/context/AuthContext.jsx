@@ -38,12 +38,16 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (userData) => {
     try {
-      const response = await api.post('/api/users/register', userData);
+        const response = await api.post('/api/users/register', {
+            username,
+            email,
+            password
+          });
       localStorage.setItem('token', response.data.token);
-      setUser(response.data.user);
+      setUser(response.username);
       return response.data;
     } catch (error) {
-      throw error.response.data;
+        throw error.response?.data || { message: 'Registration failed' };
     }
   };
 
