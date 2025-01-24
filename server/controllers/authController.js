@@ -1,26 +1,31 @@
-const User = require('../models/User');
+const User = require('../models/userModel');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 // Register a new user
 exports.register = async (req, res) => {
-    const { username, password } = req.body;
-
+    const { username, password , name , email } = req.body;
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const newUser = new User({ username, password: hashedPassword , name, email });
     try {
-        const hashedPassword = await bcrypt.hash(password, 10);
-        const newUser = new User({ username, password: hashedPassword });
-        await newUser.save();
+       const checkUser = User.find({ username,email });
+       if(checkUser){
+        return res.status(400).json({ message: "User already exists" });
+       }
+        await newUser.save()
         res.status(201).json({ message: 'User registered successfully' });
     } catch (error) {
-        res.status(500).json({ error: 'Error registering user' });
+        const errorMessages = Object.values(error.errors)?.map((error) => error.message);
+        res.status(500).json({ err: 'Error registering user', error: errorMessages });
     }
 };
 
 // Login user
 exports.login = async (req, res) => {
     const { username, password } = req.body;
-
+        
     try {
+        console.log(username)
         const user = await User.findOne({ username });
         if (!user) {
             return res.status(404).json({ error: 'User not found' });

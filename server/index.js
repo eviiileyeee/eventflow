@@ -3,8 +3,9 @@ const cors = require('cors');
 const morgan = require('morgan');
 const connectDB = require('./config/db');
 const eventRoutes = require('./routes/eventRoutes');
+const authRoutes = require("./routes/authRoutes");
 require('dotenv').config();
-//const errorHandler = require('./middleware/errorHandler');
+const errorHandler = require('./middleware/errorHandler');
 
 const app = express();
 
@@ -19,11 +20,11 @@ app.use(morgan('dev'));
 
 // Routes
 app.use('/api/v1/events', eventRoutes);
-
+app.use("/api/v1/user",authRoutes);
 // Error handling
-//app.use(errorHandler);
+app.use(errorHandler);
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 8001;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
