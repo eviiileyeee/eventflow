@@ -83,8 +83,9 @@ const Register = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 px-4 py-8">
-            <div className="max-w-md w-full space-y-8 bg-white dark:bg-gray-800 shadow-lg rounded-xl p-8">
+        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#91A5CA] via-[#C8CDD4] to-[#91A5CA]
+     dark:bg-gradient-to-br dark:from-gray-900 dark:via-gray-800 dark:to-black  px-4 py-8">
+            <div className="max-w-md w-full space-y-8 bg-gray-200 dark:bg-gray-800 shadow-lg rounded-xl p-8">
                 {/* Title section remains the same */}
                 <div className="text-center">
                     <h2 className="mt-6 text-3xl font-extrabold text-gray-900 dark:text-white">
@@ -184,7 +185,7 @@ const Register = () => {
                             className={`group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white ${
                                 isLoading 
                                     ? 'bg-blue-400 cursor-not-allowed' 
-                                    : 'bg-blue-600 hover:bg-blue-700'
+                                    : 'bg-gray-900 hover:bg-[#8194B0] hover:text-black dark:bg-[#8194B0] dark:text-black dark:hover:bg-gray-950 dark:hover:text-white '
                             } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500`}
                         >
                             {isLoading ? 'Registering...' : 'Register'}
