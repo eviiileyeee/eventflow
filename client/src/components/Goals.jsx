@@ -75,7 +75,7 @@ const Goals = () => {
           <ProjectCard
             title="Tech Workshops"
             description="Describe the product here. Include important features, pricing and other relevant info."
-            image='https://th.bing.com/th/id/OIP.OVeLai0N0LCeDmds0PG-JgHaE7?rs=1&pid=ImgDetMain'
+            image='https://tse3.mm.bing.net/th?id=OIP.zsjVEP2jmIIPPoX-liZPhAHaEo&pid=Api&P=0&h=180'
           />
           <ProjectCard
             title="Hackathon Series"
