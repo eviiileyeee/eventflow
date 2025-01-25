@@ -38,11 +38,7 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (userData) => {
     try {
-        const response = await api.post('/api/users/register', {
-            username,
-            email,
-            password
-          });
+        const response = await api.post('/api/users/register', userData);
       localStorage.setItem('token', response.data.token);
       setUser(response.username);
       return response.data;
@@ -50,6 +46,7 @@ export const AuthProvider = ({ children }) => {
         throw error.response?.data || { message: 'Registration failed' };
     }
   };
+  
 
   const logout = () => {
     localStorage.removeItem('token');
