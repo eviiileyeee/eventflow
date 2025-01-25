@@ -48,7 +48,7 @@
             </h1>
             <p
               className={`bounding-elem text-xl mb-8 mx-auto max-w-2xl font-Madefor ${
-                darkMode ? "text-[#A6B7D5]" : "text-[#7f8183]"
+                darkMode ? "text-[#A6B7D5]" : "text-[#646667]"
               }`}
             >
               "Echelon Dev Society: Training the next generation of innovators

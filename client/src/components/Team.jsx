@@ -6,17 +6,48 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const TeamMember = ({ name, role, image, linkedin, twitter, github }) => (
-  <div className="flex items-center bg-gray-300 dark:bg-gray-800 p-4 rounded-lg transition-transform duration-300 transform hover:scale-105">
-    <div className="w-1/3">
-      <img src={image} alt={name} className="w-24 h-24 ml-8 rounded-full shadow-lg" />
+  <div className="flex flex-col sm:flex-row items-center bg-gray-300 dark:bg-gray-800 p-4 rounded-lg transition-transform duration-300 transform hover:scale-105 space-y-4 sm:space-y-0 sm:space-x-4">
+    <div className="w-full sm:w-1/4 flex justify-center">
+      <img 
+        src={image} 
+        alt={name} 
+        className="w-36 h-36 sm:w-28 sm:h-28 rounded-full shadow-lg object-cover"
+      />
     </div>
-    <div className="w-2/3 pl-4">
-      <h3 className="font-semibold text-lg text-gray-900 dark:text-white">{name}</h3>
-      <p className="text-gray-600 dark:text-gray-400">{role}</p>
-      <div className="flex space-x-2 mt-2">
-        {linkedin && <a href={linkedin} target="_blank" rel="noopener noreferrer" className="text-blue-700 dark:text-blue-400"><FaLinkedin /></a>}
-        {twitter && <a href={twitter} target="_blank" rel="noopener noreferrer" className="text-blue-500 dark:text-blue-300"><FaTwitter /></a>}
-        {github && <a href={github} target="_blank" rel="noopener noreferrer" className="text-gray-900 dark:text-white"><FaGithub /></a>}
+    <div className="w-full sm:w-2/3 text-center sm:text-left">
+      <h3 className="font-semibold text-2xl sm:text-xl text-gray-900 dark:text-white">{name}</h3>
+      <p className="text-xl sm:text-base text-gray-600 dark:text-gray-400">{role}</p>
+      <div className="flex justify-center sm:justify-start space-x-4 mt-3">
+        {linkedin && (
+          <a 
+            href={linkedin} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="text-3xl sm:text-lg text-blue-700 dark:text-blue-400 hover:scale-110 transition-transform"
+          >
+            <FaLinkedin />
+          </a>
+        )}
+        {twitter && (
+          <a 
+            href={twitter} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="text-3xl sm:text-lg text-blue-500 dark:text-blue-300 hover:scale-110 transition-transform"
+          >
+            <FaTwitter />
+          </a>
+        )}
+        {github && (
+          <a 
+            href={github} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="text-3xl sm:text-lg text-gray-900 dark:text-white hover:scale-110 transition-transform"
+          >
+            <FaGithub />
+          </a>
+        )}
       </div>
     </div>
   </div>
@@ -54,12 +85,15 @@ const Team = () => {
   };
 
   return (
-    <section id="team" className="h-screen flex flex-col items-center justify-center bg-gradient-to-br from-[#C8CDD4] via-[#91A5CA] to-[#91A5CA] dark:bg-gradient-to-br dark:from-black dark:via-[#0E1421] dark:to-gray-900 px-6">
-      <div className="container mx-auto px-6">
-        <h2 className="team-heading text-5xl  font-bold text-center mb-12 text-gray-900 dark:text-white">
+    <section 
+      id="team" 
+      className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-[#C8CDD4] via-[#91A5CA] to-[#91A5CA] dark:bg-gradient-to-br dark:from-black dark:via-[#0E1421] dark:to-gray-900 px-4 sm:px-6 py-12"
+    >
+      <div className="container mx-auto px-4 sm:px-6">
+        <h2 className="team-heading text-4xl sm:text-4xl md:text-5xl font-bold text-center mb-8 sm:mb-12 text-gray-900 dark:text-white">
           OUR TEAM MEMBERS
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
           <TeamMember 
             name="Anirudhh Dugbe"
             role="Founder"
