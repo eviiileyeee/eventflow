@@ -5,7 +5,6 @@ import ProtectedRoute from './components/ProtectedRoute';
 import ProfilePage from './pages/ProfilePage';
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from './pages/Register.jsx';
-
 import "./index.css";
 import Navbar from "./components/Navbar";
 import Hero from "./pages/Hero";

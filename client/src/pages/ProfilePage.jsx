@@ -22,6 +22,7 @@ const ProfilePage = () => {
   const [darkMode, setDarkMode] = useState(false);
   const { user, checkAuth } = useAuth();
   const navigate = useNavigate();
+  console.log(user);
 
   useEffect(() => {
     if (!user) {
@@ -57,7 +58,7 @@ const ProfilePage = () => {
         className="h-20 w-20 rounded-full"
       />
       <div>
-        <h2 className="text-2xl font-bold dark:text-white">John Doe</h2>
+        <h2 className="text-2xl font-bold dark:text-white">{user.username && "user"}</h2>
         <p className="text-gray-600 dark:text-gray-400">john.doe@example.com</p>
         <div className="flex items-center mt-2 text-sm text-gray-500 dark:text-gray-400">
           <Github className="h-4 w-4 mr-1" />
