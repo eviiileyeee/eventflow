@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import {
   User,
   Settings,
@@ -17,6 +20,20 @@ import {
 const ProfilePage = () => {
   const [activeTab, setActiveTab] = useState('general');
   const [darkMode, setDarkMode] = useState(false);
+  const { user, checkAuth } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!user) {
+      checkAuth();
+    }
+  }, [user, checkAuth]);
+
+  useEffect(() => {
+    if (!localStorage.getItem('token')) {
+      navigate('/login');
+    }
+  }, [navigate]);
 
   const SidebarLink = ({ icon: Icon, text, tab }) => (
     <button

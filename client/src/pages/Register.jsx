@@ -3,19 +3,33 @@ import { useNavigate, Link } from 'react-router-dom';
 import { User, Mail, Lock } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
+
 const Register = () => {
-    const [formData, setFormData] = useState({
-        username: '',
-        email: '',
-        password: '',
-        confirmPassword: ''
+    const [formData, setFormData] = useState(() => {
+        // Initialize from localStorage if available
+        const savedData = localStorage.getItem('registerFormData');
+        return savedData ? JSON.parse(savedData) : {
+            username: '',
+            email: '',
+            password: '',
+            confirmPassword: ''
+        };
     });
+
+    
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     
     const { register } = useAuth();
     const navigate = useNavigate();
+    
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        const newFormData = { ...formData, [name]: value };
+        setFormData(newFormData);
+        localStorage.setItem('registerFormData', JSON.stringify(newFormData));
+    };
 
     const validateForm = () => {
         if (!formData.username || !formData.email || !formData.password || !formData.confirmPassword) {
@@ -42,16 +56,7 @@ const Register = () => {
 
         return true;
     };
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData(prev => ({
-            ...prev,
-            [name]: value
-        }));
-        // Clear errors when user starts typing
-        if (error) setError('');
-    };
+ 
 
     const handleSubmit = async (e) => {
         e.preventDefault();
