@@ -34,12 +34,12 @@ export const AuthProvider = ({ children }) => {
   const login = async (email, password) => {
     try {
       const response = await api.post('/api/users/login', { email, password });
-      const { token, user } = response.data;
+      const token = response.data.token;
+      const { user } = response.data;
       
       localStorage.setItem('token', token);
       api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       setUser(user);
-      
       return response.data;
     } catch (error) {
       throw error.response?.data || { message: 'Login failed' };
