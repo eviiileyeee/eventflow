@@ -20,7 +20,7 @@ app.use(morgan('dev'));
 
 // Routes
 app.use('/api/v1/events', eventRoutes);
-app.use("/api/v1/user",authRoutes);
+app.use("/api/users",authRoutes);
 // Error handling
 app.use(errorHandler);
 
