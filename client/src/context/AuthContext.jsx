@@ -48,6 +48,7 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (userData) => {
     try {
+      console.log("over register route", userData);
       const response = await api.post('/api/users/register', userData);
       const { token, user } = response.data;
 

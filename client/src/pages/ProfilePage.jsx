@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTheme } from "../components/ThemeContext/ThemeContext";
 import { useAuth } from '../context/AuthContext';
 import {
   User,
@@ -19,10 +20,10 @@ import {
 
 const ProfilePage = () => {
   const [activeTab, setActiveTab] = useState('general');
-  const [darkMode, setDarkMode] = useState(false);
-  const { user, checkAuth } = useAuth();
+  const { darkMode, toggleDarkMode } = useTheme();
+  const { user, checkAuth , logout } = useAuth();
   const navigate = useNavigate();
-  console.log(user);
+  //console.log(user);
 
   useEffect(() => {
     if (!user) {
@@ -58,11 +59,11 @@ const ProfilePage = () => {
         className="h-20 w-20 rounded-full"
       />
       <div>
-        <h2 className="text-2xl font-bold dark:text-white">{user.username && "user"}</h2>
-        <p className="text-gray-600 dark:text-gray-400">john.doe@example.com</p>
+        <h2 className="text-2xl font-bold dark:text-white">{user.username}</h2>
+        <p className="text-gray-600 dark:text-gray-400">{user.email}</p>
         <div className="flex items-center mt-2 text-sm text-gray-500 dark:text-gray-400">
           <Github className="h-4 w-4 mr-1" />
-          <span>johndoe</span>
+          <span>Github</span>
         </div>
       </div>
     </div>
@@ -75,11 +76,11 @@ const ProfilePage = () => {
         <div className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-              Full Name
+              UserName
             </label>
             <input
               type="text"
-              defaultValue="John Doe"
+              Value={user.username}
               className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
             />
           </div>
@@ -89,7 +90,7 @@ const ProfilePage = () => {
             </label>
             <input
               type="email"
-              defaultValue="john.doe@example.com"
+              Value={user.email}
               className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
             />
           </div>
@@ -107,7 +108,7 @@ const ProfilePage = () => {
               </p>
             </div>
             <button
-              onClick={() => setDarkMode(!darkMode)}
+              onClick={toggleDarkMode}
               className="p-2 rounded-lg bg-gray-100 dark:bg-gray-700"
             >
               {darkMode ? (
@@ -217,7 +218,8 @@ const ProfilePage = () => {
               
               <div className="pt-4 mt-4 border-t dark:border-gray-700">
                 <button className="w-full flex items-center bg-gray-200
-                 space-x-3 px-4 py-2 text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors">
+                 space-x-3 px-4 py-2 text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors"
+                 onClick={logout}>
                   <LogOut className="h-5 w-5" />
                   <span>Logout</span>
                 </button>

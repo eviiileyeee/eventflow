@@ -62,16 +62,20 @@ const Register = () => {
         e.preventDefault();
         setError('');
         setSuccess('');
-
+        const UserData = {
+            username: formData.username,
+            email: formData.email,
+            password: formData.password,
+        }
+        console.log(UserData);
         if (!validateForm()) return;
 
         try {
             setIsLoading(true);
-            await register(
-                formData.username,
-                formData.email,
-                formData.password
-            );
+            setSuccess('Wait a moment...');
+          
+            await register(UserData);
+               
 
             setSuccess('Registration successful! Redirecting to login...');
             

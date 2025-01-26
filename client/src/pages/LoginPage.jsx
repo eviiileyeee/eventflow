@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { Link , useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({
@@ -32,11 +32,18 @@ const LoginPage = () => {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#91A5CA] via-[#C8CDD4] to-[#91A5CA]
      dark:bg-gradient-to-br dark:from-gray-900 dark:via-gray-800 dark:to-black py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
-        <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold  dark:text-white text-gray-900">
-            Sign in to your account
-          </h2>
-        </div>
+      <div className="text-center">
+                    <h2 className="mt-6 text-3xl font-extrabold text-gray-900 dark:text-white">
+                        Logging in
+                    </h2>
+                    <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                         {' '}
+                        <Link to="/register" className="font-medium text-blue-600 hover:text-blue-500">
+                            Dont have an account?
+                        </Link>
+                    </p>
+                </div>
+
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           {error && (
             <div className="text-red-500 text-center">{error}</div>
