@@ -139,16 +139,24 @@ const ProfilePage = () => {
 
   const SecuritySettings = () => (
     <div className="bg-gray-200 dark:bg-gray-800 p-6 rounded-lg shadow space-y-6">
-      <h3 className="text-lg bg-gray-200 font-medium mb-4 dark:text-white">Security Settings</h3>
+      <h3 className="text-lg  font-medium mb-4 dark:text-white ">Security Settings</h3>
       
       <div className="space-y-4">
         <div>
-          <h4 className="font-medium dark:text-white">Two-Factor Authentication</h4>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">
-            Add an extra layer of security to your account
+          <h4 className="font-medium dark:text-white">Recovery Email</h4>
+          <p className="text-sm text-gray-500 dark:text-gray-400  mb-2">
+            Set up an email to recover your account
           </p>
-          <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
-            Enable 2FA
+          <div className="flex items-center space-x-2">
+            <input
+            type="email"
+            className="w-full p-2 rounded-lg dark:bg-gray-700 dark:text-gray-300
+            "
+            placeholder="Enter your recovery email"
+            />
+          </div>
+          <button className=" mt-3 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+            verify
           </button>
         </div>
 
@@ -189,7 +197,7 @@ const ProfilePage = () => {
             {[1, 2, 3].map((i) => (
               <div key={i} className="flex items-center justify-between py-2">
                 <div>
-                  <p className="font-medium dark:text-white">Premium Plan</p>
+                  <p className="font-medium dark:text-white">Event Registered</p>
                   <p className="text-sm text-gray-500 dark:text-gray-400">
                     {`March ${i}, 2024`}
                   </p>
