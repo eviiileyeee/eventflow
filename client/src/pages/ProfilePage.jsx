@@ -80,8 +80,9 @@ const ProfilePage = () => {
             </label>
             <input
               type="text"
-              Value={user.username}
+              value={user.username}
               className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+              onChange={(e) => value = e.target.value}
             />
           </div>
           <div>
@@ -90,8 +91,9 @@ const ProfilePage = () => {
             </label>
             <input
               type="email"
-              Value={user.email}
+              value={user.email}
               className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+              onChange={(e)=> value = e.target.value }
             />
           </div>
         </div>
