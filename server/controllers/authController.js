@@ -18,18 +18,18 @@ exports.register = async (req, res) => {
     const { username, password, email } = req.body;
 
     // Check for missing fields
-    if (!username || !email || !password ) {
+    if (!username || !email || !password) {
       return res.status(400).json({ message: 'All fields are required.' });
     }
 
     // Check if user already exists
-    const existingUser = await User.findOne({ 
-      $or: [{ email }, { username }] 
+    const existingUser = await User.findOne({
+      $or: [{ email }, { username }]
     });
-    
+
     if (existingUser) {
-      return res.status(400).json({ 
-        message: 'User with this email or username already exists' 
+      return res.status(400).json({
+        message: 'User with this email or username already exists'
       });
     }
 
@@ -45,9 +45,9 @@ exports.register = async (req, res) => {
     res.status(201).json({ message: 'User registered successfully' });
   } catch (error) {
     console.error('Error registering user:', error);
-    res.status(500).json({ 
-      message: 'Server error during registration', 
-      error: error.message 
+    res.status(500).json({
+      message: 'Server error during registration',
+      error: error.message
     });
   }
 };
@@ -59,8 +59,8 @@ exports.login = async (req, res) => {
 
     // Validate input
     if (!email || !password) {
-      return res.status(400).json({ 
-        message: 'Please provide email and password.' 
+      return res.status(400).json({
+        message: 'Please provide email and password.'
       });
     }
 
@@ -94,13 +94,30 @@ exports.login = async (req, res) => {
     });
   } catch (error) {
     console.error('Error during login:', error);
-    res.status(500).json({ 
-      message: 'Server error during login', 
-      error: error.message 
+    res.status(500).json({
+      message: 'Server error during login',
+      error: error.message
     });
   }
 };
 
+exports.uploadDetails = async (req, res) => {
+  const { id } = req.params;
+  const { username } = req.body;
+  try {
+    const user = await User.findById(id);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    // Update user details
+    user.username = username;
+    await user.save();
+    res.status(200).json({ message: 'User details updated successfully' });
+  } catch (error) {
+    console.error('Error during update:', error);
+    res.status(500).json({ message: 'Server error during update', error: error.message });
+  }
+};
 
 exports.getAllUsers = async (req, res) => {
   try {

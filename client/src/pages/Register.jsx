@@ -72,11 +72,11 @@ const Register = () => {
 
         try {
             setIsLoading(true);
+            if(isLoading){
             setSuccess('Wait a moment...');
-          
+            }
+            
             await register(UserData);
-               
-
             setSuccess('Registration successful! Redirecting to login...');
             
             // Wait a moment before redirecting

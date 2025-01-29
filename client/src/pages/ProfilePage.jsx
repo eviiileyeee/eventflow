@@ -3,6 +3,8 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTheme } from "../components/ThemeContext/ThemeContext";
 import { useAuth } from '../context/AuthContext';
+import GeneralSettings from '../components/GeneralSettings';
+import NotificationPage from './NotificationPage';
 import {
   User,
   Settings,
@@ -54,13 +56,13 @@ const ProfilePage = () => {
   const ProfileHeader = () => (
     <div className="flex items-center space-x-4 mb-8 p-4 bg-gray-200 dark:bg-gray-800 rounded-lg shadow">
       <img
-        src="/api/placeholder/80/80"
+        src="https://tse3.mm.bing.net/th?id=OIP.JttmcrrQ9_XqrY60bFEfgQHaHa&pid=Api&P=0&h=180"
         alt="Profile"
         className="h-20 w-20 rounded-full"
       />
       <div>
         <h2 className="text-2xl font-bold dark:text-white">{user.username}</h2>
-        <p className="text-gray-600 dark:text-gray-400">{user.email}</p>
+        <p className="text-gray-600 dark:text-gray-400">{user.email.slice(0,14)}...</p>
         <div className="flex items-center mt-2 text-sm text-gray-500 dark:text-gray-400">
           <Github className="h-4 w-4 mr-1" />
           <span>Github</span>
@@ -69,74 +71,7 @@ const ProfilePage = () => {
     </div>
   );
 
-  const GeneralSettings = () => (
-    <div className="space-y-6">
-      <div className="bg-gray-200 dark:bg-gray-800 p-6 rounded-lg shadow">
-        <h3 className="text-lg font-medium mb-4 dark:text-white">Personal Information</h3>
-        <div className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-              UserName
-            </label>
-            <input
-              type="text"
-              value={user.username}
-              className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-              onChange={(e) => value = e.target.value}
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-              Email
-            </label>
-            <input
-              type="email"
-              value={user.email}
-              className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-              onChange={(e)=> value = e.target.value }
-            />
-          </div>
-        </div>
-      </div>
-
-      <div className="bg-gray-200 dark:bg-gray-800 p-6 rounded-lg shadow">
-        <h3 className="text-lg font-medium mb-4 dark:text-white">Preferences</h3>
-        <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <div>
-              <h4 className="font-medium dark:text-white">Theme</h4>
-              <p className="text-sm text-gray-500 dark:text-gray-400">
-                Customize your interface theme
-              </p>
-            </div>
-            <button
-              onClick={toggleDarkMode}
-              className="p-2 rounded-lg bg-gray-100 dark:bg-gray-700"
-            >
-              {darkMode ? (
-                <Sun className="h-5 w-5 text-gray-600 dark:text-gray-300" />
-              ) : (
-                <Moon className="h-5 w-5 text-gray-600 dark:text-gray-300" />
-              )}
-            </button>
-          </div>
-          <div className="flex items-center justify-between">
-            <div>
-              <h4 className="font-medium dark:text-white">Email Notifications</h4>
-              <p className="text-sm text-gray-500 dark:text-gray-400">
-                Manage your email preferences
-              </p>
-            </div>
-            <label className="relative inline-flex items-center cursor-pointer">
-              <input type="checkbox" className="sr-only peer" defaultChecked />
-              <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
-            </label>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-
+ 
   const SecuritySettings = () => (
     <div className="bg-gray-200 dark:bg-gray-800 p-6 rounded-lg shadow space-y-6">
       <h3 className="text-lg  font-medium mb-4 dark:text-white ">Security Settings</h3>
@@ -238,10 +173,10 @@ const ProfilePage = () => {
 
             {/* Main Content */}
             <div className="flex-1">
-              {activeTab === 'general' && <GeneralSettings />}
+              {activeTab === 'general' && <GeneralSettings   user = {user} />}
               {activeTab === 'security' && <SecuritySettings />}
               {activeTab === 'billing' && <BillingSettings />}
-              {/* Add other tab contents as needed */}
+              { activeTab === 'notifications' && <NotificationPage /> }
             </div>
           </div>
         </div>

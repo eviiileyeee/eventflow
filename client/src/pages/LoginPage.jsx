@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { Link , useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({
@@ -8,6 +8,8 @@ const LoginPage = () => {
     password: '',
   });
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const { login } = useAuth();
 
@@ -21,7 +23,9 @@ const LoginPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      setIsLoading(true);
       await login(formData.email, formData.password);
+      setSuccess('Logged in successfully');
       navigate('/');
     } catch (err) {
       setError(err.message || 'An error occurred during login');
@@ -32,17 +36,17 @@ const LoginPage = () => {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#91A5CA] via-[#C8CDD4] to-[#91A5CA]
      dark:bg-gradient-to-br dark:from-gray-900 dark:via-gray-800 dark:to-black py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
-      <div className="text-center">
-                    <h2 className="mt-6 text-3xl font-extrabold text-gray-900 dark:text-white">
-                        Logging in
-                    </h2>
-                    <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-                         {' '}
-                        <Link to="/register" className="font-medium text-blue-600 hover:text-blue-500">
-                            Dont have an account?
-                        </Link>
-                    </p>
-                </div>
+        <div className="text-center">
+          <h2 className="mt-6 text-3xl font-extrabold text-gray-900 dark:text-white">
+            Logging in
+          </h2>
+          <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+            {' '}
+            <Link to="/register" className="font-medium text-blue-600 hover:text-blue-500">
+              Dont have an account?
+            </Link>
+          </p>
+        </div>
 
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           {error && (
@@ -76,9 +80,13 @@ const LoginPage = () => {
           <div>
             <button
               type="submit"
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-gray-950 hover:bg-gray-800 dark:bg-[#A3B4D5] dark:hover:bg-gray-950 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              disabled={isLoading}
+              className={`group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white ${isLoading
+                  ? 'bg-blue-400 cursor-not-allowed'
+                  : 'bg-gray-900 hover:bg-[#8194B0] hover:text-black dark:bg-[#8194B0] dark:text-black dark:hover:bg-gray-950 dark:hover:text-white '
+                } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500`}
             >
-              Sign in
+              {isLoading ? 'wait a moment...' : 'Log In'}
             </button>
           </div>
         </form>
