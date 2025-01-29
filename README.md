@@ -20,4 +20,4 @@ npm run build
 
 
 ## view live project on 
-https://edc-cdgi.netlify.app
+https://echelon-dev-society.netlify.app
