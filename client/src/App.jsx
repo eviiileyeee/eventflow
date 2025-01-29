@@ -54,18 +54,19 @@ const App = () => {
               }
             />
             <Route
-              path="/notifications"
+              path="/notification"
               element={
-                <ProtectedRoute>
                   <NotificationPage />
-                </ProtectedRoute>
               }
             />
 
             <Route path="/events" element={
-              <DashboardLayout>
-                <Events />
-              </DashboardLayout>
+              <ProtectedRoute>
+                <DashboardLayout>
+                  <Events />
+                </DashboardLayout>
+              </ProtectedRoute>
+
             } />
             <Route path="/events/:id" element={<EventFullView />} />
             <Route path="/about" element={
