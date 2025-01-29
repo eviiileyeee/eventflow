@@ -21,13 +21,12 @@ app.use(morgan('dev'));
 // Routes
 app.use('/api/v1/events', eventRoutes);
 app.use("/api/users",authRoutes);
-app.get("/",(req,res)=>{
-  res.send("this is backend of Harendra edc-project");
-})
+app.get("/",(req,res)=>   res.send("this is backend of Harendra edc-project"));
+
 // Error handling
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 8001;
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`Server running on port http://localhost:${PORT}`);
 });
