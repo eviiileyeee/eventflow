@@ -103,14 +103,12 @@ exports.login = async (req, res) => {
 
 exports.uploadDetails = async (req, res) => {
   const { id } = req.params;
-  const { username } = req.body;
+  const userData = req.body;
   try {
-    const user = await User.findById(id);
+    const user = await User.findByIdAndUpdate(id, userData, { new: true });
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
-    // Update user details
-    user.username = username;
     await user.save();
     res.status(200).json({ message: 'User details updated successfully' });
   } catch (error) {

@@ -22,9 +22,13 @@ import {
 
 
 const GeneralSettings = (props) => {
+    const {updateUser} = useAuth();
     const user = props.user;
     const { darkMode, toggleDarkMode } = useTheme();
     const [formData, setFormData] = useState({
+        username: user.username,
+        email: user.email,
+        _id: user._id,
         phoneNumber: user.phoneNumber || '',
         githubUrl: user.githubUrl || '',
         facebookUrl: user.facebookUrl || '',
@@ -49,7 +53,8 @@ const GeneralSettings = (props) => {
     
       const handleSubmit = (e) => {
         e.preventDefault();
-        onSave(formData);
+        updateUser(formData);
+        console.log(formData);
       };
 
    return(
@@ -89,7 +94,7 @@ const GeneralSettings = (props) => {
           <input
             type="url"
             name="facebookUrl"
-            placeholder={formData.facebookUrl||"facebookUrl"}
+            placeholder={user.facebookUrl||"facebookUrl"}
             onChange={handleChange}
             className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
           />
@@ -99,7 +104,7 @@ const GeneralSettings = (props) => {
             Instagram URL
           </label>
           <input
-            type="url"
+            type="string"
             name="instagramUrl"
             placeholder={user.instagramUrl|| "instagram Url"}
             onChange={handleChange}

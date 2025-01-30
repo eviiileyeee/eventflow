@@ -24,8 +24,8 @@ const ProfilePage = () => {
   const [activeTab, setActiveTab] = useState('general');
   const { darkMode, toggleDarkMode } = useTheme();
   const { user, checkAuth , logout } = useAuth();
+  const [currentUser , setCurrentUser] = useState(user);
   const navigate = useNavigate();
-  //console.log(user);
 
   useEffect(() => {
     if (!user) {
@@ -173,7 +173,7 @@ const ProfilePage = () => {
 
             {/* Main Content */}
             <div className="flex-1">
-              {activeTab === 'general' && <GeneralSettings   user = {user} />}
+              {activeTab === 'general' && <GeneralSettings   user = {currentUser} function = {setCurrentUser} />}
               {activeTab === 'security' && <SecuritySettings />}
               {activeTab === 'billing' && <BillingSettings />}
               { activeTab === 'notifications' && <NotificationPage /> }

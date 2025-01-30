@@ -48,7 +48,6 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (userData) => {
     try {
-      console.log("over register route", userData);
       const response = await api.post('/api/users/register', userData);
       const { token, user } = response.data;
 
@@ -67,9 +66,24 @@ export const AuthProvider = ({ children }) => {
     delete api.defaults.headers.common['Authorization'];
     setUser(null);
   };
-
+  
+  const updateUser = async (updatedUser) => {
+    try {
+      console.log("inside update route::::");
+    api.post('/api/users/upload-details',updatedUser)
+    .then(response => {
+      const { user } = response.data;
+      setUser(user);
+      })
+      .catch(error => {
+        console.error(error);
+        });
+        } catch (error) {
+          console.error(error);
+          }
+  }
   return (
-    <AuthContext.Provider value={{ user, loading, login, register, logout, checkAuth }}>
+    <AuthContext.Provider value={{ user, loading, login, register, logout, checkAuth , updateUser }}>
       {!loading && children}
     </AuthContext.Provider>
   );
