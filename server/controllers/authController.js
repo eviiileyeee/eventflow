@@ -91,6 +91,7 @@ exports.login = async (req, res) => {
         role: user.role
       },
       token,
+      Notification : "login activity found! ",
     });
   } catch (error) {
     console.error('Error during login:', error);
