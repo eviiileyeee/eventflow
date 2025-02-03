@@ -4,12 +4,14 @@ const eventController = require('../controllers/eventController');
 const authMiddleware = require('../middleware/authMiddleware');
 const uploadMiddleware = require('../middleware/uploadMiddleware');
 
+
+// Protected routes
+router.use(authMiddleware.protect);
+
 // Public routes
 router.get('/', eventController.getAllEvents);
 router.get('/:id', eventController.getEvent);
 
-// Protected routes
-router.use(authMiddleware.protect);
 
 router.post('/',
   uploadMiddleware.array('images', 5),

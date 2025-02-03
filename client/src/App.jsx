@@ -1,4 +1,4 @@
-import React from "react";
+import React,{ useState, useEffect} from "react";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -17,6 +17,7 @@ import ContactPage from "./pages/ContactPage";
 import NotificationPage from "./pages/NotificationPage";
 import EventFullViewWrapper from "./components/EventFullViewWrapper";
 import EventFullView from "./components/EventFullView.jsx";
+import Loader from "./components/Loader.jsx";
 
 const DashboardLayout = ({ children }) => (
   <div id="main" className="relative overflow-hidden min-h-screen">
@@ -28,7 +29,17 @@ const DashboardLayout = ({ children }) => (
 
 
 const App = () => {
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 3000); 
+  }, []);
+
   return (
+    <>  {isLoading ? (
+      <Loader />
+    ) : (
     <ThemeProvider>
       <BrowserRouter>
         <AuthProvider>
@@ -96,6 +107,8 @@ const App = () => {
         </AuthProvider>
       </BrowserRouter>
     </ThemeProvider>
+)}
+    </>
   );
 };
 
