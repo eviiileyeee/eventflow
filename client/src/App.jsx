@@ -30,11 +30,28 @@ const DashboardLayout = ({ children }) => (
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
+ 
+  
   useEffect(() => {
-    setTimeout(() => {
+    const handleLoad = () => {
       setIsLoading(false);
-    }, 3000); 
+    };
+    
+
+    // Check if the page is already loaded
+    
+    if (document.readyState === "complete") {
+      setInterval(()=>{
+        setIsLoading(false);
+      }, 3000);
+      
+    } else {
+      window.addEventListener("load", handleLoad);
+    }
+
+    return () => window.removeEventListener("load", handleLoad);
   }, []);
+
 
   return (
     <>  {isLoading ? (
