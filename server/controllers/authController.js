@@ -2,6 +2,7 @@ const User = require('../models/userModel');
 const bcryptjs = require('bcryptjs'); // Change to bcryptjs for consistency
 const jwt = require('jsonwebtoken');
 const verifyToken = require('../middleware/authMiddleware');
+const { v4: uuidv4 } = require('uuid');
 
 
 // Generate JWT Token
@@ -91,7 +92,14 @@ exports.login = async (req, res) => {
         role: user.role
       },
       token,
-      Notification : "login activity found! ",
+      Notification : {  
+        id: uuidv4(),
+        type: 'security',
+        title: 'New login detected',
+        message: 'A new login was detected from Chrome on Windows.',
+        timestamp: new Date().toISOString(),
+        read: false,
+        icon: 1 },
     });
   } catch (error) {
     console.error('Error during login:', error);

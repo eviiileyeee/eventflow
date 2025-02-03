@@ -1,19 +1,17 @@
 import React, { useState } from 'react';
-import { 
-  Bell, 
-  Mail, 
-  ShieldCheck, 
-  AlertCircle, 
-  Clock, 
-  Check, 
+import { useAuth } from '../context/AuthContext';
+import {
+  Bell,
+  Mail,
+  ShieldCheck,
+  AlertCircle,
+  Clock,
+  Check,
   Trash2,
   Settings,
   Filter
 } from 'lucide-react';
-
-const NotificationPage = () => {
-  // Sample notification data
-  const [notifications, setNotifications] = useState([
+/*
     {
       id: 1,
       type: 'security',
@@ -42,8 +40,26 @@ const NotificationPage = () => {
       icon: <Mail className="w-5 h-5 text-blue-500" />,
     },
     // Add more notifications as needed
-  ]);
+    */
+const NotificationPage = () => {
 
+  const iconType = (icon) => {
+    switch (icon) {
+      case 1:
+        return <ShieldCheck className="w-5 h-5 text-green-500" />;
+      case 2:
+        return <AlertCircle className="w-5 h-5 text-yellow-500" />;
+      case 3:
+        return <Clock className="w-5 h-5 text-blue-500" />;
+      case 4:
+        return <Check className="w-5 h-5 text-green-500" />;
+      default:
+        return <Trash2 className="w-5 h-5 text-red-500" />;
+    }
+  }
+  const user = useAuth();
+  console.log(user);
+  const [notifications, setNotifications] = useState([]);
   const [filter, setFilter] = useState('all');
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
@@ -59,7 +75,7 @@ const NotificationPage = () => {
 
   // Mark notification as read
   const markAsRead = (id) => {
-    setNotifications(notifications.map(notif => 
+    setNotifications(notifications.map(notif =>
       notif.id === id ? { ...notif, read: true } : notif
     ));
   };
@@ -116,11 +132,10 @@ const NotificationPage = () => {
             <button
               key={filterType}
               onClick={() => setFilter(filterType)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                filter === filterType
+              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${filter === filterType
                   ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300'
                   : 'bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700'
-              }`}
+                }`}
             >
               {filterType.charAt(0).toUpperCase() + filterType.slice(1)}
             </button>
@@ -150,9 +165,8 @@ const NotificationPage = () => {
           {filteredNotifications.map((notification) => (
             <div
               key={notification.id}
-              className={`bg-gray-200 dark:bg-gray-800 rounded-lg shadow-sm p-4 transition-all ${
-                !notification.read ? 'border-l-4 border-blue-500' : ''
-              }`}
+              className={`bg-gray-200 dark:bg-gray-800 rounded-lg shadow-sm p-4 transition-all ${!notification.read ? 'border-l-4 border-blue-500' : ''
+                }`}
             >
               <div className="flex items-start gap-4">
                 <div className="flex-shrink-0">
