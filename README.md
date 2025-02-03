@@ -61,7 +61,7 @@ npm run dev
 ---
 
 ## 🌍 **Live Preview**  
-👉 **View the Live Project Here**: [**EDC Landing Page**](https://edc-cdgi.netlify.app)  
+👉 **View the Live Project Here**: [**EDC Landing Page**](https://echelon-dev-society.netlify.app)  
 
 ---
 
