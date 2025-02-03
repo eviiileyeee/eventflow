@@ -89,17 +89,18 @@ exports.login = async (req, res) => {
         id: user._id,
         username: user.username,
         email: user.email,
-        role: user.role
+        role: user.role,
+        Notification : {  
+          id: uuidv4(),
+          type: 'security',
+          title: 'New login detected',
+          message: 'A new login was detected from Chrome on Windows.',
+          timestamp: new Date().toISOString(),
+          read: false,
+          icon: 1 },
       },
       token,
-      Notification : {  
-        id: uuidv4(),
-        type: 'security',
-        title: 'New login detected',
-        message: 'A new login was detected from Chrome on Windows.',
-        timestamp: new Date().toISOString(),
-        read: false,
-        icon: 1 },
+     
     });
   } catch (error) {
     console.error('Error during login:', error);
