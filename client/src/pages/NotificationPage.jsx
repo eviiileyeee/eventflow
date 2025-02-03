@@ -59,8 +59,10 @@ const NotificationPage = () => {
   }
   const user = useAuth();
   console.log(user);
-  const [notifications, setNotifications] = useState([]);
-  const [filter, setFilter] = useState('all');
+  const [notifications, setNotifications] = useState(
+    user?.user?.Notification ? [user.user.Notification] : []
+  );
+    const [filter, setFilter] = useState('all');
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
   // Filter notifications

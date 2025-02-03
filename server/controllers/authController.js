@@ -90,14 +90,17 @@ exports.login = async (req, res) => {
         username: user.username,
         email: user.email,
         role: user.role,
-        Notification : {  
-          id: uuidv4(),
-          type: 'security',
-          title: 'New login detected',
-          message: 'A new login was detected from Chrome on Windows.',
-          timestamp: new Date().toISOString(),
-          read: false,
-          icon: 1 },
+        Notification :[  // Note the array
+          {  
+            id: uuidv4(),
+            type: 'security',
+            title: 'New login detected',
+            message: 'A new login was detected from Chrome on Windows.',
+            timestamp: new Date().toISOString(),
+            read: false,
+            icon: 1 
+          }
+        ],
       },
       token,
      
