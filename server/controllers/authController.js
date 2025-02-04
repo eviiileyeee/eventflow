@@ -90,7 +90,7 @@ exports.login = async (req, res) => {
         username: user.username,
         email: user.email,
         role: user.role,
-        Notification :[  // Note the array
+        notification :
           {  
             id: uuidv4(),
             type: 'security',
@@ -100,7 +100,6 @@ exports.login = async (req, res) => {
             read: false,
             icon: 1 
           }
-        ],
       },
       token,
      

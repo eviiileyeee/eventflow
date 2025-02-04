@@ -62,7 +62,7 @@ const NotificationPage = () => {
   const [notifications, setNotifications] = useState(
     user?.user?.Notification ? [user.user.Notification] : []
   );
-    const [filter, setFilter] = useState('all');
+  const [filter, setFilter] = useState('all');
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
   // Filter notifications
