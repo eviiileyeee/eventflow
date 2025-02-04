@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
+import { notificationService } from '../services/notificationService';
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({
@@ -26,6 +27,14 @@ const LoginPage = () => {
       setIsLoading(true);
       await login(formData.email, formData.password);
       setSuccess('Logged in successfully');
+      notificationService.postNotifications({id: 1,
+        type: 'security',
+        title: 'New login detected',
+        message: 'A new login was detected from Chrome on Windows.',
+        timestamp: '2024-01-22T10:30:00',
+        read: false,
+        icon: 1,
+      });
       navigate('/');
     } catch (err) {
       setError(err.message || 'An error occurred during login');

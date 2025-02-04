@@ -2,23 +2,34 @@
 import api from './api';
 
 export const notificationService = {
-  getNotifications: async () => {
-    const response = await api.get('/api/notifications');
-    return response.data;
-  },
 
-  markAsRead: async (id) => {
-    const response = await api.patch(`/api/notifications/${id}`);
-    return response.data;
-  },
+    postNotifications: async (data) => {
+        console.log(data);
+        try {
+            const response = await api.post('/notifications', data);
+            return response.data;
+        } catch (error) {
+            console.error(error);
+            return null;
+        }
+    },
+    getNotifications: async () => {
+        const response = await api.get('/api/notifications');
+        return response.data;
+    },
 
-  markAllAsRead: async () => {
-    const response = await api.patch('/api/notifications/mark-all-read');
-    return response.data;
-  },
+    markAsRead: async (id) => {
+        const response = await api.patch(`/api/notifications/${id}`);
+        return response.data;
+    },
 
-  deleteNotification: async (id) => {
-    const response = await api.delete(`/api/notifications/${id}`);
-    return response.data;
-  }
+    markAllAsRead: async () => {
+        const response = await api.patch('/api/notifications/mark-all-read');
+        return response.data;
+    },
+
+    deleteNotification: async (id) => {
+        const response = await api.delete(`/api/notifications/${id}`);
+        return response.data;
+    }
 };
