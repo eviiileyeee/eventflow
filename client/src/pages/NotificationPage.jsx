@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
+import { notificationService } from '../services/notificationService';
 import {
   Bell,
   Mail,
@@ -11,59 +12,34 @@ import {
   Settings,
   Filter
 } from 'lucide-react';
-/*
-    {
-      id: 1,
-      type: 'security',
-      title: 'New login detected',
-      message: 'A new login was detected from Chrome on Windows.',
-      timestamp: '2024-01-22T10:30:00',
-      read: false,
-      icon: <ShieldCheck className="w-5 h-5 text-green-500" />,
-    },
-    {
-      id: 2,
-      type: 'alert',
-      title: 'System Update',
-      message: 'Important system updates are available for your account.',
-      timestamp: '2024-01-21T15:45:00',
-      read: false,
-      icon: <AlertCircle className="w-5 h-5 text-yellow-500" />,
-    },
-    {
-      id: 3,
-      type: 'message',
-      title: 'New message from John Doe',
-      message: 'Hey, I checked the latest deployment and everything looks good!',
-      timestamp: '2024-01-21T09:15:00',
-      read: true,
-      icon: <Mail className="w-5 h-5 text-blue-500" />,
-    },
-    // Add more notifications as needed
-    */
-const NotificationPage = () => {
 
-  const iconType = (icon) => {
-    switch (icon) {
-      case 1:
-        return <ShieldCheck className="w-5 h-5 text-green-500" />;
-      case 2:
-        return <AlertCircle className="w-5 h-5 text-yellow-500" />;
-      case 3:
-        return <Clock className="w-5 h-5 text-blue-500" />;
-      case 4:
-        return <Check className="w-5 h-5 text-green-500" />;
-      default:
-        return <Trash2 className="w-5 h-5 text-red-500" />;
-    }
-  }
-  const user = useAuth();
-  console.log(user);
-  const [notifications, setNotifications] = useState(
-    user?.user?.Notification ? [user.user.Notification] : []
-  );
+const NotificationPage = () => {
+  const { user } = useAuth(); // Destructure to get just the user object
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [notifications, setNotifications] = useState([]);
   const [filter, setFilter] = useState('all');
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+
+  useEffect(() => {
+    fetchNotifications();
+  }, []);
+
+  const fetchNotifications = async () => {
+    try {
+      setLoading(true);
+      const response = await notificationService.getNotifications();
+      setNotifications(response.data.map(notification => ({
+        ...notification,
+        icon: iconType(notification.icon)
+      })));
+    } catch (err) {
+      setError('Failed to fetch notifications');
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   // Filter notifications
   const filteredNotifications = notifications.filter(notif => {
@@ -76,21 +52,36 @@ const NotificationPage = () => {
   });
 
   // Mark notification as read
-  const markAsRead = (id) => {
-    setNotifications(notifications.map(notif =>
-      notif.id === id ? { ...notif, read: true } : notif
-    ));
+  const markAsRead = async (id) => {
+    try {
+      await notificationService.markAsRead(id);
+      setNotifications(notifications.map(notif =>
+        notif.id === id ? { ...notif, read: true } : notif
+      ));
+    } catch (err) {
+      console.error('Failed to mark notification as read:', err);
+    }
   };
 
-  // Delete notification
-  const deleteNotification = (id) => {
-    setNotifications(notifications.filter(notif => notif.id !== id));
+
+  const deleteNotification = async (id) => {
+    try {
+      await notificationService.deleteNotification(id);
+      setNotifications(notifications.filter(notif => notif.id !== id));
+    } catch (err) {
+      console.error('Failed to delete notification:', err);
+    }
   };
 
-  // Mark all as read
-  const markAllAsRead = () => {
-    setNotifications(notifications.map(notif => ({ ...notif, read: true })));
+  const markAllAsRead = async () => {
+    try {
+      await notificationService.markAllAsRead();
+      setNotifications(notifications.map(notif => ({ ...notif, read: true })));
+    } catch (err) {
+      console.error('Failed to mark all notifications as read:', err);
+    }
   };
+
 
   // Format timestamp
   const formatTime = (timestamp) => {
@@ -135,8 +126,8 @@ const NotificationPage = () => {
               key={filterType}
               onClick={() => setFilter(filterType)}
               className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${filter === filterType
-                  ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300'
-                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700'
+                ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300'
+                : 'bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700'
                 }`}
             >
               {filterType.charAt(0).toUpperCase() + filterType.slice(1)}
@@ -230,3 +221,22 @@ const NotificationPage = () => {
 };
 
 export default NotificationPage;
+
+
+/* 
+const iconType = (icon) => {
+    switch (icon) {
+      case 1:
+        return <ShieldCheck className="w-5 h-5 text-green-500" />;
+      case 2:
+        return <AlertCircle className="w-5 h-5 text-yellow-500" />;
+      case 3:
+        return <Clock className="w-5 h-5 text-blue-500" />;
+      case 4:
+        return <Check className="w-5 h-5 text-green-500" />;
+      default:
+        return <Trash2 className="w-5 h-5 text-red-500" />;
+    }
+  }
+
+  */

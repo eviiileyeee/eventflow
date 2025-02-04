@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const connectDB = require('./config/db');
 const eventRoutes = require('./routes/eventRoutes');
 const authRoutes = require("./routes/authRoutes");
+const notificationRoutes = require("./routes/notificationRoutes")
 require('dotenv').config();
 const errorHandler = require('./middleware/errorHandler');
 
@@ -19,6 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
 
 // Routes
+app.use('/api/notifications', notificationRoutes);
 app.use('/api/v1/events', eventRoutes);
 app.use("/api/users",authRoutes);
 app.get("/",(req,res)=>   res.send("this is backend of Harendra edc-project"));
