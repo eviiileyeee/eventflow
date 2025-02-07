@@ -6,7 +6,8 @@ export const notificationService = {
     postNotifications: async (data) => {
         console.log(data);
         try {
-            const response = await api.post('/notifications', data);
+            const response = await api.post('/api/notifications', data);
+            console.log(response.data);
             return response.data;
         } catch (error) {
             console.error(error);

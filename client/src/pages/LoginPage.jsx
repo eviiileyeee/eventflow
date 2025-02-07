@@ -13,6 +13,11 @@ const LoginPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const { login } = useAuth();
+  const now = new Date();
+  const formattedDateTime = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')},
+   ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+ 
+
 
   const handleChange = (e) => {
     setFormData({
@@ -27,11 +32,12 @@ const LoginPage = () => {
       setIsLoading(true);
       await login(formData.email, formData.password);
       setSuccess('Logged in successfully');
-      notificationService.postNotifications({id: 1,
+      notificationService.postNotifications({
+        id: 1,
         type: 'security',
         title: 'New login detected',
         message: 'A new login was detected from Chrome on Windows.',
-        timestamp: '2024-01-22T10:30:00',
+        timestamp: formattedDateTime,
         read: false,
         icon: 1,
       });
@@ -91,8 +97,8 @@ const LoginPage = () => {
               type="submit"
               disabled={isLoading}
               className={`group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white ${isLoading
-                  ? 'bg-blue-400 cursor-not-allowed'
-                  : 'bg-gray-900 hover:bg-[#8194B0] hover:text-black dark:bg-[#8194B0] dark:text-black dark:hover:bg-gray-950 dark:hover:text-white '
+                ? 'bg-blue-400 cursor-not-allowed'
+                : 'bg-gray-900 hover:bg-[#8194B0] hover:text-black dark:bg-[#8194B0] dark:text-black dark:hover:bg-gray-950 dark:hover:text-white '
                 } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500`}
             >
               {isLoading ? 'wait a moment...' : 'Log In'}
