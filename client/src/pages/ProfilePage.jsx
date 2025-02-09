@@ -26,7 +26,7 @@ const ProfilePage = () => {
   const { user, checkAuth , logout } = useAuth();
   const [currentUser , setCurrentUser] = useState(user);
   const navigate = useNavigate();
-
+console.log(user);
   useEffect(() => {
     if (!user) {
       checkAuth();

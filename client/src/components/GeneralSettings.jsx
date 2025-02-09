@@ -26,8 +26,8 @@ const GeneralSettings = (props) => {
     const user = props.user;
     const { darkMode, toggleDarkMode } = useTheme();
     const [formData, setFormData] = useState({
-        username: user.username,
-        email: user.email,
+        username: user.username || "",
+        email: user.email || "",
         _id: user._id,
         phoneNumber: user.phoneNumber || '',
         githubUrl: user.githubUrl || '',

@@ -3,6 +3,8 @@ const bcryptjs = require('bcryptjs'); // Change to bcryptjs for consistency
 const jwt = require('jsonwebtoken');
 const verifyToken = require('../middleware/authMiddleware');
 const { v4: uuidv4 } = require('uuid');
+const cloudinary = require("../utils/cloudinary"); // Cloudinary utility
+const mongoose = require('mongoose'); // Mongoose utility
 
 
 // Generate JWT Token
@@ -90,19 +92,18 @@ exports.login = async (req, res) => {
         username: user.username,
         email: user.email,
         role: user.role,
-        notification :
-          {  
-            id: uuidv4(),
-            type: 'security',
-            title: 'New login detected',
-            message: 'A new login was detected from Chrome on Windows.',
-            timestamp: new Date().toISOString(),
-            read: false,
-            icon: 1 
-          }
+        notification:
+        {
+          id: uuidv4(),
+          type: 'security',
+          title: 'New login detected',
+          message: 'A new login was detected from Chrome on Windows.',
+          timestamp: new Date().toISOString(),
+          read: false,
+          icon: 1
+        }
       },
       token,
-     
     });
   } catch (error) {
     console.error('Error during login:', error);
@@ -113,55 +114,78 @@ exports.login = async (req, res) => {
   }
 };
 
+
+
+
+
 exports.uploadDetails = async (req, res) => {
   const { id } = req.params;
   const userData = req.body;
+
+  // Validate ObjectId format
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ message: "Invalid user ID" });
+  }
+
+  const session = await mongoose.startSession(); // Start a transaction
+  session.startTransaction();
+
   try {
-    const user = await User.findByIdAndUpdate(id, userData, { new: true });
+    let user = await User.findById(id).session(session);
     if (!user) {
-      return res.status(404).json({ message: 'User not found' });
+      await session.abortTransaction();
+      session.endSession();
+      return res.status(404).json({ message: "User not found" });
     }
-    await user.save();
-    res.status(200).json({ message: 'User details updated successfully' });
+
+    let imageUrl = user.profileImage; // Keep existing image if no new one is uploaded
+
+    // If a new file is uploaded, update Cloudinary
+    if (req.file) {
+      // Delete old image from Cloudinary if it exists
+      if (user.profileImage) {
+        const oldImageId = user.profileImage.split("/").pop().split(".")[0]; // Extract public_id
+        await cloudinary.uploader.destroy(`profile_pictures/${oldImageId}`);
+      }
+
+      // Upload new image to Cloudinary
+      const result = await cloudinary.uploader.upload(req.file.path, {
+        folder: "profile_pictures",
+        use_filename: true,
+        unique_filename: false,
+        transformation: [{ width: 300, height: 300, crop: "fill" }], // Optimized image size
+      });
+
+      imageUrl = result.secure_url;
+    }
+
+    // Merge user updates with existing data
+    const updatedUserData = {
+      ...user.toObject(), // Keep existing data
+      ...userData, // Overwrite with new data from request
+      profileImage: imageUrl, // Update profile image
+      githubUrl: userData.githubUrl || user.githubUrl || "", // Preserve old values if new ones are missing
+      linkedinUrl: userData.linkedinUrl || user.linkedinUrl || "",
+      instagramUrl: userData.instagramUrl || user.instagramUrl || "",
+    };
+
+    // Update user details
+    user = await User.findByIdAndUpdate(id, updatedUserData, { new: true, session });
+
+    await session.commitTransaction();
+    session.endSession();
+
+    res.status(200).json({ message: "User updated successfully", user });
   } catch (error) {
-    console.error('Error during update:', error);
-    res.status(500).json({ message: 'Server error during update', error: error.message });
+    await session.abortTransaction();
+    session.endSession();
+
+    console.error("Error during update:", error);
+    res.status(500).json({ message: "Server error during update", error: error.message });
   }
 };
 
-exports.getAllUsers = async (req, res) => {
-  try {
-    // Find all users in the database
-    const allUsers = await User.find({});
-    res.status(200).json({
-      message: 'All users fetched successfully',
-      users: allUsers,
-    });
-  } catch (error) {
-    console.error('Error fetching all users:', error.message);
-    res.status(500).json({
-      message: 'Failed to load users',
-      error: error.message,
-    });
-  }
-};
 
-
-exports.deleteAllUsers = async (req, res) => {
-  try {
-    // Delete all users
-    await User.deleteMany({});
-    res.status(200).json({
-      message: 'All users deleted successfully',
-    });
-  } catch (error) {
-    console.error('Error deleting all users:', error.message);
-    res.status(500).json({
-      message: 'Failed to delete users',
-      error: error.message,
-    });
-  }
-};
 
 
 exports.getMe = async (req, res) => {
