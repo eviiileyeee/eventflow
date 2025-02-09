@@ -11,6 +11,7 @@ exports.uploadToCloudinary = async (filePath) => {
     const result = await cloudinary.uploader.upload(filePath, {
       folder: 'events'
     });
+    console.log("image uploaded on cloudinary");
     return {
       url: result.secure_url,
       public_id: result.public_id

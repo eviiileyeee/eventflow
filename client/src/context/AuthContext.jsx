@@ -69,7 +69,7 @@ export const AuthProvider = ({ children }) => {
   const updateUser = async (updatedUser) => {
     try {
       console.log("inside update route::::");
-    api.post('/api/users/uploaDetails', updatedUser)
+    api.put(`/api/users/uploadDetails/${updatedUser._id}`, updatedUser)
     .then(response => {
       const { user } = response.data;
       setUser(user);

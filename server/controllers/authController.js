@@ -155,7 +155,9 @@ exports.uploadDetails = async (req, res) => {
         unique_filename: false,
         transformation: [{ width: 300, height: 300, crop: "fill" }], // Optimized image size
       });
-
+     if(!result){
+      console.log("error during image upload")
+     }
       imageUrl = result.secure_url;
     }
 
@@ -164,9 +166,9 @@ exports.uploadDetails = async (req, res) => {
       ...user.toObject(), // Keep existing data
       ...userData, // Overwrite with new data from request
       profileImage: imageUrl, // Update profile image
-      githubUrl: userData.githubUrl || user.githubUrl || "", // Preserve old values if new ones are missing
-      linkedinUrl: userData.linkedinUrl || user.linkedinUrl || "",
-      instagramUrl: userData.instagramUrl || user.instagramUrl || "",
+      githubUrl: userData.githubUrl || user.githubUrl , // Preserve old values if new ones are missing
+      linkedinUrl: userData.linkedinUrl || user.linkedinUrl ,
+      instagramUrl: userData.instagramUrl || user.instagramUrl ,
     };
 
     // Update user details

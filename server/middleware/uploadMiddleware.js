@@ -16,6 +16,7 @@ const fileFilter = (req, file, cb) => {
   const mimetype = allowedTypes.test(file.mimetype);
 
   if (extname && mimetype) {
+    console.log("multer middleware worked succesfully")
     cb(null, true);
   } else {
     cb(new Error('Only image files are allowed!'), false);
