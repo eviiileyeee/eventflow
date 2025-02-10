@@ -14,6 +14,7 @@ exports.uploadToCloudinary = async (filePath) => {
       folder: 'events'
     });
     console.log("image uploaded on cloudinary");
+    console.log(result.secure_url);
     return {
       url: result.secure_url,
       public_id: result.public_id
