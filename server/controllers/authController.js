@@ -120,86 +120,69 @@ exports.login = async (req, res) => {
 exports.uploadDetails = async (req, res) => {
   const { id } = req.params;
   const userData = req.body;
-  
+  let session;
+
   console.log("🔹 Received user data:", userData);
-  console.log("🔹 Uploaded file:", req.file ? req.file.originalname : "No file uploaded");
-
-  // Validate ObjectId format
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(400).json({ message: "Invalid user ID" });
-  }
-
-  // Start a transaction session
-  const session = await mongoose.startSession();
-  session.startTransaction();
+  console.log("🔹 Uploaded file:", req.file?.originalname ?? "No file uploaded");
 
   try {
-    let user = await User.findById(id).session(session);
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ message: "Invalid user ID" });
+    }
+
+    session = await mongoose.startSession();
+    session.startTransaction();
+
+    const user = await User.findById(id).session(session);
     if (!user) {
-      await session.abortTransaction();
-      session.endSession();
-      return res.status(404).json({ message: "User not found" });
+      throw new Error("User not found");
     }
 
-    let imageUrl = user.profileImage; // Default: Keep the old image if no new one is uploaded
+    let imageUrl = user.profileImage;
 
-    // If a new file is uploaded, process it with Cloudinary
     if (req.file) {
-      try {
-        // Delete old image from Cloudinary if it exists
-        if (user.profileImage && typeof user.profileImage === "string" && user.profileImage.startsWith("http")) {
-  const oldImageId = user.profileImage.split("/").pop().split(".")[0];
-  await deleteFromCloudinary(oldImageId); 
-}
-
-
-        // Upload new image to Cloudinary
-        const result = await uploadToCloudinary(req.file.path); // Use uploadToCloudinary helper function
-      imageUrl = result.url;
-
-        if (imageUrl) {
-          throw new Error("Image upload to Cloudinary failed");
-        }
-
-        imageUrl = result.secure_url;
-        console.log("✅ New image uploaded to Cloudinary:", imageUrl);
-      } catch (uploadError) {
-    console.error("❌ Cloudinary upload error:", uploadError); // Log the upload error
-
-        throw new Error("Failed to upload image. Please try again.");
+      // Delete old image if exists
+      if (user.profileImage?.startsWith("http")) {
+        const oldImageId = user.profileImage.split("/").pop().split(".")[0];
+        await deleteFromCloudinary(oldImageId);
       }
+
+      // Upload new image
+      const result = await uploadToCloudinary(req.file.path);
+      if (!result?.secure_url) {
+        throw new Error("Image upload failed");
+      }
+      imageUrl = result.secure_url;
+      console.log("✅ New image uploaded:", imageUrl);
     }
 
-    // Merge user updates with existing data, preserving old values if new ones are missing
-    const updatedUserData = { // Prepare updated user data
-
-      username: userData.username || user.username,
-      email: userData.email || user.email,
-      phoneNumber: userData.phoneNumber || user.phoneNumber,
-      githubUrl: userData.githubUrl || user.githubUrl,
-      linkedinUrl: userData.linkedinUrl || user.linkedinUrl,
-      instagramUrl: userData.instagramUrl || user.instagramUrl,
-      profileImage: imageUrl,
-    };
-
-    // Update user details
-    user = await User.findByIdAndUpdate(id, updatedUserData, { new: true, session });
+    const updatedUser = await User.findByIdAndUpdate(
+      id,
+      {
+        ...user.toObject(),
+        ...userData,
+        profileImage: imageUrl
+      },
+      { new: true, session }
+    );
 
     await session.commitTransaction();
-    session.endSession();
-
-    console.log("✅ User updated successfully:", user);
-    res.status(200).json({ message: "User updated successfully", user }); // Respond with updated user data
+    res.status(200).json({ message: "User updated successfully", user: updatedUser });
 
   } catch (error) {
-    await session.abortTransaction();
-    session.endSession();
+    console.error("❌ Error:", error);
+    await session?.abortTransaction();
+    
+    if (error.message === "User not found") {
+      res.status(404).json({ message: "User not found" });
+    } else {
+      res.status(500).json({ message: "Update failed", error: error.message });
+    }
 
-    console.error("❌ Error during update:", error);
-    res.status(500).json({ message: "Server error during update", error: error.message });
+  } finally {
+    await session?.endSession();
   }
 };
-
 
 
 
