@@ -8,29 +8,30 @@ cloudinary.config({
 
 exports.uploadToCloudinary = async (filePath) => {
   try {
-    console.log("Uploading file to Cloudinary:", filePath); // Log the file path being uploaded
+    console.log("Uploading file to Cloudinary:", filePath);
     const result = await cloudinary.uploader.upload(filePath, {
-
       folder: 'events'
     });
-    console.log("image uploaded on cloudinary");
-    console.log(result.secure_url);
+    console.log("Image uploaded to Cloudinary:", result.secure_url);
+    
+    // Return both secure_url and url to match controller expectations
     return {
+      secure_url: result.secure_url,
       url: result.secure_url,
       public_id: result.public_id
     };
   } catch (error) {
-    console.error('Error uploading to Cloudinary:', error); // Log the error
-    throw new Error('Error uploading to Cloudinary: ' + error.message); // Include error message in the thrown error
-
-
+    console.error('Error uploading to Cloudinary:', error);
+    throw error; // Throw the original error to preserve the stack trace
   }
 };
 
 exports.deleteFromCloudinary = async (publicId) => {
   try {
-    await cloudinary.uploader.destroy(publicId);
+    const result = await cloudinary.uploader.destroy(publicId);
+    return result;
   } catch (error) {
-    throw new Error('Error deleting from cloudinary');
+    console.error('Error deleting from Cloudinary:', error);
+    throw error; // Throw the original error to preserve the stack trace
   }
 };

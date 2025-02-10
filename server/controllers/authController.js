@@ -141,20 +141,24 @@ exports.uploadDetails = async (req, res) => {
     let imageUrl = user.profileImage;
 
     if (req.file) {
-      /*
-      // Delete old image if exists
-      if (user.profileImage?.startsWith("http")) {
-        const oldImageId = user.profileImage.split("/").pop().split(".")[0];
-        await deleteFromCloudinary(oldImageId);
+      try {
+        // Delete old image if exists
+        if (user.profileImage?.startsWith("http")) {
+          const oldImageId = user.profileImage.split("/").pop().split(".")[0];
+          await deleteFromCloudinary(oldImageId);
+        }
+
+        // Upload new image
+        const result = await uploadToCloudinary(req.file.path);
+        if (!result?.url) {
+          throw new Error("Cloudinary upload failed");
+        }
+        imageUrl = result.url;
+        console.log("✅ New image uploaded:", imageUrl);
+      } catch (uploadError) {
+        console.error("❌ Cloudinary upload error:", uploadError);
+        throw new Error(`Image upload failed: ${uploadError.message}`);
       }
-        */
-      // Upload new image
-      const result = await uploadToCloudinary(req.file.path);
-      if (!result?.secure_url) {
-        throw new Error("Image upload failed");
-      }
-      imageUrl = result.secure_url;
-      console.log("✅ New image uploaded:", imageUrl);
     }
 
     const updatedUser = await User.findByIdAndUpdate(
@@ -168,7 +172,10 @@ exports.uploadDetails = async (req, res) => {
     );
 
     await session.commitTransaction();
-    res.status(200).json({ message: "User updated successfully", user: updatedUser });
+    res.status(200).json({ 
+      message: "User updated successfully", 
+      user: updatedUser 
+    });
 
   } catch (error) {
     console.error("❌ Error:", error);
@@ -177,14 +184,25 @@ exports.uploadDetails = async (req, res) => {
     if (error.message === "User not found") {
       res.status(404).json({ message: "User not found" });
     } else {
-      res.status(500).json({ message: "Update failed", error: error.message });
+      res.status(500).json({ 
+        message: "Update failed", 
+        error: error.message 
+      });
     }
 
   } finally {
     await session?.endSession();
+    
+    // Clean up uploaded file if it exists
+    if (req.file?.path) {
+      try {
+        fs.unlinkSync(req.file.path);
+      } catch (err) {
+        console.error("Failed to clean up uploaded file:", err);
+      }
+    }
   }
 };
-
 
 
 
