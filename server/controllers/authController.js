@@ -157,7 +157,7 @@ exports.uploadDetails = async (req, res) => {
         const result = await uploadToCloudinary(req.file.path); // Use uploadToCloudinary helper function
       imageUrl = result.url;
 
-        if (!result || !result.secure_url) {
+        if (imageUrl) {
           throw new Error("Image upload to Cloudinary failed");
         }
 
