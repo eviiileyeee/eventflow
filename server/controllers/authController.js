@@ -6,7 +6,7 @@ const { v4: uuidv4 } = require('uuid');
 const cloudinary = require("../utils/cloudinary"); // Cloudinary utility
 const mongoose = require('mongoose'); // Mongoose utility
 const { uploadToCloudinary, deleteFromCloudinary } = require('../utils/cloudinary'); // Assuming your cloudinary functions are in this file
-
+const fs = require('fs');
 
 // Generate JWT Token
 const generateToken = (id) => {
@@ -117,6 +117,8 @@ exports.login = async (req, res) => {
 
 
 
+
+
 exports.uploadDetails = async (req, res) => {
   const { id } = req.params;
   const userData = req.body;
@@ -138,13 +140,13 @@ exports.uploadDetails = async (req, res) => {
       throw new Error("User not found");
     }
 
-    let imageUrl = user.profileImage;
+    let imageUrl = user.profileImage || null;
 
     if (req.file) {
       try {
-        // Delete old image if exists
-        if (user.profileImage?.startsWith("http")) {
-          const oldImageId = user.profileImage.split("/").pop().split(".")[0];
+        // Delete old image if it exists and is a valid URL
+        if (imageUrl && typeof imageUrl === 'string' && imageUrl.includes('cloudinary')) {
+          const oldImageId = imageUrl.split("/").pop().split(".")[0];
           await deleteFromCloudinary(oldImageId);
         }
 
@@ -158,6 +160,11 @@ exports.uploadDetails = async (req, res) => {
       } catch (uploadError) {
         console.error("❌ Cloudinary upload error:", uploadError);
         throw new Error(`Image upload failed: ${uploadError.message}`);
+      } finally {
+        // Clean up uploaded file
+        if (req.file.path && fs.existsSync(req.file.path)) {
+          fs.unlinkSync(req.file.path);
+        }
       }
     }
 
@@ -192,15 +199,6 @@ exports.uploadDetails = async (req, res) => {
 
   } finally {
     await session?.endSession();
-    
-    // Clean up uploaded file if it exists
-    if (req.file?.path) {
-      try {
-        fs.unlinkSync(req.file.path);
-      } catch (err) {
-        console.error("Failed to clean up uploaded file:", err);
-      }
-    }
   }
 };
 
