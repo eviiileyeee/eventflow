@@ -164,13 +164,15 @@ exports.uploadDetails = async (req, res) => {
         imageUrl = result.secure_url;
         console.log("✅ New image uploaded to Cloudinary:", imageUrl);
       } catch (uploadError) {
-        console.error("❌ Cloudinary upload error:", uploadError);
+    console.error("❌ Cloudinary upload error:", uploadError); // Log the upload error
+
         throw new Error("Failed to upload image. Please try again.");
       }
     }
 
     // Merge user updates with existing data, preserving old values if new ones are missing
-    const updatedUserData = {
+    const updatedUserData = { // Prepare updated user data
+
       username: userData.username || user.username,
       email: userData.email || user.email,
       phoneNumber: userData.phoneNumber || user.phoneNumber,
@@ -187,7 +189,8 @@ exports.uploadDetails = async (req, res) => {
     session.endSession();
 
     console.log("✅ User updated successfully:", user);
-    res.status(200).json({ message: "User updated successfully", user });
+    res.status(200).json({ message: "User updated successfully", user }); // Respond with updated user data
+
   } catch (error) {
     await session.abortTransaction();
     session.endSession();

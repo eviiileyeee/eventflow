@@ -17,7 +17,9 @@ exports.uploadToCloudinary = async (filePath) => {
       public_id: result.public_id
     };
   } catch (error) {
-    throw new Error('Error uploading to cloudinary');
+    console.error('Error uploading to Cloudinary:', error); // Log the error
+    throw new Error('Error uploading to Cloudinary'); // Updated error message
+
   }
 };
 
