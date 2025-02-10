@@ -121,7 +121,7 @@ exports.login = async (req, res) => {
 exports.uploadDetails = async (req, res) => {
   const { id } = req.params;
   const userData = req.body;
-
+  console.log("user Data that has been recieved from frontend", userData , "\n image that uploaded ", req.file);
   // Validate ObjectId format
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).json({ message: "Invalid user ID" });

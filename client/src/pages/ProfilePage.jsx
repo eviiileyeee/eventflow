@@ -26,7 +26,6 @@ const ProfilePage = () => {
   const { user, checkAuth , logout } = useAuth();
   const [currentUser , setCurrentUser] = useState(user);
   const navigate = useNavigate();
-console.log(user);
   useEffect(() => {
     if (!user) {
       checkAuth();
@@ -63,7 +62,8 @@ console.log(user);
       <div>
         <h2 className="text-2xl font-bold dark:text-white">{user.username}</h2>
         <p className="text-gray-600 dark:text-gray-400">{user.email.slice(0,14)}...</p>
-        <div className="flex items-center mt-2 text-sm text-gray-500 dark:text-gray-400">
+        <div className="flex items-center mt-2 text-sm text-gray-500 dark:text-gray-400"
+         onClick={() => window.open(user.githubUrl, '_blank')}>
           <Github className="h-4 w-4 mr-1" />
           <span>Github</span>
         </div>

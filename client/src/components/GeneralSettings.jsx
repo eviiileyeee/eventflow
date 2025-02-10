@@ -51,10 +51,11 @@ const GeneralSettings = (props) => {
         });
       };
     
+    
       const handleSubmit = (e) => {
         e.preventDefault();
         updateUser(formData);
-        console.log(formData);
+        console.log("your form data is that has to be submitted", formData);
       };
 
    return(

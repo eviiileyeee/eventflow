@@ -72,6 +72,7 @@ export const AuthProvider = ({ children }) => {
     api.put(`/api/users/uploadDetails/${updatedUser._id}`, updatedUser)
     .then(response => {
       const { user } = response.data;
+      console.log("user that has been returned by server", user);
       setUser(user);
       })
       .catch(error => {
