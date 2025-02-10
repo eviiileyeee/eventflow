@@ -5,6 +5,7 @@ const verifyToken = require('../middleware/authMiddleware');
 const { v4: uuidv4 } = require('uuid');
 const cloudinary = require("../utils/cloudinary"); // Cloudinary utility
 const mongoose = require('mongoose'); // Mongoose utility
+const { uploadToCloudinary, deleteFromCloudinary } = require('../utils/cloudinary'); // Assuming your cloudinary functions are in this file
 
 
 // Generate JWT Token
@@ -147,18 +148,14 @@ exports.uploadDetails = async (req, res) => {
       try {
         // Delete old image from Cloudinary if it exists
         if (user.profileImage && typeof user.profileImage === "string" && user.profileImage.startsWith("http")) {
-          const oldImageId = user.profileImage.split("/").pop().split(".")[0];
-          await cloudinary.uploader.destroy(`profile_pictures/${oldImageId}`);
-        }
-        
+  const oldImageId = user.profileImage.split("/").pop().split(".")[0];
+  await deleteFromCloudinary(oldImageId); 
+}
+
 
         // Upload new image to Cloudinary
-        const result = await cloudinary.uploader.upload(req.file.path, {
-          folder: "profile_pictures",
-          use_filename: true,
-          unique_filename: false,
-          transformation: [{ width: 300, height: 300, crop: "fill" }],
-        });
+        const result = await uploadToCloudinary(req.file.path); // Use uploadToCloudinary helper function
+      imageUrl = result.url;
 
         if (!result || !result.secure_url) {
           throw new Error("Image upload to Cloudinary failed");
