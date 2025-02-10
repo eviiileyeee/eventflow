@@ -141,12 +141,13 @@ exports.uploadDetails = async (req, res) => {
     let imageUrl = user.profileImage;
 
     if (req.file) {
+      /*
       // Delete old image if exists
       if (user.profileImage?.startsWith("http")) {
         const oldImageId = user.profileImage.split("/").pop().split(".")[0];
         await deleteFromCloudinary(oldImageId);
       }
-
+        */
       // Upload new image
       const result = await uploadToCloudinary(req.file.path);
       if (!result?.secure_url) {
