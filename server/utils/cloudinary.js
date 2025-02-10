@@ -8,7 +8,9 @@ cloudinary.config({
 
 exports.uploadToCloudinary = async (filePath) => {
   try {
+    console.log("Uploading file to Cloudinary:", filePath); // Log the file path being uploaded
     const result = await cloudinary.uploader.upload(filePath, {
+
       folder: 'events'
     });
     console.log("image uploaded on cloudinary");
@@ -18,7 +20,8 @@ exports.uploadToCloudinary = async (filePath) => {
     };
   } catch (error) {
     console.error('Error uploading to Cloudinary:', error); // Log the error
-    throw new Error('Error uploading to Cloudinary'); // Updated error message
+    throw new Error('Error uploading to Cloudinary: ' + error.message); // Include error message in the thrown error
+
 
   }
 };
