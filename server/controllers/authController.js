@@ -146,11 +146,11 @@ exports.uploadDetails = async (req, res) => {
     if (req.file) {
       try {
         // Delete old image from Cloudinary if it exists
-        if (user.profileImage) {
-          const oldImageId = user.profileImage.split("/").pop().split(".")[0]; // Extract public_id
+        if (user.profileImage && typeof user.profileImage === "string" && user.profileImage.startsWith("http")) {
+          const oldImageId = user.profileImage.split("/").pop().split(".")[0];
           await cloudinary.uploader.destroy(`profile_pictures/${oldImageId}`);
-          console.log("✅ Old image deleted from Cloudinary:", oldImageId);
         }
+        
 
         // Upload new image to Cloudinary
         const result = await cloudinary.uploader.upload(req.file.path, {
