@@ -55,8 +55,8 @@ const ProfilePage = () => {
   const ProfileHeader = () => (
     <div className="flex items-center space-x-4 mb-8 p-4 bg-gray-200 dark:bg-gray-800 rounded-lg shadow">
       <img
-        src={ user.profileImage}
-        alt="https://tse3.mm.bing.net/th?id=OIP.JttmcrrQ9_XqrY60bFEfgQHaHa&pid=Api&P=0&h=180"
+        src={ user.profileImage || "https://tse3.mm.bing.net/th?id=OIP.JttmcrrQ9_XqrY60bFEfgQHaHa&pid=Api&P=0&h=180"}
+        alt=" User Avtar"
         className="h-20 w-20 rounded-full"
       />
       <div>

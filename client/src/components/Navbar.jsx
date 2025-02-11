@@ -91,7 +91,7 @@ const Navbar = () => {
                   onClick={() => { navigate("/profile"); }}
                 >
                   <img className="h-10 w-10 object-cover rounded-full "
-                  src={user.profileImage} alt="User Avatar" />
+                  src={user.profileImage || "https://tse3.mm.bing.net/th?id=OIP.JttmcrrQ9_XqrY60bFEfgQHaHa&pid=Api&P=0&h=180"} alt="User Avatar" />
                 </button>
               </>
             ) : (
