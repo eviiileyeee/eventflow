@@ -90,7 +90,8 @@ const Navbar = () => {
                   className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
                   onClick={() => { navigate("/profile"); }}
                 >
-                  <User className="h-6 w-6 text-gray-600 dark:text-gray-300" />
+                  <img className="h-10 w-10 object-cover rounded-full "
+                  src={user.profileImage} alt="User Avatar" />
                 </button>
               </>
             ) : (
