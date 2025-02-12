@@ -2,29 +2,78 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Define CSS Variables for Color Palette */
+:root {
+    --color-primary: #C0D0DF; /* Blue */
+    --color-secondary: #111827; /* Green */
+    --color-text-dark: #1a202c; /* Dark Gray */
+    --color-bg-light:  #9CB3D7 ; /* Light Blue */
+    --color-button-text: #f7fafc; /* White */
+}                                           
+
+/* Import the custom fonts */
 @font-face {
-    font-family: 'Raleway';
-    src: url('fonts/Raleway-VariableFont_wght.ttf') format('truetype');
+    font-family: 'FoundersGrotesk-Semibold';
+    src: url('/fonts/FoundersGrotesk-Semibold.woff2') format('woff2'),
+         url('/fonts/FoundersGrotesk-Semibold.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
-    font-family: 'Raleway Italic';
-    src: url('fonts/Raleway-Italic-VariableFont_wght.ttf') format('truetype');
+    font-family: 'NeueMontreal-Regular';
+    src: url('/fonts/NeueMontreal-Regular.woff2') format('woff2'),
+         url('/fonts/NeueMontreal-Regular.woff') format('woff');
     font-weight: normal;
-    font-style: italic;
+    font-style: normal;
 }
 
+/* Apply fonts */
 body {
-    font-family: 'Raleway', sans-serif;
+    font-family: 'NeueMontreal-Regular', sans-serif; /* Default font for normal text */
+    margin: 0;
+    padding: 0;
+    background-color: var(--color-bg-light);
+    color: var(--color-text-dark);
 }
 
+/* Utility classes */
+.font-normal {
+    font-family: 'NeueMontreal-Regular', sans-serif;
+}
 
-:root {
-    --color-background: #cfe5f5; /* Light blue */
-    --color-primary: #006400; /* Dark green */
-    --color-secondary: #00008B; /* Dark blue */
-    --color-text: #000000; /* Black */
-    --color-accent: #ffd700; /* Yellow */
+.font-heading {
+    font-family: 'FoundersGrotesk-Semibold', sans-serif;
+}
+
+/* Apply heading font to main headings */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'FoundersGrotesk-Semibold', sans-serif;
+}
+
+/* Button styles */
+button {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    color: var(--color-button-text);
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+/* Use CSS Variables for Colors */
+.bg-primary {
+    background-color: var(--color-primary);
+}
+
+.bg-secondary {
+    background-color: var(--color-secondary);
+}
+
+.text-primary {
+    color: var(--color-primary);
+}
+
+.text-secondary {
+    color: var(--color-secondary);
 }
