@@ -1,13 +1,30 @@
-/* src/styles/tailwind.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @font-face {
-    font-family: 'GeneralSans-Regular';
-    src: url('./assets/fonts/GeneralSans-Regular.otf') format('opentype');
+    font-family: 'Raleway';
+    src: url('fonts/Raleway-VariableFont_wght.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
-  }
-  
+}
 
+@font-face {
+    font-family: 'Raleway Italic';
+    src: url('fonts/Raleway-Italic-VariableFont_wght.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+}
+
+body {
+    font-family: 'Raleway', sans-serif;
+}
+
+
+:root {
+    --color-background: #cfe5f5; /* Light blue */
+    --color-primary: #006400; /* Dark green */
+    --color-secondary: #00008B; /* Dark blue */
+    --color-text: #000000; /* Black */
+    --color-accent: #ffd700; /* Yellow */
+}

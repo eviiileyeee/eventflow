@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Bell, User, Menu, X, Sun, Moon, LogOut } from "lucide-react";
 import { useAuth } from '../context/AuthContext';
+<<<<<<< HEAD
+import { useTheme } from '../components/ThemeContext/ThemeContext';
+=======
 import logo from "../assets/1734760408581.jpeg";
 import { useTheme } from '../context/ThemeContext/ThemeContext';
+>>>>>>> fc1f3639c9bb27e7e1e44d7f6540b8acea145e66
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
@@ -13,20 +17,18 @@ const Navbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Update active tab based on location
   useEffect(() => {
     const path = location.pathname;
     if (path === '/') setActiveTab('home');
+    else if (path === '/workshops') setActiveTab('workshops');
     else if (path === '/about') setActiveTab('about');
-    else if (path === '/events') setActiveTab('events');
-    else if (path === '/team') setActiveTab('team');
-    else if (path === '/contact') setActiveTab('contact');
+    else if (path === '/speakers') setActiveTab('speakers');
+    else if (path === '/visit') setActiveTab('visit');
   }, [location]);
 
   const handleLogout = () => {
     logout();
     navigate('/login');
-    // Removed setIsOpen as it was not defined
   };
 
   const navLinks = [
@@ -37,28 +39,24 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="fixed top-0 left-0 w-full bg-white bg-opacity-30 backdrop-blur-md shadow-md dark:bg-gray-800 dark:bg-opacity-30 z-50">
+    <nav className="fixed top-0 left-0 w-full bg-[var(--color-background)] z-50 font-raleway">
       <div className="max-w-7xl mx-auto px-4">
-        <div className="flex justify-between h-16">
+        <div className="flex justify-between h-16 items-center">
           <div className="flex items-center">
-            <div className="flex-shrink-0 flex items-center">
-              <img className="h-8 w-8" src={logo} alt="Logo" />
-              <span className="ml-2 text-xl font-bold uppercase tracking-wide text-gray-800 dark:text-white">
-                Echelon Dev Society
+            <Link to="/" className="flex items-center">
+              <span className="text-[var(--color-text)] text-xl font-extrabold uppercase tracking-wide">
+                EVENTFLOW
               </span>
-            </div>
+            </Link>
           </div>
 
-          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {navLinks.map((link) => (
               <button
                 key={link.id}
-                onClick={() => { navigate(link.path); }}
+                onClick={() => navigate(link.path)}
                 className={`text-sm font-bold uppercase tracking-wide ${
-                  activeTab === link.id 
-                    ? 'text-blue-500 dark:text-blue-400' 
-                    : 'text-gray-600 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-400'
+                  activeTab === link.id ? 'text-[var(--color-primary)]' : 'text-black hover:text-[var(--color-secondary)]'
                 }`}
               >
                 {link.name}
@@ -66,15 +64,21 @@ const Navbar = () => {
             ))}
           </div>
 
-          {/* Right-side icons */}
           <div className="hidden md:flex items-center space-x-4">
-            {/* Dark Mode Toggle */}
             <button
-              onClick={toggleDarkMode}
-              className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
+              className="px-4 py-2 text-sm font-medium text-black hover:text-[var(--color-primary)]"
+              onClick={() => navigate("/login")}
             >
-              {darkMode ? <Sun className="text-yellow-500" /> : <Moon className="text-gray-600" />}
+              Log In
             </button>
+<<<<<<< HEAD
+            <Link
+              to="/tickets"
+              className="px-4 py-2 text-sm font-medium text-white bg-[var(--color-primary)] hover:bg-[#004d00] rounded-full transition-colors"
+            >
+              TICKETS
+            </Link>
+=======
 
             {/* Notification Bell and User Icons */}
             {user ? (
@@ -110,98 +114,50 @@ const Navbar = () => {
                 </Link>
               </>
             )}
+>>>>>>> fc1f3639c9bb27e7e1e44d7f6540b8acea145e66
           </div>
 
-          {/* Mobile menu button */}
           <div className="md:hidden flex items-center">
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-2 rounded-md text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
-            >
+            <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="p-2 rounded-md text-black">
               {isMobileMenuOpen ? (
-                <X className="h-6 w-6" />
+                <X className="h-6 w-6 text-[var(--color-primary)]" />
               ) : (
-                <Menu className="h-6 w-6" />
+                <Menu className="h-6 w-6 text-[var(--color-primary)]" />
               )}
             </button>
           </div>
 
-          {/* Mobile menu */}
           {isMobileMenuOpen && (
-            <div className="md:hidden absolute top-16 left-0 w-full bg-white dark:bg-gray-800 py-2">
-              {navLinks.map((link) => (
+            <div className="md:hidden fixed inset-0 bg-[var(--color-background)] z-50 p-8">
+              <div className="flex justify-end mb-16">
+                <button onClick={() => setIsMobileMenuOpen(false)} className="text-[var(--color-primary)]">
+                  <X className="h-8 w-8" />
+                </button>
+              </div>
+              <div className="space-y-8">
+                {navLinks.map((link) => (
+                  <button
+                    key={link.id}
+                    onClick={() => {
+                      navigate(link.path);
+                      setIsMobileMenuOpen(false);
+                    }}
+                    className="block w-full text-left text-[var(--color-primary)] text-xl font-bold uppercase"
+                  >
+                    {link.name}
+                  </button>
+                ))}
+
                 <button
-                  key={link.id}
-                  onClick={() => { 
-                    navigate(link.path);
+                  onClick={() => {
+                    navigate("/tickets");
                     setIsMobileMenuOpen(false);
                   }}
-                  className={`block w-full text-left px-3 py-2 rounded-md text-sm font-bold uppercase tracking-wide ${
-                    activeTab === link.id 
-                      ? 'text-blue-500 dark:text-blue-400 bg-gray-100 dark:bg-gray-700' 
-                      : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
-                  }`}
+                  className="block w-full text-left text-[var(--color-primary)] text-xl font-bold uppercase underline"
                 >
-                  {link.name}
+                  BUY TICKETS!
                 </button>
-              ))}
-              
-              <button
-                onClick={toggleDarkMode}
-                className="w-full text-left flex items-center px-3 py-2 rounded-md text-sm font-bold uppercase tracking-wide text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
-              >
-                {darkMode ? <Sun className="text-yellow-500 mr-2" /> : <Moon className="text-gray-600 mr-2" />}
-                Theme
-              </button>
-              
-              {user ? (
-                <>
-                  <button
-                    onClick={() => { 
-                      navigate("/notification");
-                      setIsMobileMenuOpen(false);
-                    }}
-                    className="w-full text-left flex items-center px-3 py-2 rounded-md text-sm font-bold uppercase tracking-wide text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
-                  >
-                    <Bell className="h-6 w-6 mr-2 text-gray-600 dark:text-gray-300" />
-                    Notifications
-                  </button>
-                  
-                  <button
-                    onClick={() => { 
-                      navigate("/profile");
-                      setIsMobileMenuOpen(false);
-                    }}
-                    className="w-full text-left flex items-center px-3 py-2 rounded-md text-sm font-bold uppercase tracking-wide text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
-                  >
-                    <User className="h-6 w-6 mr-2 text-gray-600 dark:text-gray-300" />
-                    Profile
-                  </button>
-                  
-                  <button
-                    onClick={handleLogout}
-                    className="w-full text-left flex items-center px-3 py-2 rounded-md text-sm font-bold uppercase tracking-wide text-red-600 dark:text-red-400 hover:bg-gray-100 dark:hover:bg-gray-700"
-                  >
-                    <LogOut className="h-6 w-6 mr-2" />
-                    Logout
-                  </button>
-                </>
-              ) : (
-                <div className="px-3 py-2 space-y-2">
-                  <Link
-                    to="/login"
-                    className="block w-full text-center px-4 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition-colors"
-                  >
-                    Login
-                  </Link>
-                  <Link
-                    to="/register"
-                    className="block w-full text-center px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 rounded-full transition-colors"
-                  >
-                    Sign Up
-                  </Link>
-                </div>
-              )}
+              </div>
             </div>
           )}
         </div>
