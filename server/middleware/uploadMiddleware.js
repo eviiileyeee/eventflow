@@ -39,6 +39,5 @@ const upload = multer({
   fileFilter: fileFilter,
 });
 
-console.log("Multer middleware initialized successfully");
 
 module.exports = upload;

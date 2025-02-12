@@ -20,7 +20,7 @@ const generateToken = (id) => {
 exports.register = async (req, res) => {
   try {
     const { username, password, email } = req.body;
-
+    const profileImage = "https://tse3.mm.bing.net/th?id=OIP.JttmcrrQ9_XqrY60bFEfgQHaHa&pid=Api&P=0&h=180";
     // Check for missing fields
     if (!username || !email || !password) {
       return res.status(400).json({ message: 'All fields are required.' });
@@ -42,6 +42,7 @@ exports.register = async (req, res) => {
       username,
       password,
       email,
+      profileImage
     });
 
     await newUser.save();
@@ -93,6 +94,7 @@ exports.login = async (req, res) => {
         username: user.username,
         email: user.email,
         role: user.role,
+        profileImage: user.profileImage,
         notification:
         {
           id: uuidv4(),
@@ -106,6 +108,7 @@ exports.login = async (req, res) => {
       },
       token,
     });
+
   } catch (error) {
     console.error('Error during login:', error);
     res.status(500).json({
