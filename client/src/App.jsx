@@ -11,7 +11,7 @@ import Hero from "./pages/Hero";
 import About from "./components/About";
 import Footer from "./components/Footer";
 import Events from "./pages/Events";
-import { ThemeProvider } from './components/ThemeContext/ThemeContext';
+import { ThemeProvider } from './context/ThemeContext/ThemeContext';
 import Cursor from "./components/Cursor";
 import ContactPage from "./pages/ContactPage";
 import NotificationPage from "./pages/NotificationPage";

@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
-import { useTheme } from "../components/ThemeContext/ThemeContext";
-import { useAuth } from '../context/AuthContext';
+import { useTheme } from "../../context/ThemeContext/ThemeContext";
+import { useAuth } from '../../context/AuthContext';
 import { Link , useNavigate } from 'react-router-dom';
 import {
     User,

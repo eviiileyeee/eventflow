@@ -3,7 +3,7 @@
   import Goals from "../components/Goals";
   import Team from "../components/Team";
   import Stars from "../components/Stars";
-  import { useTheme } from "../components/ThemeContext/ThemeContext";
+  import { useTheme } from "../context/ThemeContext/ThemeContext";
  // import Marquee from "../components/Marquee"; // Import the Marquee component
 
   const Hero = () => {

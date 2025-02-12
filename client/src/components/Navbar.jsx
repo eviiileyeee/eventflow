@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Bell, User, Menu, X, Sun, Moon, LogOut } from "lucide-react";
 import { useAuth } from '../context/AuthContext';
 import logo from "../assets/1734760408581.jpeg";
-import { useTheme } from '../components/ThemeContext/ThemeContext';
+import { useTheme } from '../context/ThemeContext/ThemeContext';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
