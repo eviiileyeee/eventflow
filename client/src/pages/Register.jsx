@@ -67,7 +67,6 @@ const Register = () => {
             email: formData.email,
             password: formData.password,
         }
-        console.log(UserData);
         if (!validateForm()) return;
 
         try {

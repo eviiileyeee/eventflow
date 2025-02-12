@@ -1,9 +1,19 @@
+<<<<<<< HEAD
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import Goals from "../components/Goals";
 import Team from "../components/Team";
 import { useTheme } from "../components/ThemeContext/ThemeContext";
 import Stars from "../components/Stars";
+=======
+  import React from "react";
+  import { useNavigate } from "react-router-dom";
+  import Goals from "../components/Goals";
+  import Team from "../components/Team";
+  import Stars from "../components/Stars";
+  import { useTheme } from "../context/ThemeContext/ThemeContext";
+ // import Marquee from "../components/Marquee"; // Import the Marquee component
+>>>>>>> fc1f3639c9bb27e7e1e44d7f6540b8acea145e66
 
 const Hero = () => {
   const navigate = useNavigate();

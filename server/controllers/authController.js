@@ -5,7 +5,8 @@ const verifyToken = require('../middleware/authMiddleware');
 const { v4: uuidv4 } = require('uuid');
 const cloudinary = require("../utils/cloudinary"); // Cloudinary utility
 const mongoose = require('mongoose'); // Mongoose utility
-
+const { uploadToCloudinary, deleteFromCloudinary } = require('../utils/cloudinary'); // Assuming your cloudinary functions are in this file
+const fs = require('fs');
 
 // Generate JWT Token
 const generateToken = (id) => {
@@ -19,7 +20,7 @@ const generateToken = (id) => {
 exports.register = async (req, res) => {
   try {
     const { username, password, email } = req.body;
-
+    const profileImage = "https://tse3.mm.bing.net/th?id=OIP.JttmcrrQ9_XqrY60bFEfgQHaHa&pid=Api&P=0&h=180";
     // Check for missing fields
     if (!username || !email || !password) {
       return res.status(400).json({ message: 'All fields are required.' });
@@ -41,6 +42,7 @@ exports.register = async (req, res) => {
       username,
       password,
       email,
+      profileImage
     });
 
     await newUser.save();
@@ -92,6 +94,7 @@ exports.login = async (req, res) => {
         username: user.username,
         email: user.email,
         role: user.role,
+        profileImage: user.profileImage,
         notification:
         {
           id: uuidv4(),
@@ -105,6 +108,7 @@ exports.login = async (req, res) => {
       },
       token,
     });
+
   } catch (error) {
     console.error('Error during login:', error);
     res.status(500).json({
@@ -121,72 +125,85 @@ exports.login = async (req, res) => {
 exports.uploadDetails = async (req, res) => {
   const { id } = req.params;
   const userData = req.body;
+  let session;
 
-  // Validate ObjectId format
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(400).json({ message: "Invalid user ID" });
-  }
-
-  const session = await mongoose.startSession(); // Start a transaction
-  session.startTransaction();
+  console.log("🔹 Received user data:", userData);
+  console.log("🔹 Uploaded file:", req.file?.originalname ?? "No file uploaded");
 
   try {
-    let user = await User.findById(id).session(session);
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ message: "Invalid user ID" });
+    }
+
+    session = await mongoose.startSession();
+    session.startTransaction();
+
+    const user = await User.findById(id).session(session);
     if (!user) {
-      await session.abortTransaction();
-      session.endSession();
-      return res.status(404).json({ message: "User not found" });
+      throw new Error("User not found");
     }
 
-    let imageUrl = user.profileImage; // Keep existing image if no new one is uploaded
+    let imageUrl = user.profileImage || null;
 
-    // If a new file is uploaded, update Cloudinary
     if (req.file) {
-      // Delete old image from Cloudinary if it exists
-      if (user.profileImage) {
-        const oldImageId = user.profileImage.split("/").pop().split(".")[0]; // Extract public_id
-        await cloudinary.uploader.destroy(`profile_pictures/${oldImageId}`);
-      }
+      try {
+        // Delete old image if it exists and is a valid URL
+        if (imageUrl && typeof imageUrl === 'string' && imageUrl.includes('cloudinary')) {
+          const oldImageId = imageUrl.split("/").pop().split(".")[0];
+          await deleteFromCloudinary(oldImageId);
+        }
 
-      // Upload new image to Cloudinary
-      const result = await cloudinary.uploader.upload(req.file.path, {
-        folder: "profile_pictures",
-        use_filename: true,
-        unique_filename: false,
-        transformation: [{ width: 300, height: 300, crop: "fill" }], // Optimized image size
-      });
-     if(!result){
-      console.log("error during image upload")
-     }
-      imageUrl = result.secure_url;
+        // Upload new image
+        const result = await uploadToCloudinary(req.file.path);
+        if (!result?.url) {
+          throw new Error("Cloudinary upload failed");
+        }
+        imageUrl = result.url;
+        console.log("✅ New image uploaded:", imageUrl);
+      } catch (uploadError) {
+        console.error("❌ Cloudinary upload error:", uploadError);
+        throw new Error(`Image upload failed: ${uploadError.message}`);
+      } finally {
+        // Clean up uploaded file
+        if (req.file.path && fs.existsSync(req.file.path)) {
+          fs.unlinkSync(req.file.path);
+        }
+      }
     }
 
-    // Merge user updates with existing data
-    const updatedUserData = {
-      ...user.toObject(), // Keep existing data
-      ...userData, // Overwrite with new data from request
-      profileImage: imageUrl, // Update profile image
-      githubUrl: userData.githubUrl || user.githubUrl , // Preserve old values if new ones are missing
-      linkedinUrl: userData.linkedinUrl || user.linkedinUrl ,
-      instagramUrl: userData.instagramUrl || user.instagramUrl ,
-    };
-
-    // Update user details
-    user = await User.findByIdAndUpdate(id, updatedUserData, { new: true, session });
+    const updatedUser = await User.findByIdAndUpdate(
+      id,
+      {
+        ...user.toObject(),
+        ...userData,
+        profileImage: imageUrl
+      },
+      { new: true, session }
+    );
 
     await session.commitTransaction();
-    session.endSession();
+    res.status(200).json({ 
+      message: "User updated successfully", 
+      user: updatedUser 
+    });
 
-    res.status(200).json({ message: "User updated successfully", user });
   } catch (error) {
-    await session.abortTransaction();
-    session.endSession();
+    console.error("❌ Error:", error);
+    await session?.abortTransaction();
+    
+    if (error.message === "User not found") {
+      res.status(404).json({ message: "User not found" });
+    } else {
+      res.status(500).json({ 
+        message: "Update failed", 
+        error: error.message 
+      });
+    }
 
-    console.error("Error during update:", error);
-    res.status(500).json({ message: "Server error during update", error: error.message });
+  } finally {
+    await session?.endSession();
   }
 };
-
 
 
 

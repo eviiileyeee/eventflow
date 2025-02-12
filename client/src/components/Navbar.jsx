@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Bell, User, Menu, X, Sun, Moon, LogOut } from "lucide-react";
 import { useAuth } from '../context/AuthContext';
+<<<<<<< HEAD
 import { useTheme } from '../components/ThemeContext/ThemeContext';
+=======
+import logo from "../assets/1734760408581.jpeg";
+import { useTheme } from '../context/ThemeContext/ThemeContext';
+>>>>>>> fc1f3639c9bb27e7e1e44d7f6540b8acea145e66
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
@@ -66,12 +71,50 @@ const Navbar = () => {
             >
               Log In
             </button>
+<<<<<<< HEAD
             <Link
               to="/tickets"
               className="px-4 py-2 text-sm font-medium text-white bg-[var(--color-primary)] hover:bg-[#004d00] rounded-full transition-colors"
             >
               TICKETS
             </Link>
+=======
+
+            {/* Notification Bell and User Icons */}
+            {user ? (
+              <>
+                <button
+                  className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
+                  onClick={() => { navigate("/notification"); }}
+                >
+                  <Bell className="h-6 w-6 text-gray-600 dark:text-gray-300" />
+                </button>
+
+                <button
+                  className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
+                  onClick={() => { navigate("/profile"); }}
+                >
+                  <img className="h-10 w-10 object-cover rounded-full "
+                  src={user.profileImage || "https://tse3.mm.bing.net/th?id=OIP.JttmcrrQ9_XqrY60bFEfgQHaHa&pid=Api&P=0&h=180"} alt="User Avatar" />
+                </button>
+              </>
+            ) : (
+              <>
+                <Link
+                  to="/login"
+                  className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition-colors"
+                >
+                  Login
+                </Link>
+                <Link
+                  to="/register"
+                  className="px-4 py-2 text-sm font-medium text-white bg-[#6B85B6] hover:bg-gray-950 dark:bg-[#A7B9D5] dark:hover:bg-[#6B85B6] rounded-full transition-colors"
+                >
+                  Sign Up
+                </Link>
+              </>
+            )}
+>>>>>>> fc1f3639c9bb27e7e1e44d7f6540b8acea145e66
           </div>
 
           <div className="md:hidden flex items-center">

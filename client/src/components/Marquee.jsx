@@ -1,6 +1,6 @@
 import React from "react";
 import Marquee from "react-marquee-slider";
-import { useTheme } from "../components/ThemeContext/ThemeContext";
+import { useTheme } from "../context/ThemeContext/ThemeContext";
 import { 
   FaDribbble, 
   FaInstagram, 
