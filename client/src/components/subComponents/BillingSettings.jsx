@@ -1,5 +1,7 @@
 import React from "react";
-
+import {
+    CreditCard,
+} from "lucide-react"
 const BillingSettings = () => (
     <div className="bg-gray-200 dark:bg-gray-800 p-6 rounded-lg shadow space-y-6">
       <h3 className="text-lg font-medium mb-4 dark:text-white">Billing Information</h3>
