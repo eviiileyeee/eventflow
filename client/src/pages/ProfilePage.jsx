@@ -159,7 +159,7 @@ const ProfilePage = () => {
               <SidebarLink icon={Shield} text="Security" tab="security" />
               <SidebarLink icon={CreditCard} text="Billing" tab="billing" />
               <SidebarLink icon={Bell} text="Notifications" tab="notifications" />
-              <SidebarLink icon={Building} text="Teams" tab="teams" />
+              <SidebarLink icon={Settings} text="Settings" tab="settings" />
               
               <div className="pt-4 mt-4 border-t dark:border-gray-700">
                 <button className="w-full flex items-center bg-gray-200
@@ -173,7 +173,7 @@ const ProfilePage = () => {
 
             {/* Main Content */}
             <div className="flex-1">
-              {activeTab === 'general' && <GeneralSettings   user = {currentUser} function = {setCurrentUser} />}
+              {activeTab === 'settings' && <GeneralSettings   user = {currentUser} function = {setCurrentUser} />}
               {activeTab === 'security' && <SecuritySettings />}
               {activeTab === 'billing' && <BillingSettings />}
               { activeTab === 'notifications' && <NotificationPage /> }
