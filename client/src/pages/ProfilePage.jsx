@@ -25,7 +25,7 @@ import {
 } from 'lucide-react';
 
 const ProfilePage = () => {
-  const [activeTab, setActiveTab] = useState('general');
+  const [activeTab, setActiveTab] = useState('profile');
   const { darkMode, toggleDarkMode } = useTheme();
   const { user, checkAuth , logout } = useAuth();
   const [currentUser , setCurrentUser] = useState(user);
@@ -87,11 +87,11 @@ const ProfilePage = () => {
 
             {/* Main Content */}
             <div className="flex-1">
+              {activeTab === 'profile' && <UserProfile user={currentUser} setTab = {setActiveTab}/>}
               {activeTab === 'settings' && <GeneralSettings   user = {currentUser} function = {setCurrentUser} />}
               {activeTab === 'security' && <SecuritySettings />}
               {activeTab === 'billing' && <BillingSettings />}
               { activeTab === 'notifications' && <NotificationPage /> }
-              { activeTab === 'profile' && <UserProfile user={currentUser}/>}
             </div>
           </div>
         </div>

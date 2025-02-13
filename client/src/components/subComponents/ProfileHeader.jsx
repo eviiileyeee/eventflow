@@ -9,7 +9,7 @@ export default function ProfileHeader(props){
       <img
         src={ props.user.profileImage || "https://tse3.mm.bing.net/th?id=OIP.JttmcrrQ9_XqrY60bFEfgQHaHa&pid=Api&P=0&h=180"}
         alt=" User Avtar"
-        className="h-20 w-20 rounded-full"
+        className="h-20 w-20 rounded-full object-cover"
       />
       <div>
         <h2 className="text-2xl font-bold dark:text-white">{props.user.username}</h2>
