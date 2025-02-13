@@ -25,7 +25,7 @@ import {
 } from 'lucide-react';
 
 const ProfilePage = () => {
-  const [activeTab, setActiveTab] = useState('general');
+  const [activeTab, setActiveTab] = useState('profile');
   const { darkMode, toggleDarkMode } = useTheme();
   const { user, checkAuth , logout } = useAuth();
   const [currentUser , setCurrentUser] = useState(user);
