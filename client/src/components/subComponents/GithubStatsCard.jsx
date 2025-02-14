@@ -55,7 +55,7 @@ const GitHubStatsCard = (props) => {
   if (!userData) return null;
 
   return (
-    <div className="w-full max-w-md overflow-hidden rounded-lg border border-gray-200 bg-white shadow-md transition-all duration-500 ease-out dark:bg-gray-800">
+    <div className="w-auto max-w-md overflow-hidden rounded-lg border border-gray-200 bg-white shadow-md transition-all duration-500 ease-out dark:bg-gray-800">
       {/* Header Section */}
       <div className="border-b border-gray-200 p-6">
         <div className="flex items-center space-x-4">
