@@ -18,6 +18,8 @@ import NotificationPage from "./pages/NotificationPage";
 import EventFullViewWrapper from "./components/EventFullViewWrapper";
 import EventFullView from "./components/EventFullView.jsx";
 import Loader from "./components/Loader.jsx";
+import { ToastContainer } from 'react-toastify';
+import PageNotFound from "./components/subComponents/PageNoteFound.jsx";
 
 const DashboardLayout = ({ children }) => (
   <div id="main" className="relative overflow-hidden min-h-screen">
@@ -111,10 +113,7 @@ const App = () => {
               <Route path="*" element={
                 <DashboardLayout>
                   <div className="flex items-center justify-center min-h-screen">
-                    <div className="text-center">
-                      <h1 className="text-6xl font-bold text-gray-900 dark:text-white">404</h1>
-                      <p className="text-xl text-gray-600 dark:text-gray-400">Page not found</p>
-                    </div>
+                    <PageNotFound/>
                   </div>
                 </DashboardLayout>
               } />

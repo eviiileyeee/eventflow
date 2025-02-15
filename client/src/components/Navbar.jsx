@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Bell, User, Menu, X, Sun, Moon } from "lucide-react";
+import { Bell, User, Menu, X, Sun, Moon, CirclePlus } from "lucide-react";
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext/ThemeContext';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -48,9 +48,8 @@ const Navbar = () => {
               <button
                 key={link.path}
                 onClick={() => navigate(link.path)}
-                className={`text-sm font-bold uppercase tracking-wide ${
-                  activeTab === link.path.substring(1) ? (darkMode ? 'text-white' : 'text-black') : (darkMode ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-black')
-                }`}
+                className={`text-sm font-bold uppercase tracking-wide ${activeTab === link.path.substring(1) ? (darkMode ? 'text-white' : 'text-black') : (darkMode ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-black')
+                  }`}
               >
                 {link.name}
               </button>
@@ -65,9 +64,16 @@ const Navbar = () => {
 
             {user ? (
               <>
-                <button className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700" onClick={() => navigate("/notification")}>
-                  <Bell className="h-6 w-6 text-gray-600 dark:text-gray-300" />
-                </button>
+                {activeTab === "events" ?
+                  (<button className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700" onClick={() => navigate("/add")}>
+                    <CirclePlus className="h-6 w-6 text-gray-600 dark:text-gray-300"/>
+                  </button>
+                  ) :
+                  <button className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700" onClick={() => navigate("/notification")}>
+                    <Bell className="h-6 w-6 text-gray-600 dark:text-gray-300" />
+                  </button>
+                }
+
                 <button className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700" onClick={() => navigate("/profile")}>
                   <img className="h-10 w-10 object-cover rounded-full" src={user.profileImage || "https://tse3.mm.bing.net/th?id=OIP.JttmcrrQ9_XqrY60bFEfgQHaHa&pid=Api&P=0&h=180"} alt="User Avatar" />
                 </button>
