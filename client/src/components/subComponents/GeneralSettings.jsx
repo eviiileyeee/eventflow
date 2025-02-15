@@ -19,6 +19,8 @@ const GeneralSettings = () => {
     facebookUrl: user?.facebookUrl || "",
     instagramUrl: user?.instagramUrl || "",
     profileImage: null,
+    discription : user?.discription || "",
+    profession : user?.profession || "",
   }), [user]);
 
   const [formData, setFormData] = useState(initialFormData);
@@ -72,7 +74,7 @@ const GeneralSettings = () => {
       <div className="bg-gray-200 dark:bg-gray-800 p-6 rounded-lg shadow">
         <h3 className="text-lg font-medium mb-4 dark:text-white">Personal Information</h3>
         <form onSubmit={handleSubmit} className="space-y-4">
-          {["phoneNumber", "githubUrl", "facebookUrl", "instagramUrl"].map((field) => (
+          {["phoneNumber", "githubUrl", "facebookUrl", "instagramUrl", "discription","profession"].map((field) => (
             <div key={field}>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 {field.replace(/([A-Z])/g, " $1")}
