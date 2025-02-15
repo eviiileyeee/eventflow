@@ -2,6 +2,8 @@ import React, { useEffect, useState, useCallback, useMemo } from "react";
 import { useTheme } from "../../context/ThemeContext/ThemeContext";
 import { useAuth } from "../../context/AuthContext";
 import { Sun, Moon } from "lucide-react";
+import { ToastContainer, toast } from 'react-toastify';
+
 
 const GeneralSettings = () => {
   const { updateUser, user, checkAuth } = useAuth();
@@ -21,7 +23,7 @@ const GeneralSettings = () => {
 
   const [formData, setFormData] = useState(initialFormData);
 
-  
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -44,6 +46,16 @@ const GeneralSettings = () => {
       setLoading(true);
       try {
         await updateUser(formData);
+        toast.success('uploaded successfully', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
         console.log("Form submitted:", formData);
       } catch (error) {
         console.error("Error updating user:", error);
@@ -117,7 +129,20 @@ const GeneralSettings = () => {
               )}
             </button>
           </div>
-
+          <div>
+            <ToastContainer
+              position="top-right"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick={false}
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="light"
+            />
+          </div>
           {/* Disabled Email Notifications */}
           <div className="flex items-center justify-between cursor-not-allowed opacity-50">
             <div>

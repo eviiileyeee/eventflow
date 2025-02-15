@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
 import { notificationService } from '../services/notificationService';
+import { ToastContainer, toast } from 'react-toastify';
+
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({
@@ -32,6 +34,17 @@ const LoginPage = () => {
       setIsLoading(true);
       await login(formData.email, formData.password);
       setSuccess('Logged in successfully');
+      setIsLoading(false);
+      toast.success('logged in successfully', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       notificationService.postNotifications({
         id: 1,
         type: 'security',
@@ -41,7 +54,9 @@ const LoginPage = () => {
         read: false,
         icon: 1,
       });
-      navigate('/');
+      setTimeout(()=>{
+        navigate('/');
+      },2000);
     } catch (err) {
       setError(err.message || 'An error occurred during login');
     }
@@ -67,6 +82,11 @@ const LoginPage = () => {
           {error && (
             <div className="text-red-500 text-center">{error}</div>
           )}
+          {
+            success && (
+              <div className="text-green-500 text-center">{success}</div>
+            )
+          }
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
               <input
@@ -106,6 +126,20 @@ const LoginPage = () => {
           </div>
         </form>
       </div>
+      <div>
+            <ToastContainer
+              position="top-right"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick={false}
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="light"
+            />
+          </div>
     </div>
   );
 };
