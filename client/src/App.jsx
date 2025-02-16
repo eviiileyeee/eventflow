@@ -18,6 +18,7 @@ import NotificationPage from "./pages/NotificationPage";
 import EventFullViewWrapper from "./components/EventFullViewWrapper";
 import EventFullView from "./components/EventFullView.jsx";
 import Loader from "./components/Loader.jsx";
+import ServicesPage from "./pages/ServicesPage";
 
 const DashboardLayout = ({ children }) => (
   <div id="main" className="relative overflow-hidden min-h-screen">
@@ -107,6 +108,12 @@ const App = () => {
                   <ContactPage />
                 </DashboardLayout>
               } />
+
+<Route path="/services" element={
+  <DashboardLayout>
+    <ServicesPage />
+  </DashboardLayout>
+} />
               {/* 404 route */}
               <Route path="*" element={
                 <DashboardLayout>

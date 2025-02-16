@@ -77,3 +77,8 @@ button {
 .text-secondary {
     color: var(--color-secondary);
 }
+
+
+#services::-webkit-scrollbar{
+    display: none;
+}
