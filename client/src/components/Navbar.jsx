@@ -30,13 +30,13 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className={`fixed top-0 left-0 w-full ${darkMode ? 'bg-secondary/60' : 'bg-primary/60'} backdrop-blur-lg shadow-md z-50`}>
+    <nav className={`fixed top-0 left-0 w-full ${darkMode ? 'bg-secondary/60' : 'bg-primary/60'} backdrop-blur-lg  z-50`}>
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between h-16 items-center">
           {/* Logo */}
           <div className="flex items-center">
             <Link to="/" className="flex items-center">
-              <span className={`text-4xl font-extrabold uppercase tracking-wide font-['FoundersGrotesk-Semibold'] ${darkMode ? 'text-primary' : 'text-secondary'}`}>
+              <span className={`text-4xl font-extrabold uppercase tracking-wide font-['FoundersGrotesk-Semibold'] ${darkMode ? 'text-primary' : 'text-purple-600'}`}>
                 EVENTFLOW
               </span>
             </Link>
@@ -48,7 +48,7 @@ const Navbar = () => {
               <button
                 key={link.path}
                 onClick={() => navigate(link.path)}
-                className={`text-sm font-bold uppercase tracking-wide ${activeTab === link.path.substring(1) ? (darkMode ? 'text-white' : 'text-black') : (darkMode ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-black')
+                className={`text-sm font-bold uppercase tracking-wide ${activeTab === link.path.substring(1) ? (darkMode ? 'text-white' : 'text-black') : (darkMode ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-purple-600')
                   }`}
               >
                 {link.name}
@@ -66,7 +66,7 @@ const Navbar = () => {
               <>
                 {activeTab === "events" ?
                   (<button className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700" onClick={() => navigate("/create")}>
-                    <CirclePlus className="h-6 w-6 text-gray-600 dark:text-gray-300"/>
+                    <CirclePlus className="h-6 w-6 text-purple-800 dark:text-gray-300"/>
                   </button>
                   ) :
                   <button className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700" onClick={() => navigate("/notification")}>
@@ -75,7 +75,7 @@ const Navbar = () => {
                 }
 
                 <button className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700" onClick={() => navigate("/profile")}>
-                  <img className="h-10 w-10 object-cover rounded-full" src={user.profileImage || "https://tse3.mm.bing.net/th?id=OIP.JttmcrrQ9_XqrY60bFEfgQHaHa&pid=Api&P=0&h=180"} alt="User Avatar" />
+                  <img className="h-10 w-10 object-cover rounded-full border-2 border-indigo-800" src={user.profileImage || "https://tse3.mm.bing.net/th?id=OIP.JttmcrrQ9_XqrY60bFEfgQHaHa&pid=Api&P=0&h=180"} alt="User Avatar" />
                 </button>
               </>
             ) : (
