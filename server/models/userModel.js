@@ -48,6 +48,9 @@ const userSchema = new mongoose.Schema({
   githubUrl: String,
   linkedinUrl: String,
   instagramUrl: String,
+  profession : String,
+  location : String,
+  discription : String,
 }, {
   timestamps: true
 });

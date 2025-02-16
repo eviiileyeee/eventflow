@@ -1,8 +1,8 @@
 
-# 🌟 **Echelon Dev Society** 🌟  
+# 🌟 **Event Flow** 🌟  
 
 ### 🚀 **About Us**
-Echelon Dev Society (EDC) is a vibrant community of passionate developers, designers, and tech enthusiasts.  
+Event Flow is a vibrant community of passionate developers, designers, and tech enthusiasts.  
 Our mission is to **foster innovation, collaboration**, and continuous learning through impactful **projects**, hands-on **workshops**, and exciting **events**.  
 
 ---
@@ -21,11 +21,11 @@ Quarterly hackathons to solve real-world problems, inspire creativity, and build
 
 ## 💻 **Installation Instructions**
 
-To get started with the EDC project locally, follow these steps:
+To get started with  project locally, follow these steps:
 
 ```bash
 # 1️⃣ Create a new project directory
-mkdir edc-project
+mkdir eventflow
 
 # 2️⃣ Clone the repository
 git clone https://github.com/eviiileyeee/EDC-LandingPage.git
@@ -61,7 +61,7 @@ npm run dev
 ---
 
 ## 🌍 **Live Preview**  
-👉 **View the Live Project Here**: [**EDC Landing Page**](https://echelon-dev-society.netlify.app)  
+👉 **View the Live Project Here**: [**EDC Landing Page**](https://flowevent.netlify.app)  
 
 ---
 

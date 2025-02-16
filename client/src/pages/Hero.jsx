@@ -138,9 +138,8 @@ const Hero = () => {
         </div>
       </section>
 
-      <Goals />
-      <Team />
-    </>
+      <Goals />   
+       </>
   );
 };
 

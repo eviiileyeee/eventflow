@@ -1,8 +1,15 @@
 import React, { useState, useEffect } from "react";
+<<<<<<< HEAD
 import { Bell, User, Menu, X, Sun, Moon } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import { useTheme } from "../context/ThemeContext/ThemeContext";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+=======
+import { Bell, User, Menu, X, Sun, Moon, CirclePlus } from "lucide-react";
+import { useAuth } from '../context/AuthContext';
+import { useTheme } from '../context/ThemeContext/ThemeContext';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+>>>>>>> 2a860a5332eec6414b2f1dd29fa66b4d4e3d3bb2
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -31,21 +38,29 @@ const Navbar = () => {
   ];
 
   return (
+<<<<<<< HEAD
     <nav
       className={`fixed top-0 left-0 w-full ${
         darkMode ? "bg-secondary/60" : "bg-primary/60"
       } backdrop-blur-lg shadow-md z-50`}
     >
+=======
+    <nav className={`fixed top-0 left-0 w-full ${darkMode ? 'bg-secondary/60' : 'bg-primary/60'} backdrop-blur-lg  z-50`}>
+>>>>>>> 2a860a5332eec6414b2f1dd29fa66b4d4e3d3bb2
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between h-16 items-center">
           {/* Logo */}
           <div className="flex items-center">
             <Link to="/" className="flex items-center">
+<<<<<<< HEAD
               <span
                 className={`text-4xl font-extrabold uppercase tracking-wide font-['FoundersGrotesk-Semibold'] ${
                   darkMode ? "text-primary" : "text-secondary"
                 }`}
               >
+=======
+              <span className={`text-4xl font-extrabold uppercase tracking-wide font-['FoundersGrotesk-Semibold'] ${darkMode ? 'text-primary' : 'text-purple-600'}`}>
+>>>>>>> 2a860a5332eec6414b2f1dd29fa66b4d4e3d3bb2
                 EVENTFLOW
               </span>
             </Link>
@@ -56,6 +71,7 @@ const Navbar = () => {
             {navLinks.map((link) => (
               <Link
                 key={link.path}
+<<<<<<< HEAD
                 to={link.path}
                 className={`text-sm font-bold uppercase tracking-wide transition-colors duration-200 ${
                   activeTab === link.path.substring(1)
@@ -66,6 +82,11 @@ const Navbar = () => {
                     ? "text-gray-400 hover:text-white"
                     : "text-gray-600 hover:text-black"
                 }`}
+=======
+                onClick={() => navigate(link.path)}
+                className={`text-sm font-bold uppercase tracking-wide ${activeTab === link.path.substring(1) ? (darkMode ? 'text-white' : 'text-black') : (darkMode ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-purple-600')
+                  }`}
+>>>>>>> 2a860a5332eec6414b2f1dd29fa66b4d4e3d3bb2
               >
                 {link.name}
               </Link>
@@ -87,6 +108,7 @@ const Navbar = () => {
 
             {user ? (
               <>
+<<<<<<< HEAD
                 <button
                   className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
                   onClick={() => navigate("/notification")}
@@ -105,6 +127,20 @@ const Navbar = () => {
                     }
                     alt="User Avatar"
                   />
+=======
+                {activeTab === "events" ?
+                  (<button className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700" onClick={() => navigate("/create")}>
+                    <CirclePlus className="h-6 w-6 text-purple-800 dark:text-gray-300"/>
+                  </button>
+                  ) :
+                  <button className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700" onClick={() => navigate("/notification")}>
+                    <Bell className="h-6 w-6 text-gray-600 dark:text-gray-300" />
+                  </button>
+                }
+
+                <button className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700" onClick={() => navigate("/profile")}>
+                  <img className="h-10 w-10 object-cover rounded-full border-2 border-indigo-800" src={user.profileImage || "https://tse3.mm.bing.net/th?id=OIP.JttmcrrQ9_XqrY60bFEfgQHaHa&pid=Api&P=0&h=180"} alt="User Avatar" />
+>>>>>>> 2a860a5332eec6414b2f1dd29fa66b4d4e3d3bb2
                 </button>
               </>
             ) : (

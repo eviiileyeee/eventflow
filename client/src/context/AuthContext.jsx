@@ -79,6 +79,11 @@ export const AuthProvider = ({ children }) => {
       formData.append("githubUrl", updatedUser.githubUrl);
       formData.append("facebookUrl", updatedUser.facebookUrl);
       formData.append("instagramUrl", updatedUser.instagramUrl);
+      formData.append("discription", updatedUser.discription);
+      formData.append("profession", updatedUser.profession);
+
+
+
   
       // Only append file if it's available
       if (updatedUser.profileImage) {
