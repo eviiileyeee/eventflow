@@ -65,7 +65,7 @@ const Navbar = () => {
             {user ? (
               <>
                 {activeTab === "events" ?
-                  (<button className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700" onClick={() => navigate("/add")}>
+                  (<button className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700" onClick={() => navigate("/create")}>
                     <CirclePlus className="h-6 w-6 text-gray-600 dark:text-gray-300"/>
                   </button>
                   ) :

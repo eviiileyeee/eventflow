@@ -20,6 +20,7 @@ import EventFullView from "./components/EventFullView.jsx";
 import Loader from "./components/Loader.jsx";
 import { ToastContainer } from 'react-toastify';
 import PageNotFound from "./components/subComponents/PageNoteFound.jsx";
+import EventCreationForm from "./pages/eventComponent/EventCreationForm.jsx";
 
 const DashboardLayout = ({ children }) => (
   <div id="main" className="relative overflow-hidden min-h-screen">
@@ -95,7 +96,13 @@ const App = () => {
                     <Events />
                   </DashboardLayout>
                 </ProtectedRoute>
-
+              } />
+              <Route path="/create" element={
+                <ProtectedRoute>
+                  <DashboardLayout>
+                    <EventCreationForm />
+                  </DashboardLayout>
+                </ProtectedRoute>
               } />
               <Route path="/events/:id" element={<EventFullView />} />
               <Route path="/about" element={
