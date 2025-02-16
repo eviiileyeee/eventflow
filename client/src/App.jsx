@@ -18,13 +18,10 @@ import NotificationPage from "./pages/NotificationPage";
 import EventFullViewWrapper from "./components/EventFullViewWrapper";
 import EventFullView from "./components/EventFullView.jsx";
 import Loader from "./components/Loader.jsx";
-<<<<<<< HEAD
 import ServicesPage from "./pages/ServicesPage";
-=======
 import { ToastContainer } from 'react-toastify';
 import PageNotFound from "./components/subComponents/PageNoteFound.jsx";
 import EventCreationForm from "./pages/eventComponent/EventCreationForm.jsx";
->>>>>>> 2a860a5332eec6414b2f1dd29fa66b4d4e3d3bb2
 
 const DashboardLayout = ({ children }) => (
   <div id="main" className="relative overflow-hidden min-h-screen">
