@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../assets/1734760408581.jpeg";
 import { 
   Github, 
@@ -17,27 +18,24 @@ const FooterSection = ({ title, children }) => (
   </div>
 );
 
-const FooterLink = ({ href, children }) => (
-  <a 
-    href={href}
+const FooterLink = ({ to, children }) => (
+  <Link 
+    to={to}
     className="block mb-2 text-gray-400 hover:text-blue-400 transition-colors duration-200"
   >
     <div className="flex items-center">
       <ChevronRight className="h-4 w-4 mr-1" />
       {children}
     </div>
-  </a>
+  </Link>
 );
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
-
   return (
     <footer className="bg-gray-900 text-gray-400">
-      {/* Main Footer Content */}
       <div className="max-w-7xl mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {/* About Section */}
           <FooterSection title="About Echelon Dev">
             <div className="mb-4">
               <img 
@@ -64,31 +62,28 @@ const Footer = () => {
             </div>
           </FooterSection>
 
-          {/* Quick Links Section */}
           <FooterSection title="Quick Links">
             <div className="space-y-2">
-              <FooterLink href="/about">About Us</FooterLink>
-              <FooterLink href="/events">Events</FooterLink>
-              <FooterLink href="/projects">Projects</FooterLink>
-              <FooterLink href="/team">Our Team</FooterLink>
-              <FooterLink href="/blog">Blog</FooterLink>
-              <FooterLink href="/careers">Careers</FooterLink>
+              <FooterLink to="/about">About Us</FooterLink>
+              <FooterLink to="/events">Events</FooterLink>
+              <FooterLink to="/projects">Projects</FooterLink>
+              <FooterLink to="/team">Our Team</FooterLink>
+              <FooterLink to="/blog">Blog</FooterLink>
+              <FooterLink to="/careers">Careers</FooterLink>
             </div>
           </FooterSection>
 
-          {/* Resources Section */}
           <FooterSection title="Resources">
             <div className="space-y-2">
-              <FooterLink href="/docs">Documentation</FooterLink>
-              <FooterLink href="/tutorials">Tutorials</FooterLink>
-              <FooterLink href="/workshops">Workshops</FooterLink>
-              <FooterLink href="/faqs">FAQs</FooterLink>
-              <FooterLink href="/support">Support</FooterLink>
-              <FooterLink href="/community">Community</FooterLink>
+              <FooterLink to="/docs">Documentation</FooterLink>
+              <FooterLink to="/tutorials">Tutorials</FooterLink>
+              <FooterLink to="/workshops">Workshops</FooterLink>
+              <FooterLink to="/faqs">FAQs</FooterLink>
+              <FooterLink to="/support">Support</FooterLink>
+              <FooterLink to="/community">Community</FooterLink>
             </div>
           </FooterSection>
 
-          {/* Contact Section */}
           <FooterSection title="Contact Us">
             <div className="space-y-4">
               <div className="flex items-center">
@@ -107,13 +102,12 @@ const Footer = () => {
               </div>
               <div className="flex items-center">
                 <MapPin className="h-5 w-5 mr-2" />
-                <span>Chameli Devi Group of Institutions, khandwa-naka Road, Indore (MP)</span>
+                <span>Chameli Devi Group of Institutions, Khandwa-Naka Road, Indore (MP)</span>
               </div>
             </div>
           </FooterSection>
         </div>
 
-        {/* Newsletter Subscription */}
         <div className="border-t border-gray-800 mt-12 pt-8">
           <div className="max-w-md mx-auto text-center">
             <h3 className="text-lg font-semibold mb-4 text-white">
@@ -132,22 +126,15 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Bottom Bar */}
         <div className="border-t border-gray-800 mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="mb-4 md:mb-0">
               © {currentYear} Echelon Dev Society. All rights reserved.
             </div>
             <div className="flex space-x-6">
-              <a href="/privacy" className="hover:text-blue-400 transition-colors">
-                Privacy Policy
-              </a>
-              <a href="/terms" className="hover:text-blue-400 transition-colors">
-                Terms of Service
-              </a>
-              <a href="/cookies" className="hover:text-blue-400 transition-colors">
-                Cookie Policy
-              </a>
+              <FooterLink to="/privacy">Privacy Policy</FooterLink>
+              <FooterLink to="/terms">Terms of Service</FooterLink>
+              <FooterLink to="/cookies">Cookie Policy</FooterLink>
             </div>
           </div>
         </div>

@@ -24,7 +24,6 @@ const Navbar = () => {
 
   const navLinks = [
     { name: "Home", path: "/" },
-    { name: "About", path: "/about" },
     { name: "Events", path: "/events" },
     { name: "Contact", path: "/contact" },
     { name: "Services", path: "/services" },
@@ -48,7 +47,7 @@ const Navbar = () => {
             {navLinks.map((link) => (
               <Link
                 key={link.path}
-                to={link.path} // ✅ Correct navigation
+                to={link.path} 
                 className={`text-sm font-bold uppercase tracking-wide ${
                   activeTab === link.path.substring(1) ? 
                     (darkMode ? 'text-white' : 'text-black') :
