@@ -18,6 +18,7 @@ import NotificationPage from "./pages/NotificationPage";
 import EventFullViewWrapper from "./components/EventFullViewWrapper";
 import EventFullView from "./components/EventFullView.jsx";
 import Loader from "./components/Loader.jsx";
+import ServicesPage from "./pages/ServicesPage";
 import { ToastContainer } from 'react-toastify';
 import PageNotFound from "./components/subComponents/PageNoteFound.jsx";
 import EventCreationForm from "./pages/eventComponent/EventCreationForm.jsx";
@@ -116,6 +117,12 @@ const App = () => {
                   <ContactPage />
                 </DashboardLayout>
               } />
+
+<Route path="/services" element={
+  <DashboardLayout>
+    <ServicesPage />
+  </DashboardLayout>
+} />
               {/* 404 route */}
               <Route path="*" element={
                 <DashboardLayout>

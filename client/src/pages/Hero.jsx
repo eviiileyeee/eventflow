@@ -4,6 +4,7 @@ import { motion, easeOut } from "framer-motion";
 import Goals from "../components/Goals";
 import Team from "../components/Team";
 import { useTheme } from "../context/ThemeContext/ThemeContext";
+import Background from "../components/Background";
 
 const Hero = () => {
   const navigate = useNavigate();
@@ -61,6 +62,9 @@ const Hero = () => {
             : "bg-gradient-to-br from-[#C0D0DF] to-[#9CB3D7] text-black"
         }`}
       >
+        
+       
+    
         <div className="container mx-auto text-left max-w-6xl">
           <div className="leading-[9rem] font-extrabold text-[12rem] font-heading">
             <div className="relative flex items-center">
