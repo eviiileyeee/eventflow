@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@auth0/auth0-react": "^2.3.0",
     "@emailjs/browser": "^4.4.1",
     "@react-three/drei": "^9.121.4",
     "@react-three/fiber": "^8.17.14",
