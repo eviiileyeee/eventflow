@@ -82,3 +82,24 @@ button {
 #services::-webkit-scrollbar{
     display: none;
 }
+
+
+/* For Webkit browsers (Chrome, Safari) */
+::-webkit-scrollbar {
+    width: 4px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #1a202c; /* Dark gray track */
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #4a90e2; /* Blue thumb */
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #357ABD;
+  }
+  
