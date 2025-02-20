@@ -126,8 +126,8 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       <div
-        className={`fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm transition-transform transform ${
-          isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
+        className={`fixed top-0 right-0 bg-black bg-opacity-50 backdrop-blur-sm transition-transform transform ${
+          isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
         } md:hidden`}
       >
         <div className={`p-6 w-64 bg-white dark:bg-gray-900 h-full`}>
