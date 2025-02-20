@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { ThemeContext } from '../../context/ThemeContext/ThemeContext';
+import { useTheme } from '../../context/ThemeContext/ThemeContext';
+import { useNavigate } from 'react-router-dom';
+import ImageUpload from '../../components/eventComponents/ImageUpload';
 import { 
   Calendar, 
   Clock, 
@@ -18,6 +20,7 @@ import {
 } from 'lucide-react';
 
 const EventCreationForm = () => {
+  const { darkMode, toggleDarkMode } = useTheme();
   const [agendaItems, setAgendaItems] = useState([{ time: '', title: '', description: '', speaker: '' }]);
   const [images, setImages] = useState([]);
 
@@ -25,8 +28,27 @@ const EventCreationForm = () => {
     setAgendaItems([...agendaItems, { time: '', title: '', description: '', speaker: '' }]);
   };
 
+  const handleImageChange = (e) => {
+    const selectedFiles = [...e.target.files];
+    setImages(selectedFiles);
+  };
+
+  const removeImage = (index) => {
+    setImages(images.filter((_, i) => i !== index));
+  };
+
   const removeAgendaItem = (index) => {
     setAgendaItems(agendaItems.filter((_, i) => i !== index));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formData = {
+      agendaItems,
+      images,
+      // Add any other form fields here
+    };
+    console.log(formData);
   };
 
   return (
@@ -39,7 +61,7 @@ const EventCreationForm = () => {
             <p className="mt-2 text-purple-100">Fill in the details to create your amazing event</p>
           </div>
 
-          <form className="px-6 py-8 space-y-8">
+          <form className="px-6 py-8 space-y-8" onSubmit={handleSubmit}>
             {/* Basic Information Section */}
             <div className="space-y-6">
               <h2 className="text-xl font-semibold text-gray-900 flex items-center gap-2">
@@ -73,7 +95,13 @@ const EventCreationForm = () => {
                 />
               </div>
             </div>
-
+            <div>
+            <h2 className="text-xl font-semibold text-gray-900 flex items-center gap-2">
+                <ImageIcon className="w-5 h-5 text-purple-600" />
+                Event Images
+              </h2>
+            <ImageUpload className="mt-4" onChange={handleImageChange} />
+            </div>
             {/* Date and Time Section */}
             <div className="space-y-6">
               <h2 className="text-xl font-semibold text-gray-900 flex items-center gap-2">
@@ -181,24 +209,22 @@ const EventCreationForm = () => {
                       <InputField
                         label="Time"
                         type="time"
-                        value={item.time}
                       />
                       <InputField
                         label="Title"
                         placeholder="Session title"
-                        value={item.title}
+                        type="text"
                       />
                       <div className="md:col-span-2">
                         <InputField
                           label="Description"
+                          type="text"
                           placeholder="Session description"
-                          value={item.description}
                         />
                       </div>
                       <InputField
                         label="Speaker"
                         placeholder="Speaker name"
-                        value={item.speaker}
                       />
                     </div>
                   </div>

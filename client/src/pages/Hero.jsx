@@ -1,8 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, easeOut } from "framer-motion";
-import Goals from "../components/Goals";
-import Team from "../components/Team";
+import Goals from "../components/subPages/Goals";
 import { useTheme } from "../context/ThemeContext/ThemeContext";
 import Background from "../components/Background";
 
