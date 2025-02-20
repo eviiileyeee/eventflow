@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useState , useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, easeOut } from "framer-motion";
 import Goals from "../components/subPages/Goals";
 import { useTheme } from "../context/ThemeContext/ThemeContext";
-import Background from "../components/Background";
+import Loader from "../components/Loader.jsx";
+
 
 const Hero = () => {
   const navigate = useNavigate();
   const { darkMode } = useTheme();
-
+  const [isLoading, setIsLoading] = useState(true);
   const handleClick = () => {
     navigate(`/events`);
   };
@@ -51,9 +52,27 @@ const Hero = () => {
       }
     }
   };
+ 
+
+
+  useEffect(() => {
+    const handleLoad = () => {
+      setIsLoading(false);
+    };
+    // Check if the page is already loaded
+    if (document.readyState === "complete") {
+      setIsLoading(false);
+    } else {
+      window.addEventListener("load", handleLoad);
+    }
+    return () => window.removeEventListener("load", handleLoad);
+  }, []);
+
 
   return (
-    <>
+     <>  {isLoading ? (
+          <Loader />
+        ) : (
       <section
         className={`relative h-screen flex items-center justify-center px-6 transition-all duration-500 ${
           darkMode
@@ -61,9 +80,6 @@ const Hero = () => {
             : "bg-gradient-to-br from-[#C0D0DF] to-[#9CB3D7] text-black"
         }`}
       >
-        
-       
-    
         <div className="container mx-auto text-left max-w-6xl">
           <div className="leading-[9rem] font-extrabold text-[12rem] font-heading">
             <div className="relative flex items-center">
@@ -136,8 +152,9 @@ const Hero = () => {
           </button>
         </div>
       </section>
-
-      <Goals />   
+      
+      )}
+      <Goals />
        </>
   );
 };

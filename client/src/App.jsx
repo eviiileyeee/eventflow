@@ -17,7 +17,6 @@ import ContactPage from "./pages/ContactPage";
 import NotificationPage from "./pages/NotificationPage";
 import EventFullViewWrapper from "./components/EventFullViewWrapper";
 import EventFullView from "./components/EventFullView.jsx";
-import Loader from "./components/Loader.jsx";
 import ServicesPage from "./pages/ServicesPage";
 import { ToastContainer } from 'react-toastify';
 import PageNotFound from "./components/subComponents/PageNoteFound.jsx";
@@ -33,33 +32,10 @@ const DashboardLayout = ({ children }) => (
 
 
 const App = () => {
-  const [isLoading, setIsLoading] = useState(true);
-
-
-  useEffect(() => {
-    const handleLoad = () => {
-      setIsLoading(false);
-    };
-
-
-    // Check if the page is already loaded
-
-    if (document.readyState === "complete") {
-      setIsLoading(false);
-
-
-    } else {
-      window.addEventListener("load", handleLoad);
-    }
-
-    return () => window.removeEventListener("load", handleLoad);
-  }, []);
 
 
   return (
-    <>  {isLoading ? (
-      <Loader />
-    ) : (
+   <>
       <ThemeProvider>
         <BrowserRouter>
           <AuthProvider>
@@ -136,7 +112,7 @@ const App = () => {
           </AuthProvider>
         </BrowserRouter>
       </ThemeProvider>
-    )}
+   
     </>
   );
 };
