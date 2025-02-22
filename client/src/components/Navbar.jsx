@@ -112,12 +112,12 @@ const Navbar = () => {
           <div className="md:hidden flex items-center">
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-2 rounded-md transition"
+              className="p-2 rounded-md hover:bg-white/10 transition-colors"
             >
               {isMobileMenuOpen ? (
-                <X className={`h-6 w-6 ${darkMode ? "text-white" : "text-black"}`} />
+                <X className="h-6 w-6 text-white" />
               ) : (
-                <Menu className={`h-6 w-6 ${darkMode ? "text-white" : "text-black"}`} />
+                <Menu className="h-6 w-6 text-white" />
               )}
             </button>
           </div>
@@ -125,39 +125,91 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Menu */}
-      <div
-        className={`fixed top-0 right-0 bg-black bg-opacity-50 backdrop-blur-sm transition-transform transform ${
-          isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
+      <div 
+        className={`absolute top-16 left-0 w-full transform transition-transform duration-300 ease-in-out ${
+          isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
         } md:hidden`}
       >
-        <div className={`p-6 w-64 bg-white dark:bg-gray-900 h-full`}>
-          <div className="flex justify-between">
-            <h2 className="text-2xl font-bold uppercase text-gray-800 dark:text-white">
-              Menu
-            </h2>
-            <button onClick={() => setIsMobileMenuOpen(false)} className="p-2">
-              <X className="h-8 w-8 text-gray-800 dark:text-white" />
-            </button>
-          </div>
+        <div className={`${darkMode ? 'bg-gray-900'  : 'bg-gradient-to-br from-[#C0D0DF] to-[#9CB3D7]'} py-4`}>
+          {/* User Profile if logged in */}
+          {user && (
+            <div className="px-4 py-3 border-b border-white/10">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-3">
+                  <img 
+                    src={user.profileImage || "https://tse3.mm.bing.net/th?id=OIP.JttmcrrQ9_XqrY60bFEfgQHaHa&pid=Api&P=0&h=180"}
+                    alt="Profile" 
+                    className="w-12 h-12 rounded-full object-cover"
+                  />
+                  <div className="text-xl text-black dark:text-white">
+                    <h3 className="font-semibold">{user.name || "User Name"}</h3>
+                  </div>
+                </div>
+                <button
+                  onClick={toggleDarkMode}
+                  className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition"
+                >
+                  {darkMode ? (
+                    <Sun className="h-5 w-5 text-yellow-400" />
+                  ) : (
+                    <Moon className="h-5 w-5 text-gray-700" />
+                  )}
+                </button>
+              </div>
+            </div>
+          )}
 
-          <div className="mt-6 space-y-4">
+          {/* Navigation Links */}
+          <div className="px-4 py-2 space-y-2">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="block text-lg font-semibold text-gray-800 dark:text-white hover:underline"
+                className="block py-2 text-sm font-bold text-black dark:text-white hover:text-white/80 transition-colors"
               >
                 {link.name}
               </Link>
             ))}
+            
             <Link
               to="/tickets"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="block text-lg font-semibold text-blue-600 dark:text-blue-400 hover:underline"
+              className="block py-2 text-sm font-semibold text-blue-400 hover:text-blue-300 transition-colors"
             >
               BUY TICKETS!
             </Link>
+
+            {!user && (
+              <div className="pt-4 border-t border-white/10 mt-4">
+                <Link
+                  to="/login"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="block py-2 text-lg font-semibold text-white hover:text-white/80"
+                >
+                  Login
+                </Link>
+                <Link
+                  to="/register"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="block pl-2 py-2  text-sm font-semibold text-blue-400 hover:text-blue-300"
+                >
+                  Sign Up
+                </Link>
+              </div>
+            )}
+
+            {user && (
+              <button
+                onClick={() => {
+                  handleLogout();
+                  setIsMobileMenuOpen(false);
+                }}
+                className="block w-full text-left py-2 pl-1 text-lg font-semibold text-red-400 hover:text-red-300 transition-colors"
+              >
+                Log out
+              </button>
+            )}
           </div>
         </div>
       </div>
