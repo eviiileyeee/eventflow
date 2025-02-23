@@ -13,7 +13,8 @@ import Footer from "./components/Footer";
 import Events from "./pages/Events";
 import { ThemeProvider } from './context/ThemeContext/ThemeContext';
 import Cursor from "./components/Cursor";
-import ContactPage from "./pages/ContactPage";
+import ContactPage from "./pages/contactPages/ContactPage.jsx";
+import SearchUserPage from "./pages/contactPages/SearchUserPage.jsx";
 import NotificationPage from "./pages/NotificationPage";
 import EventFullViewWrapper from "./components/EventFullViewWrapper";
 import EventFullView from "./components/EventFullView.jsx";
@@ -21,6 +22,7 @@ import ServicesPage from "./pages/ServicesPage";
 import { ToastContainer } from 'react-toastify';
 import PageNotFound from "./components/subComponents/PageNoteFound.jsx";
 import EventCreationForm from "./pages/eventComponent/EventCreationForm.jsx";
+import SearchedUserPage from "./pages/contactPages/SearchedUserPage.jsx";
 
 const DashboardLayout = ({ children }) => (
   <div id="main" className="relative overflow-hidden min-h-screen">
@@ -35,7 +37,7 @@ const App = () => {
 
 
   return (
-   <>
+    <>
       <ThemeProvider>
         <BrowserRouter>
           <AuthProvider>
@@ -94,16 +96,23 @@ const App = () => {
                 </DashboardLayout>
               } />
 
-<Route path="/services" element={
-  <DashboardLayout>
-    <ServicesPage />
-  </DashboardLayout>
-} />
+              <Route path="/search" element={
+                <DashboardLayout>
+                  <SearchUserPage />
+                </DashboardLayout>
+              } />
+              <Route path="/search/:username" element={<SearchedUserPage />} />
+
+              <Route path="/services" element={
+                <DashboardLayout>
+                  <ServicesPage />
+                </DashboardLayout>
+              } />
               {/* 404 route */}
               <Route path="*" element={
                 <DashboardLayout>
                   <div className="flex items-center justify-center min-h-screen">
-                    <PageNotFound/>
+                    <PageNotFound />
                   </div>
                 </DashboardLayout>
               } />
@@ -112,7 +121,7 @@ const App = () => {
           </AuthProvider>
         </BrowserRouter>
       </ThemeProvider>
-   
+
     </>
   );
 };

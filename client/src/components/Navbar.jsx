@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useTheme } from "../context/ThemeContext/ThemeContext";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Bell, User, Menu, X, Sun, Moon, CirclePlus } from "lucide-react";
+import { Bell, User, Menu, X, Sun, Moon, CirclePlus, UserRoundPlus } from "lucide-react";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -47,12 +47,11 @@ const Navbar = () => {
             {navLinks.map((link) => (
               <Link
                 key={link.path}
-                to={link.path} 
-                className={`text-sm font-bold uppercase tracking-wide ${
-                  activeTab === link.path.substring(1) ? 
-                    (darkMode ? 'text-white' : 'text-black') :
-                    (darkMode ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-black')
-                }`}
+                to={link.path}
+                className={`text-sm font-bold uppercase tracking-wide ${activeTab === link.path.substring(1) ?
+                  (darkMode ? 'text-white' : 'text-black') :
+                  (darkMode ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-black')
+                  }`}
               >
                 {link.name}
               </Link>
@@ -71,30 +70,47 @@ const Navbar = () => {
                 <Moon className="h-6 w-6 text-gray-700" />
               )}
             </button>
-
             {user ? (
               <>
                 {activeTab === "events" ? (
-                  <button className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700" onClick={() => navigate("/create")}>
-                    <CirclePlus className="h-6 w-6 text-purple-800 dark:text-gray-300"/>
+                  <button
+                    className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
+                    onClick={() => navigate("/create")}
+                  >
+                    <CirclePlus className="h-6 w-6 text-purple-800 dark:text-gray-300" />
+                  </button>
+                ) : activeTab === "contact" ? (
+                  <button
+                    className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
+                    onClick={() => navigate("/search")}
+                  >
+                    <UserRoundPlus className="h-6 w-6 text-purple-800 dark:text-gray-300" />
                   </button>
                 ) : (
-                  <button className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700" onClick={() => navigate("/notification")}>
+                  <button
+                    className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
+                    onClick={() => navigate("/notification")}
+                  >
                     <Bell className="h-6 w-6 text-gray-600 dark:text-gray-300" />
                   </button>
                 )}
 
-                <button className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700" onClick={() => navigate("/profile")}>
-                  <img className="h-10 w-10 object-cover rounded-full border-2 border-indigo-800" src={user.profileImage || "https://tse3.mm.bing.net/th?id=OIP.JttmcrrQ9_XqrY60bFEfgQHaHa&pid=Api&P=0&h=180"} alt="User Avatar" />
+                <button
+                  className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
+                  onClick={() => navigate("/profile")}
+                >
+                  <img
+                    className="h-10 w-10 object-cover rounded-full border-2 border-indigo-800"
+                    src={user.profileImage || "https://tse3.mm.bing.net/th?id=OIP.JttmcrrQ9_XqrY60bFEfgQHaHa&pid=Api&P=0&h=180"}
+                    alt="User Avatar"
+                  />
                 </button>
               </>
             ) : (
               <>
                 <Link
                   to="/login"
-                  className={`px-4 py-2 text-sm font-medium transition-colors ${
-                    darkMode ? "text-white hover:text-blue-400" : "text-gray-700 hover:text-blue-600"
-                  }`}
+                  className={`px-4 py-2 text-sm font-medium transition-colors ${darkMode ? "text-white hover:text-blue-400" : "text-gray-700 hover:text-blue-600"}`}
                 >
                   Login
                 </Link>
@@ -106,6 +122,7 @@ const Navbar = () => {
                 </Link>
               </>
             )}
+
           </div>
 
           {/* Mobile Menu Button */}
@@ -126,9 +143,8 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       <div
-        className={`fixed top-0 right-0 bg-black bg-opacity-50 backdrop-blur-sm transition-transform transform ${
-          isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
-        } md:hidden`}
+        className={`fixed top-0 right-0 bg-black bg-opacity-50 backdrop-blur-sm transition-transform transform ${isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
+          } md:hidden`}
       >
         <div className={`p-6 w-64 bg-white dark:bg-gray-900 h-full`}>
           <div className="flex justify-between">
