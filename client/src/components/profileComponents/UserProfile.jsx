@@ -16,7 +16,7 @@ export default function UserProfile(props) {
     }, []);
 
     return (
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl max-w-4xl w-full p-8 transition-all duration-300 animate-fade-in">
+        <div className="  bg-white dark:bg-gray-800 rounded-xl shadow-2xl max-w-4xl w-full p-8 transition-all duration-300 animate-fade-in">
             <div className="flex flex-col md:flex-row">
                 <div className="md:w-1/3 text-center mb-8 md:mb-0">
                     <img src={props.user.profileImage} alt="Profile" className="rounded-full object-cover w-48 h-48 mx-auto mb-4 border-4 border-indigo-800 dark:border-blue-900 transition-transform duration-300 hover:scale-105" />
