@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import logo from "../assets/1734760408581.jpeg";
+import logo from "../../../assets/1734760408581.jpeg";
 import { 
   Github, 
   Linkedin, 

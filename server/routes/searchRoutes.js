@@ -4,6 +4,6 @@ const { searchUser , getAllUsers} = require("../controllers/searchController")
 
 
 router.get("/:username", searchUser)
-router.get('/get-all-users', getAllUsers);
+router.get('/users/all', getAllUsers);
 
 module.exports = router;

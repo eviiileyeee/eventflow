@@ -19,9 +19,12 @@ exports.searchUser = async (req, res) => {
 }
 
 exports.getAllUsers = async (req, res) => {
-
+    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Expires', '0');
     try {
         const users = await User.find()
+        console.log(users)
         res.status(200).json(users)
     } catch (err) {
         res.status(500).json({ message: err.message })
