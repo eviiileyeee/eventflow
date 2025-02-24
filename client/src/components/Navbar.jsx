@@ -152,14 +152,16 @@ const Navbar = () => {
           {user && (
             <div className="px-4 py-3 border-b border-white/10">
               <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-3">
+                <div className="flex items-center space-x-3"
+                onClick={()=> navigate("/profile")}
+                >
                   <img 
                     src={user.profileImage || "https://tse3.mm.bing.net/th?id=OIP.JttmcrrQ9_XqrY60bFEfgQHaHa&pid=Api&P=0&h=180"}
                     alt="Profile" 
                     className="w-12 h-12 rounded-full object-cover"
                   />
                   <div className="text-xl text-black dark:text-white">
-                    <h3 className="font-semibold">{user.name || "User Name"}</h3>
+                    <h3 className="font-semibold">{user.username || "User Name"}</h3>
                   </div>
                 </div>
                 <button
@@ -189,14 +191,6 @@ const Navbar = () => {
               </Link>
             ))}
             
-            <Link
-              to="/tickets"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="block py-2 text-sm font-semibold text-blue-400 hover:text-blue-300 transition-colors"
-            >
-              BUY TICKETS!
-            </Link>
-
             {!user && (
               <div className="pt-4 border-t border-white/10 mt-4">
                 <Link

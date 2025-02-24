@@ -7,7 +7,6 @@ import {
 export default function UserProfile(props) {
     const [isDarkMode, setIsDarkMode] = useState(false);
     const [openMenu, setopenMenu] = useState(false);
-    console.log(props.user);
     useEffect(() => {
 
         if (window.matchMedia("(prefers-color-scheme: dark)").matches) {

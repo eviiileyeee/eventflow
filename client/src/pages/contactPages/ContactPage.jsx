@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Mail, Phone, Send, MessageCircle } from 'lucide-react';
-
+import SearchUserPage from './SearchUserPage';
 const ContactPage = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -75,7 +75,7 @@ const ContactPage = () => {
             Choose your preferred way to reach us.
           </p>
         </div>
-
+        
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
           <div className="space-y-8">
             <form onSubmit={handleSubmit} className="space-y-6">

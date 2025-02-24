@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useRef } from 'react';
-import { Search, User, Loader, AlertCircle, Github, Instagram, Linkedin, Phone } from 'lucide-react';
+import { Search, User, Loader, AlertCircle, Github, Instagram, Linkedin, Phone, ArrowLeft } from 'lucide-react';
 import debounce from 'lodash/debounce';
 import { searchServices } from '../../services/searchServices';
 import { useNavigate } from 'react-router-dom';
@@ -17,19 +17,19 @@ const SearchUserPage = () => {
       if (abortControllerRef.current) {
         abortControllerRef.current.abort();
       }
-  
+
       const trimmedQuery = searchQuery.trim();
       if (!trimmedQuery) {
         setUser(null);
         setIsLoading(false);
         return;
       }
-  
+
       const controller = new AbortController();
       abortControllerRef.current = controller;
       setIsLoading(true);
       setError(null);
-  
+
       try {
         const result = await searchServices.searchUser(trimmedQuery);
         if (result && result._id) {
@@ -64,6 +64,16 @@ const SearchUserPage = () => {
   }, [debouncedSearch]);
 
   return (
+    <div className='bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100'>
+    <div className=" flex items-center mt-6 justify-between  h-16 ">
+        <button
+          onClick={() => Navigate(-1)}
+          className="flex items-center mt-10 text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white"
+        >
+          <ArrowLeft className="w-5 h-5 mr-2" />
+          Back
+        </button>
+      </div>
     <div className="min-h-screen flex flex-col items-center p-6 bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
       <div className="w-full max-w-md relative mt-12">
         <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
@@ -90,12 +100,12 @@ const SearchUserPage = () => {
           </div>
         ) : user ? (
           <div className="flex flex-col gap-4 p-4"
-           key={user.id}
-           onClick={() => Navigate(`/search/${user.username}`)}
-           > 
+            key={user.id}
+            onClick={() => Navigate(`/search/${user.username}`)}
+          >
             <div className="flex items-center gap-4">
-              <img 
-                src={user.profileImage} 
+              <img
+                src={user.profileImage}
                 alt={user.username}
                 className="h-16 w-16 object-cover rounded-full border-2 border-indigo-500"
               />
@@ -115,6 +125,7 @@ const SearchUserPage = () => {
           </p>
         )}
       </div>
+    </div>
     </div>
   );
 };
