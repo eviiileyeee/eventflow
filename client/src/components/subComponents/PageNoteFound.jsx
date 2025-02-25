@@ -2,7 +2,7 @@ import React from 'react'
 
 const PageNoteFound = () => {
   return (
-    <div>PageNoteFound</div>
+    <div>Page Not Found</div>
   )
 }
 

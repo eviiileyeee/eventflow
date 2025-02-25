@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { motion, easeOut } from "framer-motion";
 import Goals from "../components/subPages/Goals";
 import { useTheme } from "../context/ThemeContext/ThemeContext";
-import Loader from "../components/Loader.jsx";
+import Loader from "../components/ui/Loader.jsx";
 
 const Hero = () => {
   const navigate = useNavigate();

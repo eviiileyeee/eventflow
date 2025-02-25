@@ -3,12 +3,12 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTheme } from "../context/ThemeContext/ThemeContext";
 import { useAuth } from '../context/AuthContext';
-import GeneralSettings from '../components/subComponents/GeneralSettings';
+import GeneralSettings from '../components/profileComponents/GeneralSettings';
 import NotificationPage from './NotificationPage';
-import UserProfile from '../components/subComponents/UserProfile';
-import SecuritySettings from '../components/subComponents/SecuritySettings';
-import ProfileHeader from '../components/subComponents/ProfileHeader';
-import BillingSettings from '../components/subComponents/BillingSettings';
+import UserProfile from '../components/profileComponents/UserProfile';
+import SecuritySettings from '../components/profileComponents/SecuritySettings';
+import ProfileHeader from '../components/profileComponents/ProfileHeader';
+import BillingSettings from '../components/profileComponents/BillingSettings';
 import {
   User,
   Settings,
@@ -30,6 +30,7 @@ const ProfilePage = () => {
   const { user, checkAuth , logout } = useAuth();
   const [currentUser , setCurrentUser] = useState(user);
   const navigate = useNavigate();
+  
   useEffect(() => {
     if (!user) {
       checkAuth();
