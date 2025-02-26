@@ -1,60 +1,132 @@
 import React from 'react';
 import { useTheme } from '../../context/ThemeContext/ThemeContext';
-import ServiceSlider from '../../components/ui/ServiceSlider';
-
-const slides = [
-  {
-    id: 1,
-    title: "Ethereal Experiences",
-    description: "Immersive event experiences that transcend the ordinary",
-    image: "https://plus.unsplash.com/premium_photo-1739502183175-e50a4c5e3c27?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    category: "VIRTUAL EVENTS"
-  },
-  {
-    id: 2,
-    title: "Hackwave",
-    description: "This event brings together the brightest minds in IT for a thrilling 48-hour innovation marathon. Participants collaborate, code, and create cutting-edge solutions, guided by experienced mentors",
-    image: "https://images.unsplash.com/photo-1738463791783-b61514add113?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    category: "HACKATHONS"
-  },
-  {
-    id: 3,
-    title: "Innovate and Create",
-    description: "Dive into the world of innovation with experienced mentors guiding you to transform ideas into reality. Collaborate, code, and create groundbreaking solutions in just 48 hours.",
-    image: "https://plus.unsplash.com/premium_photo-1666726721652-a15e685e48a0?q=80&w=2942&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    category: "WORKSHOPS"
-  },
-  {
-    id: 4,
-    title: "Technical Excellence",
-    description: "State-of-the-art production and technical solutions",
-    image: "https://images.unsplash.com/photo-1739382445475-1cc4fcedff2c?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    category: "DESIGN"
-  }
-];
 
 const ServicesPage = () => {
-  const { darkMode, toggleTheme } = useTheme();
+  const { darkMode } = useTheme();
+
+  const services = [
+    {
+      id: 1,
+      title: "Virtual Events",
+      description: "Explore the birth of groundbreaking ideas and inventions.",
+      image: "https://plus.unsplash.com/premium_photo-1739502183175-e50a4c5e3c27?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      icon: "📄", // Document icon
+      size: "small"
+    },
+    {
+      id: 2,
+      title: "The Digital Revolution",
+      description: "Dive into the transformative power of technology.",
+      image: "https://images.unsplash.com/photo-1738463791783-b61514add113?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      icon: "📁", // Folder icon
+      size: "small"
+    },
+    {
+      id: 3,
+      title: "Hackathons",
+      description: "Discover the beauty of thoughtful and functional design.",
+      image: "https://plus.unsplash.com/premium_photo-1666726721652-a15e685e48a0?q=80&w=2942&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      icon: "🖌️", // Design icon
+      size: "small"
+    },
+    {
+      id: 4,
+      title: "Workshops",
+      description: "Understand the impact of effective communication in our lives.",
+      image: "https://images.unsplash.com/photo-1739382445475-1cc4fcedff2c?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      icon: "📊", // Presentation icon
+      size: "large"
+    },
+    {
+      id: 5,
+      title: "The Pursuit of Knowledge",
+      description: "Join the quest for understanding and enlightenment.",
+      image: "https://images.unsplash.com/photo-1499750310107-5fef28a66643?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      icon: "🔍", // Search icon
+      size: "medium"
+    },
+    {
+      id: 6,
+      title: "Sustainable Innovation",
+      description: "Discover eco-friendly approaches to technological advancement.",
+      image: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      icon: "🌱", // Plant icon
+      size: "medium"
+    },
+    {
+      id: 7,
+      title: "Future of AI",
+      description: "Explore the ethical implications and potential of artificial intelligence.",
+      image: "https://images.unsplash.com/photo-1677442135132-fd3b4981ed00?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      icon: "🤖", // Robot icon
+      size: "large"
+    },
+    {
+      id: 8,
+      title: "Creative Thinking",
+      description: "Learn how to harness creativity for problem-solving and innovation.",
+      image: "https://images.unsplash.com/photo-1499750310107-5fef28a66643?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      icon: "💡", // Lightbulb icon
+      size: "small"
+    }
+  ];
+
+  // Function to render service cards with different sizes and responsive layouts
+  const renderServiceCard = (service) => {
+    // Dynamic class for different card sizes based on screen size
+    const sizeClass = service.size === "large" 
+      ? "col-span-1 sm:col-span-2" 
+      : "col-span-1";
+
+    return (
+      <div key={service.id} className={`${sizeClass} border border-gray-600 rounded-xl sm:rounded-2xl lg:rounded-3xl overflow-hidden`}>
+        {/* Card container with black background */}
+        <div className="dark:bg-gray-900 bg-gray-100  flex flex-col h-full">
+          {/* Image Container */}
+          <div className="w-full overflow-hidden">
+            <img 
+              src={service.image} 
+              alt={service.title} 
+              className="w-full h-32 sm:h-40 lg:h-48 object-cover"
+            />
+          </div>
+          
+          {/* Content Container */}
+          <div className="p-3 sm:p-4 lg:p-6 flex flex-col">
+            <div className="flex items-start mb-1 sm:mb-2">
+              <span className="text-lg sm:text-xl text-white mr-2">{service.icon}</span>
+            </div>
+            <h3 className="text-base sm:text-lg lg:text-xl font-bold text-black dark:text-white mb-1">
+              {service.title}
+            </h3>
+            <p className="text-xs sm:text-sm  text-gray-700 dark:text-gray-300">
+              {service.description}
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  };
 
   return (
-    <div className={`fixed inset-0 w-full h-screen overflow-hidden transition-colors duration-300 ${
+    <div className={`min-h-screen w-full transition-colors duration-300 ${
       darkMode 
         ? 'bg-gray-900 text-gray-300' 
-        : 'bg-gradient-to-br from-[#C0D0DF] to-[#9CB3D7] text-black'
+        : 'bg-gradient-to-br from-white via-gray-100 to-[#f1f2f4] text-black'
     }`}>
-      {/* Theme Toggle Button */}
-      {/* <button
-        onClick={toggleTheme}
-        className={`fixed top-8 right-8 p-3 rounded-full transition-colors ${
-          darkMode 
-            ? 'bg-white text-gray-800 hover:bg-white/80' 
-            : 'bg-gray-800 text-white hover:bg-gray-800/80'
-        }`}
-      >
-        {darkMode ? '☀️' : '🌙'}
-      </button> */}
-
-      <ServiceSlider slides={slides} isDarkMode={darkMode} />
+      {/* Main Content - Added top padding for navbar clearance */}
+      <div className="container mx-auto px-2 sm:px-3 lg:px-4 py-4 sm:py-6 lg:py-8 pt-16 sm:pt-20 lg:pt-24">
+        {/* Section Title */}
+        <div className="mb-6 sm:mb-8 lg:mb-10 text-center">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold">Our Services</h2>
+          <p className="mt-2 text-sm sm:text-base opacity-80">Discover how we can help you innovate and grow</p>
+        </div>
+        
+        {/* Bento Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-6xl mx-auto">
+          {services.map(service => renderServiceCard(service))}
+        </div>
+      </div>
     </div>
   );
 };
