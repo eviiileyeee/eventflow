@@ -61,12 +61,12 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-black py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gradient-to-r dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 py-12 px-4 sm:px-6 lg:px-8">
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="max-w-md w-full space-y-8 bg-white dark:bg-black p-8 rounded-lg border-2 border-gray-300 dark:border-gray-700 shadow-lg"
+        className="max-w-md w-full space-y-8 bg-white dark:bg-gray-900 p-8 rounded-lg border-2 border-gray-300 dark:border-gray-700 shadow-lg"
       >
         <div className="text-center">
           <h2 className="mt-6 text-4xl font-bold text-gray-900 dark:text-white">
