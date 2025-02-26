@@ -13,7 +13,7 @@ router.get('/', eventController.getAllEvents);
 router.get('/:id', eventController.getEvent);
 
 
-router.post('/',
+router.post('/create',
   uploadMiddleware.array('images', 5),
   eventController.createEvent
 );

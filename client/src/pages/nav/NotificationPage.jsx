@@ -1,6 +1,6 @@
 import React, { useState , useEffect } from 'react';
-import { useAuth } from '../context/AuthContext';
-import { notificationService } from '../services/notificationService';
+import { useAuth } from '../../context/AuthContext';
+import { notificationService } from '../../services/notificationService';
 import {
   Bell,
   Mail,

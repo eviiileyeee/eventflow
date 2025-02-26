@@ -68,10 +68,10 @@ const ContactPage = () => {
       <div className="max-w-6xl mx-auto px-4 py-16">
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-bold mb-4 pt-8 text-gray-800 dark:text-[#D2D9EF]">
-            Get in Touch
+            Having Trouble?
           </h1>
           <p className="max-w-2xl mx-auto text-gray-700 dark:text-[#D2D9EF]">
-            Have a question or want to work together? We'd love to hear from you.
+            any question or want to work together? We'd love to hear from you.
             Choose your preferred way to reach us.
           </p>
         </div>

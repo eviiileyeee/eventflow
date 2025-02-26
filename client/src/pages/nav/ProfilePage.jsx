@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useTheme } from "../context/ThemeContext/ThemeContext";
-import { useAuth } from '../context/AuthContext';
-import GeneralSettings from '../components/profileComponents/GeneralSettings';
-import NotificationPage from './NotificationPage';
-import UserProfile from '../components/profileComponents/UserProfile';
-import SecuritySettings from '../components/profileComponents/SecuritySettings';
-import ProfileHeader from '../components/profileComponents/ProfileHeader';
-import BillingSettings from '../components/profileComponents/BillingSettings';
+import { useTheme } from "../../context/ThemeContext/ThemeContext";
+import { useAuth } from '../../context/AuthContext';
+import GeneralSettings from '../../components/profileComponents/GeneralSettings';
+import NotificationPage from '../nav/NotificationPage';
+import UserProfile from '../../components/profileComponents/UserProfile';
+import SecuritySettings from '../../components/profileComponents/SecuritySettings';
+import ProfileHeader from '../../components/profileComponents/ProfileHeader';
+import BillingSettings from '../../components/profileComponents/BillingSettings';
 import {
   User,
   Settings,

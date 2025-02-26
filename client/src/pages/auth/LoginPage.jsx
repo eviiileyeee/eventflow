@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../../context/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
-import { notificationService } from '../services/notificationService';
+import { notificationService } from '../../services/notificationService';
 import { ToastContainer, toast } from 'react-toastify';
 
 

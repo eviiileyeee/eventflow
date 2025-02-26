@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Calendar, MapPin, Upload, X, ChevronLeft, ChevronRight } from 'lucide-react';
-import image01 from "../assets/image.png"
-import image02 from "../assets/img02.png"
-import image03 from "../assets/img03.png"
+import image01 from "../../assets/image.png"
+import image02 from "../../assets/img02.png"
+import image03 from "../../assets/img03.png"
 
 
 const Events = () => {

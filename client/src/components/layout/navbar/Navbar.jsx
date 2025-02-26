@@ -185,7 +185,7 @@ const Navbar = () => {
                 key={link.path}
                 to={link.path}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="block py-2 text-sm font-bold text-black dark:text-white hover:text-white/80 transition-colors flex items-center"
+                className=" py-2 text-sm font-bold text-black dark:text-white hover:text-white/80 transition-colors flex items-center"
               >
                 <link.icon className="mr-2 h-5 w-5" /> {/* Add the icon here */}
                 {link.name}
@@ -197,7 +197,7 @@ const Navbar = () => {
                 <Link
                   to="/login"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="block py-2 text-lg font-semibold text-white hover:text-white/80 flex items-center"
+                  className=" py-2 text-lg font-semibold text-white hover:text-white/80 flex items-center"
                 >
                   <User className="mr-2 h-5 w-5" /> {/* Login Icon */}
                   Login
@@ -205,7 +205,7 @@ const Navbar = () => {
                 <Link
                   to="/register"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="block pl-2 py-2 text-sm font-semibold text-blue-400 hover:text-blue-300 flex items-center"
+                  className=" pl-2 py-2 text-sm font-semibold text-blue-400 hover:text-blue-300 flex items-center"
                 >
                   <UserRoundPlus className="mr-2 h-5 w-5" /> {/* Sign Up Icon */}
                   Sign Up
@@ -219,7 +219,7 @@ const Navbar = () => {
                   handleLogout();
                   setIsMobileMenuOpen(false);
                 }}
-                className="block w-full text-left py-2 pl-1 text-lg font-semibold text-red-400 hover:text-red-300 transition-colors flex items-center"
+                className=" w-full text-left py-2 pl-1 text-lg font-semibold text-red-400 hover:text-red-300 transition-colors flex items-center"
                 >
                   <X className="mr-2 h-5 w-5" /> {/* Logout Icon */}
                   Log out

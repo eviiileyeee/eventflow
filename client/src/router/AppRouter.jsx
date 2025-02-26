@@ -4,18 +4,18 @@ import { AuthProvider } from "../context/AuthContext";
 import ProtectedRoute from "./ProtectedRoute";
 import DashboardLayout from "../components/layout/DashboardLayout";
 import Hero from "../pages/Hero";
-import LoginPage from "../pages/LoginPage";
-import RegisterPage from "../pages/Register";
-import ProfilePage from "../pages/ProfilePage";
-import NotificationPage from "../pages/NotificationPage";
-import Events from "../pages/Events";
-import EventCreationForm from "../pages/eventComponent/EventCreationForm";
+import LoginPage from "../pages/auth/LoginPage";
+import RegisterPage from "../pages/auth/Register";
+import ProfilePage from "../pages/nav/ProfilePage";
+import NotificationPage from "../pages/nav/NotificationPage";
+import Events from "../pages/eventPages/Events";
+import EventCreationForm from "../pages/eventPages/EventCreationForm";
 import EventFullView from "../components/eventComponents/EventFullView";
 import About from "../components/layout/footer/footerLinks/About";
 import ContactPage from "../pages/contactPages/ContactPage";
 import SearchUserPage from "../pages/contactPages/SearchUserPage";
 import SearchedUserPage from "../pages/contactPages/SearchedUserPage";
-import ServicesPage from "../pages/ServicesPage";
+import ServicesPage from "../pages/nav/ServicesPage";
 import PageNotFound from "../components/subComponents/PageNoteFound";
 
 const AppRouter = () => {

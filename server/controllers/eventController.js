@@ -67,20 +67,69 @@ exports.getEvent = catchAsync(async (req, res, next) => {
 });
 
 exports.createEvent = catchAsync(async (req, res) => {
-  const eventData = { ...req.body, organizer: req.user._id };
+  console.log("Inside createEvent",req.body);
+  // Parse the JSON data from the form
+  let eventData;
   
-  // Handle image uploads
-  if (req.files) {
-    const imagePromises = req.files.map(file => uploadToCloudinary(file.path));
-    const uploadedImages = await Promise.all(imagePromises);
-    eventData.images = uploadedImages.map(image => ({
-      url: image.url,
-      public_id: image.public_id
-    }));
+  if (req.body.eventData) {
+    // If eventData is sent as a string (which is common with FormData)
+    try {
+      eventData = JSON.parse(req.body.eventData);
+    } catch (error) {
+      return res.status(400).json({
+        status: 'fail',
+        message: 'Invalid event data format'
+      });
+    }
+  } else {
+    // If data is sent as regular JSON
+    eventData = req.body;
   }
 
+  // Add organizer (current user) to the event data
+  eventData.organizer = req.user._id;
+  
+  // Handle image uploads
+  if (req.files && req.files.images) {
+    try {
+      // Ensure images is always an array
+      const imageFiles = Array.isArray(req.files.images) 
+        ? req.files.images 
+        : [req.files.images];
+      
+      // Process each image
+      const imagePromises = imageFiles.map(async file => {
+        const result = await uploadToCloudinary(file.path);
+        
+        // Clean up the temporary file after upload
+        fs.unlink(file.path, err => {
+          if (err) console.error('Error deleting temporary file:', err);
+        });
+        
+        return {
+          url: result.url,
+          public_id: result.public_id
+        };
+      });
+      
+      // Wait for all uploads to complete
+      eventData.images = await Promise.all(imagePromises);
+    } catch (error) {
+      return res.status(400).json({
+        status: 'fail',
+        message: 'Error uploading images',
+        error: error.message
+      });
+    }
+  } else {
+    // No images provided
+    eventData.images = [];
+  }
+  
+  // Create the event in the database
   const event = await Event.create(eventData);
-
+  
+  // Return the created event
   res.status(201).json({
     status: 'success',
     data: event

@@ -1,6 +1,6 @@
 import React from 'react';
-import { useTheme } from '../context/ThemeContext/ThemeContext';
-import ServiceSlider from './ServiceSlider';
+import { useTheme } from '../../context/ThemeContext/ThemeContext';
+import ServiceSlider from '../../components/ui/ServiceSlider';
 
 const slides = [
   {
