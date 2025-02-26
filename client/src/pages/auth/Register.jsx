@@ -2,7 +2,7 @@
     import { useNavigate, Link } from 'react-router-dom';
     import { motion } from 'framer-motion';
     import { User, Mail, Lock } from 'lucide-react';
-    import { useAuth } from '../context/AuthContext';
+    import { useAuth } from '../../context/AuthContext';
     import { ToastContainer, toast } from 'react-toastify';
 
     const Register = () => {
