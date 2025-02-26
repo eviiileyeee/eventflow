@@ -62,12 +62,16 @@ const LoginPage = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gradient-to-r dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 py-12 px-4 sm:px-6 lg:px-8">
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="max-w-md w-full space-y-8 bg-white dark:bg-gray-900 p-8 rounded-lg border-2 border-gray-300 dark:border-gray-700 shadow-lg"
-      >
+     <motion.div 
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5 }}
+                        className="max-w-md w-full space-y-8 bg-white dark:bg-gray-900 p-8 rounded-lg shadow-lg relative"
+                        style={{
+                            boxShadow: '0 0 5px 1px rgba(59, 130, 246, 0.5), 0 0 0 1px rgba(59, 130, 246, 0.2)',
+                            transition: 'box-shadow 0.3s ease-in-out'
+                        }}
+                    >
         <div className="text-center">
           <h2 className="mt-6 text-4xl font-bold text-gray-900 dark:text-white">
             Welcome to Eventflow
@@ -107,7 +111,10 @@ const LoginPage = () => {
                 name="email"
                 type="email"
                 required
-                className="appearance-none relative block w-full px-3 py-3 border-2 border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent sm:text-sm"
+                className="appearance-none relative block w-full px-3 py-3 border-2 border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:shadow-outline-blue sm:text-sm"
+                style={{
+                  transition: 'all 0.3s ease-in-out',
+                }}
                 placeholder="Enter your email address"
                 value={formData.email}
                 onChange={handleChange}
@@ -122,7 +129,10 @@ const LoginPage = () => {
                 name="password"
                 type="password"
                 required
-                className="appearance-none relative block w-full px-3 py-3 border-2 border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent sm:text-sm"
+                className="appearance-none relative block w-full px-3 py-3 border-2 border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:shadow-outline-blue sm:text-sm"
+                style={{
+                  transition: 'all 0.3s ease-in-out',
+                }}
                 placeholder="Enter your password"
                 value={formData.password}
                 onChange={handleChange}
@@ -141,6 +151,9 @@ const LoginPage = () => {
                 ? 'bg-gray-600 cursor-not-allowed'
                 : 'bg-blue-600 hover:bg-blue-700'
               } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-200`}
+              style={{
+                boxShadow: '0 0 10px rgba(59, 130, 246, 0.5)'
+              }}
             >
               {isLoading ? 'Wait a moment...' : 'Log In →'}
             </motion.button>
