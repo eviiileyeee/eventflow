@@ -8,40 +8,40 @@ const ServicesPage = () => {
     {
       id: 1,
       title: "Virtual Events",
-      description: "Explore the birth of groundbreaking ideas and inventions.",
-      image: "https://plus.unsplash.com/premium_photo-1739502183175-e50a4c5e3c27?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      icon: "📄", // Document icon
+      description: "Experience virtual events like never before.",
+      image: "/images/Virtual_events.png",
+      icon: "🤖", // Document icon
       size: "small"
     },
     {
       id: 2,
       title: "The Digital Revolution",
       description: "Dive into the transformative power of technology.",
-      image: "https://images.unsplash.com/photo-1738463791783-b61514add113?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      icon: "📁", // Folder icon
+      image: "/images/Digital_rev.png",
+      icon: "💻", // Computer icon
       size: "small"
     },
     {
       id: 3,
       title: "Hackathons",
-      description: "Discover the beauty of thoughtful and functional design.",
-      image: "https://plus.unsplash.com/premium_photo-1666726721652-a15e685e48a0?q=80&w=2942&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      description: "Unleash your creativity and innovation.",
+      image: "/images/Hackathons.jpg",
       icon: "🖌️", // Design icon
       size: "small"
     },
     {
       id: 4,
       title: "Workshops",
-      description: "Understand the impact of effective communication in our lives.",
-      image: "https://images.unsplash.com/photo-1739382445475-1cc4fcedff2c?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      description: "Engage in insightful discussions and learn from experts.",
+      image: "/images/Workshops.png",
       icon: "📊", // Presentation icon
       size: "large"
     },
     {
       id: 5,
-      title: "The Pursuit of Knowledge",
-      description: "Join the quest for understanding and enlightenment.",
-      image: "https://images.unsplash.com/photo-1499750310107-5fef28a66643?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      title: "Award Ceremonies",
+      description: "Recognize and celebrate outstanding achievements.",
+      image: "/images/Award_cer.png",
       icon: "🔍", // Search icon
       size: "medium"
     },
@@ -79,27 +79,27 @@ const ServicesPage = () => {
       : "col-span-1";
 
     return (
-      <div key={service.id} className={`${sizeClass} border border-gray-600 rounded-xl sm:rounded-2xl lg:rounded-3xl overflow-hidden`}>
+      <div key={service.id} className={`${sizeClass} border border-gray-600 rounded-xl sm:rounded-2xl lg:rounded-3xl overflow-hidden transition duration-300 hover:shadow-lg`}>
         {/* Card container with black background */}
-        <div className="dark:bg-gray-900 bg-gray-100  flex flex-col h-full">
-          {/* Image Container */}
-          <div className="w-full overflow-hidden">
+        <div className="dark:bg-gray-900 bg-gray-100 flex flex-col h-full transition duration-300 ease-in-out">
+          {/* Image Container - Added padding */}
+          <div className="w-full overflow-hidden p-3 pt-3 pb-0">
             <img 
               src={service.image} 
               alt={service.title} 
-              className="w-full h-32 sm:h-40 lg:h-48 object-cover"
+              className="w-full h-32 sm:h-40 lg:h-48 object-cover transition duration-300 transform hover:scale-105 rounded-lg"
             />
           </div>
           
-          {/* Content Container */}
-          <div className="p-3 sm:p-4 lg:p-6 flex flex-col">
-            <div className="flex items-start mb-1 sm:mb-2">
+          {/* Content Container - Added hover effect to move content right */}
+          <div className="p-3 sm:p-4 lg:p-6 flex flex-col group hover:cursor-pointer">
+            <div className="flex items-start mb-1 sm:mb-2 transition-transform duration-300 group-hover:translate-x-2">
               <span className="text-lg sm:text-xl text-white mr-2">{service.icon}</span>
             </div>
-            <h3 className="text-base sm:text-lg lg:text-xl font-bold text-black dark:text-white mb-1">
+            <h3 className="text-base sm:text-lg lg:text-xl font-bold text-black dark:text-white mb-1 transition-transform duration-300 group-hover:translate-x-2">
               {service.title}
             </h3>
-            <p className="text-xs sm:text-sm  text-gray-700 dark:text-gray-300">
+            <p className="text-xs sm:text-sm text-gray-700 dark:text-gray-300 transition-transform duration-300 group-hover:translate-x-2">
               {service.description}
             </p>
           </div>
