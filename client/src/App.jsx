@@ -11,6 +11,7 @@ const App = () => {
       <Cursor />
     </ThemeProvider>
   );
+  
 };
 
 export default App;

@@ -10,7 +10,7 @@ exports.searchUser = async (req, res) => {
     try {
         const user = await User.findOne({ username: username })
         if (!user) {
-            return res.status(404).json({ message: "User not found" })
+            return res.status(404).json({ message: "User not found. please try again" })
         }
         res.status(200).json(user)
     } catch (err) {
