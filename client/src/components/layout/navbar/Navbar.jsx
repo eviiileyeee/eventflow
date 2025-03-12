@@ -87,12 +87,14 @@ const Navbar = () => {
                     <UserRoundPlus className="h-6 w-6 text-purple-800 dark:text-gray-300" />
                   </button>
                 ) : (
+                  <>
                   <button
                     className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
                     onClick={() => navigate("/notification")}
                   >
                     <Bell className="h-6 w-6 text-gray-600 dark:text-gray-300" />
                   </button>
+                  </>
                 )}
 
                 <button

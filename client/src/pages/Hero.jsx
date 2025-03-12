@@ -48,9 +48,6 @@ const Hero = () => {
 
   return (
     <>
-      {isLoading ? (
-        <Loader />
-      ) : (
         <section
           className={`
             relative 
@@ -156,7 +153,6 @@ const Hero = () => {
 
           </div>
         </section>
-      )}
       <Goals />
     </>
   );
