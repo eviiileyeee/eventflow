@@ -1,4 +1,4 @@
-import React, { useState , useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { notificationService } from '../../services/notificationService';
 import {
@@ -14,7 +14,7 @@ import {
 } from 'lucide-react';
 
 const NotificationPage = () => {
-  const { user } = useAuth(); // Destructure to get just the user object
+  const { user } = useAuth();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [notifications, setNotifications] = useState([]);
@@ -29,10 +29,16 @@ const NotificationPage = () => {
     try {
       setLoading(true);
       const response = await notificationService.getNotifications();
-      setNotifications(response.data.map(notification => ({
-        ...notification,
-        icon: iconType(notification.icon)
-      })));
+      // Fix: Check if response exists and has data property
+      if (response && response.data) {
+        setNotifications(response.data.map(notification => ({
+          ...notification,
+          icon: iconType(notification.type) // Fix: Use notification.type instead of icon
+        })));
+      } else {
+        // Handle empty response
+        setNotifications([]);
+      }
     } catch (err) {
       setError('Failed to fetch notifications');
       console.error(err);
@@ -41,18 +47,21 @@ const NotificationPage = () => {
     }
   };
 
-  const iconType = (icon) => {
-    switch (icon) {
-      case 1:
+  const iconType = (type) => {
+    // Fix: Map based on notification type instead of icon number
+    switch (type) {
+      case 'security':
         return <ShieldCheck className="w-5 h-5 text-green-500" />;
-      case 2:
+      case 'alert':
         return <AlertCircle className="w-5 h-5 text-yellow-500" />;
-      case 3:
+      case 'reminder':
         return <Clock className="w-5 h-5 text-blue-500" />;
-      case 4:
+      case 'success':
         return <Check className="w-5 h-5 text-green-500" />;
+      case 'message':
+        return <Mail className="w-5 h-5 text-blue-500" />;
       default:
-        return <Trash2 className="w-5 h-5 text-red-500" />;
+        return <Bell className="w-5 h-5 text-gray-500" />;
     }
   }
 
@@ -69,42 +78,62 @@ const NotificationPage = () => {
   // Mark notification as read
   const markAsRead = async (id) => {
     try {
-      await notificationService.markAsRead(id);
-      setNotifications(notifications.map(notif =>
-        notif.id === id ? { ...notif, read: true } : notif
-      ));
+      const response = await notificationService.markAsRead(id);
+      // Fix: Check if response was successful
+      if (response) {
+        setNotifications(notifications.map(notif =>
+          notif._id === id ? { ...notif, read: true } : notif
+        ));
+      }
     } catch (err) {
+      setError('Failed to mark notification as read');
       console.error('Failed to mark notification as read:', err);
     }
   };
 
-
   const deleteNotification = async (id) => {
     try {
-      await notificationService.deleteNotification(id);
-      setNotifications(notifications.filter(notif => notif.id !== id));
+      const response = await notificationService.deleteNotification(id);
+      // Fix: Check if response was successful
+      if (response !== null) {
+        setNotifications(notifications.filter(notif => notif._id !== id));
+      }
     } catch (err) {
+      setError('Failed to delete notification');
       console.error('Failed to delete notification:', err);
     }
   };
 
   const markAllAsRead = async () => {
     try {
-      await notificationService.markAllAsRead();
-      setNotifications(notifications.map(notif => ({ ...notif, read: true })));
+      const response = await notificationService.markAllAsRead();
+      // Fix: Check if response was successful
+      if (response) {
+        setNotifications(notifications.map(notif => ({ ...notif, read: true })));
+      }
     } catch (err) {
+      setError('Failed to mark all notifications as read');
       console.error('Failed to mark all notifications as read:', err);
     }
   };
 
-
   // Format timestamp
   const formatTime = (timestamp) => {
-    const date = new Date(timestamp);
-    return new Intl.RelativeTimeFormat('en', { numeric: 'auto' }).format(
-      Math.ceil((date - new Date()) / (1000 * 60 * 60 * 24)),
-      'day'
-    );
+    if (!timestamp) return 'Unknown time';
+    
+    try {
+      const date = new Date(timestamp);
+      const now = new Date();
+      const diffDays = Math.ceil((date - now) / (1000 * 60 * 60 * 24));
+      
+      return new Intl.RelativeTimeFormat('en', { numeric: 'auto' }).format(
+        diffDays,
+        'day'
+      );
+    } catch (err) {
+      console.error('Error formatting date:', err);
+      return 'Invalid date';
+    }
   };
 
   return (
@@ -169,78 +198,87 @@ const NotificationPage = () => {
           </div>
         )}
 
+        {/* Loading State */}
+        {loading && (
+          <div className="flex justify-center py-12">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-700 dark:border-gray-300"></div>
+          </div>
+        )}
+
+        {/* Error State */}
+        {error && !loading && (
+          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+            <p>{error}</p>
+          </div>
+        )}
+
         {/* Notifications List */}
-        <div className="space-y-4">
-          {filteredNotifications.map((notification) => (
-            <div
-            key={notification.timestamp || Math.random()}
-              className={`bg-gray-200 dark:bg-gray-800 rounded-lg shadow-sm p-4 transition-all ${!notification.read ? 'border-l-4 border-blue-500' : ''
-                }`}
-            >
-              <div className="flex items-start gap-4">
-                <div className="flex-shrink-0">
-                  {notification.icon}
-                </div>
-                <div className="flex-grow">
-                  <div className="flex items-start justify-between">
-                    <div>
-                      <h3 className="text-sm font-medium text-gray-900 dark:text-white">
-                        {notification.title}
-                      </h3>
-                      <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                        {notification.message}
-                      </p>
+        {!loading && !error && (
+          <div className="space-y-4">
+            {filteredNotifications.map((notification) => (
+              <div
+                key={notification._id || notification.timestamp || Math.random()}
+                className={`bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 transition-all ${!notification.read ? 'border-l-4 border-blue-500' : ''
+                  }`}
+              >
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0">
+                    {notification.icon}
+                  </div>
+                  <div className="flex-grow">
+                    <div className="flex items-start justify-between">
+                      <div>
+                        <h3 className="text-sm font-medium text-gray-900 dark:text-white">
+                          {notification.title}
+                        </h3>
+                        <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                          {notification.message}
+                        </p>
+                      </div>
+                      <span className="text-xs text-gray-400 dark:text-gray-500 flex items-center gap-1">
+                        <Clock className="w-3 h-3" />
+                        {formatTime(notification.timestamp)}
+                      </span>
                     </div>
-                    <span className="text-xs text-gray-400 dark:text-gray-500 flex items-center gap-1">
-                      <Clock className="w-3 h-3" />
-                      {formatTime(notification.timestamp)}
-                    </span>
                   </div>
                 </div>
-              </div>
-              <div className="mt-4 flex items-center justify-end gap-2">
-                {!notification.read && (
+                <div className="mt-4 flex items-center justify-end gap-2">
+                  {!notification.read && (
+                    <button
+                      onClick={() => markAsRead(notification._id)}
+                      className="text-sm text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 flex items-center gap-1"
+                    >
+                      <Check className="w-4 h-4" />
+                      Mark as read
+                    </button>
+                  )}
                   <button
-                    onClick={() => markAsRead(notification.id)}
-                    className="text-sm text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 flex items-center gap-1"
+                    onClick={() => deleteNotification(notification._id)}
+                    className="text-sm text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300 flex items-center gap-1"
                   >
-                    <Check className="w-4 h-4" />
-                    Mark as read
+                    <Trash2 className="w-4 h-4" />
+                    Delete
                   </button>
-                )}
-                <button
-                  onClick={() => deleteNotification(notification.id)}
-                  className="text-sm text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300 flex items-center gap-1"
-                >
-                  <Trash2 className="w-4 h-4" />
-                  Delete
-                </button>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
 
-          {filteredNotifications.length === 0 && (
-            <div className="text-center py-12">
-              <Bell className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-              <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
-                No notifications
-              </h3>
-              <p className="text-gray-500 dark:text-gray-400">
-                When you get notifications, they'll show up here
-              </p>
-            </div>
-          )}
-        </div>
+            {filteredNotifications.length === 0 && !loading && (
+              <div className="text-center py-12">
+                <Bell className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+                <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
+                  No notifications
+                </h3>
+                <p className="text-gray-500 dark:text-gray-400">
+                  When you get notifications, they'll show up here
+                </p>
+              </div>
+            )}
+          </div>
+        )}
       </div>
-      <div className='bg-red-200 text-gray-8000'> {error} </div>
     </div>
   );
 };
 
 export default NotificationPage;
-
-
-
-
-
- 
