@@ -538,9 +538,12 @@ const EventCreationForm = () => {
                 className="px-6 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-medium rounded-md hover:from-purple-700 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 disabled:opacity-50"
                 disabled={loading}
               >
+
                 {loading ? 'Creating...' : 'Create Event'}
               </button>
             </div>
+            <p className="text-red-500 text-center mt-6">! service unavailable. since it is in developing stage</p>
+
           </form>
         </div>
       </div>

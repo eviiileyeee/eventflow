@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import api from '../api/api';
+import { notificationService } from '../services/notificationService';
 
 const AuthContext = createContext();
 
@@ -8,10 +9,7 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const initAuth = async () => {
-      await checkAuth();
-    };
-    initAuth();
+    checkAuth();
   }, []);
 
   const checkAuth = async () => {
@@ -36,9 +34,22 @@ export const AuthProvider = ({ children }) => {
       const response = await api.post('/api/users/login', { email, password });
       const token = response.data.token;
       const { user } = response.data;
+
       localStorage.setItem('token', token);
       api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       setUser(user);
+
+      // ✅ Send notification after successful login
+      await notificationService.postNotifications({
+        id: user._id,
+        type: 'security',
+        title: 'New login detected',
+        message: 'A new login was detected from Chrome on Windows.',
+        timestamp: new Date().toISOString(),
+        read: false,
+        icon: 1,
+      });
+
       return response.data;
     } catch (error) {
       throw error.response?.data || { message: 'Login failed' };
@@ -70,7 +81,6 @@ export const AuthProvider = ({ children }) => {
     try {
       console.log("Inside update route::::");
   
-      // Create a FormData object to handle file uploads
       const formData = new FormData();
       formData.append("_id", updatedUser._id);
       formData.append("username", updatedUser.username);
@@ -82,21 +92,16 @@ export const AuthProvider = ({ children }) => {
       formData.append("discription", updatedUser.discription);
       formData.append("profession", updatedUser.profession);
 
-
-
-  
-      // Only append file if it's available
       if (updatedUser.profileImage) {
         formData.append("profileImage", updatedUser.profileImage);
       }
-  
-      // Send FormData request with proper headers
+
       const response = await api.put(`/api/users/uploadDetails/${updatedUser._id}`, formData, {
         headers: {
-          "Content-Type": "multipart/form-data", // ✅ Required for file upload
+          "Content-Type": "multipart/form-data",
         },
       });
-  
+
       const { user } = response.data;
       console.log("User returned by server:", user);
       setUser(user);
@@ -106,7 +111,7 @@ export const AuthProvider = ({ children }) => {
   };
   
   return (
-    <AuthContext.Provider value={{ user, loading, login, register, logout, checkAuth , updateUser }}>
+    <AuthContext.Provider value={{ user, loading, login, register, logout, checkAuth, updateUser }}>
       {!loading && children}
     </AuthContext.Provider>
   );

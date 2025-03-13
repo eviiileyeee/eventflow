@@ -68,6 +68,7 @@ exports.deleteNotification = catchAsync(async (req, res) => {
 
 // Create notification (for internal use or admin)
 exports.createNotification = catchAsync(async (req, res) => {
+  try{
   const notification = await Notification.create({
     userId: req.body.userId,
     type: req.body.type,
@@ -75,9 +76,14 @@ exports.createNotification = catchAsync(async (req, res) => {
     message: req.body.message,
     icon: req.body.icon
   });
+  console.log(notification)
 
   res.status(201).json({
     status: 'success',
     data: notification
   });
+} catch(error){
+  res.status(500).json({ message : "internal server error", error : error });
+  console.log(error)
+}
 });

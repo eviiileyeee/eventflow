@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
-import { notificationService } from '../../services/notificationService';
 import { ToastContainer, toast } from 'react-toastify';
 import { motion } from 'framer-motion';
 
@@ -43,15 +42,7 @@ const LoginPage = () => {
         progress: undefined,
         theme: "light",
       });
-      notificationService.postNotifications({
-        id: 1,
-        type: 'security',
-        title: 'New login detected',
-        message: 'A new login was detected from Chrome on Windows.',
-        timestamp: formattedDateTime,
-        read: false,
-        icon: 1,
-      });
+      
       setTimeout(()=>{
         navigate('/');
       },2000);

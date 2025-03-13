@@ -12,7 +12,7 @@ router
   .post(notificationController.createNotification);
 
 router.patch('/mark-all-read', notificationController.markAllAsRead);
-
+router.post('/post',notificationController.createNotification )
 router
   .route('/:id')
   .patch(notificationController.markAsRead)

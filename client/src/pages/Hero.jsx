@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { motion, easeOut } from "framer-motion";
 import Goals from "../components/subPages/Goals";
 import { useTheme } from "../context/ThemeContext/ThemeContext";
-import Loader from "../components/ui/Loader.jsx";
 import Button from "../components/ui/Button.jsx"; // Import the new Button component
+import AddEventCard from "../components/ui/addEventCard.jsx";
 
 const Hero = () => {
   const navigate = useNavigate();
@@ -153,6 +153,8 @@ const Hero = () => {
 
           </div>
         </section>
+       <AddEventCard/>
+        
       <Goals />
     </>
   );

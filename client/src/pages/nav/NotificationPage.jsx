@@ -41,6 +41,21 @@ const NotificationPage = () => {
     }
   };
 
+  const iconType = (icon) => {
+    switch (icon) {
+      case 1:
+        return <ShieldCheck className="w-5 h-5 text-green-500" />;
+      case 2:
+        return <AlertCircle className="w-5 h-5 text-yellow-500" />;
+      case 3:
+        return <Clock className="w-5 h-5 text-blue-500" />;
+      case 4:
+        return <Check className="w-5 h-5 text-green-500" />;
+      default:
+        return <Trash2 className="w-5 h-5 text-red-500" />;
+    }
+  }
+
   // Filter notifications
   const filteredNotifications = notifications.filter(notif => {
     if (filter === 'unread') return !notif.read;
@@ -95,6 +110,7 @@ const NotificationPage = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#91A5CA] via-[#C8CDD4] to-[#91A5CA] 
     dark:bg-gradient-to-br dark:from-gray-900 dark:via-gray-800 dark:to-black">
+    
       <div className="max-w-4xl mx-auto px-4 py-8">
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
@@ -157,7 +173,7 @@ const NotificationPage = () => {
         <div className="space-y-4">
           {filteredNotifications.map((notification) => (
             <div
-              key={notification.id}
+            key={notification.timestamp || Math.random()}
               className={`bg-gray-200 dark:bg-gray-800 rounded-lg shadow-sm p-4 transition-all ${!notification.read ? 'border-l-4 border-blue-500' : ''
                 }`}
             >
@@ -216,6 +232,7 @@ const NotificationPage = () => {
           )}
         </div>
       </div>
+      <div className='bg-red-200 text-gray-8000'> {error} </div>
     </div>
   );
 };
@@ -223,20 +240,7 @@ const NotificationPage = () => {
 export default NotificationPage;
 
 
-/* 
-const iconType = (icon) => {
-    switch (icon) {
-      case 1:
-        return <ShieldCheck className="w-5 h-5 text-green-500" />;
-      case 2:
-        return <AlertCircle className="w-5 h-5 text-yellow-500" />;
-      case 3:
-        return <Clock className="w-5 h-5 text-blue-500" />;
-      case 4:
-        return <Check className="w-5 h-5 text-green-500" />;
-      default:
-        return <Trash2 className="w-5 h-5 text-red-500" />;
-    }
-  }
 
-  */
+
+
+ 

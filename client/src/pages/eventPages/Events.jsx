@@ -5,7 +5,6 @@ import image01 from "../../assets/image.png"
 import image02 from "../../assets/img02.png"
 import image03 from "../../assets/img03.png"
 
-
 const Events = () => {
   // Sample event data
   const [events, setEvents] = useState([
