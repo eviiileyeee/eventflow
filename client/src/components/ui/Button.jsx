@@ -9,11 +9,11 @@ const Button = ({
   size = "md", // sm, md, lg
   fullWidth = false,
 }) => {
-  // Updated size mappings with smaller sizes for sm and md devices
+  // Updated size mappings with improved responsive sizing
   const sizeClasses = {
-    sm: "h-6 py-1 px-2 text-xs sm:h-7 sm:py-1.5 sm:px-3", 
-    md: "h-8 py-2 px-5 text-sm md:h-9 md:py-2.5 md:px-6", 
-    lg: "h-12 py-3 px-10 text-lg", 
+    sm: "h-8 py-1 px-4 text-xs",
+    md: "h-10 py-2 px-6 text-sm",
+    lg: "h-12 py-3 px-8 text-base"
   };
 
   return (
@@ -27,6 +27,8 @@ const Button = ({
         "shadow-[0_0_10px_rgba(50,117,248,0.5)]",
         className
       )}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
     >
       {children}
     </motion.button>
