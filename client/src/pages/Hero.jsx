@@ -45,6 +45,14 @@ const Hero = () => {
       }
     }
   });
+  
+  function formatDate(dateString) {
+    const date = new Date(dateString);
+  
+    // Format: Month Day Year (e.g., "May 12 2035")
+    const options = { month: "long", day: "numeric", year: "numeric" };
+    return new Intl.DateTimeFormat("en-US", options).format(date);
+  }
 
   return (
     <>
@@ -65,7 +73,7 @@ const Hero = () => {
         >
           {/* Date - Positioned for visibility on mobile */}
           <div className="absolute right-4 top-20 sm:right-6 sm:top-8 md:top-10 lg:top-[17%] text-xs sm:text-xl md:text-2xl lg:text-2xl text-gray-500 font-arp z-10">
-            May 12-15 2035
+            {formatDate(new Date().toISOString())}
           </div>
           
           <div className="container mx-auto text-left max-w-6xl relative pt-28 sm:py-0">
@@ -134,7 +142,7 @@ const Hero = () => {
             </div>
 
             {/* Scroll for More - Mobile Only */}
-            <div className="sm:hidden flex justify-center mt-10">
+            <div className="sm:hidden flex justify-center mt-20">
               <motion.div
                 animate={{ y: [0, 10, 0] }}
                 transition={{ repeat: Infinity, duration: 1.5 }}
