@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import ImageUpload from '../../components/eventComponents/ImageUpload';
 import { eventService } from '../../services/eventServices';
 import InputField from './component/InputField';
+import {useAuth} from "../../context/AuthContext"
+
 import { 
   Calendar, 
   Clock, 
@@ -23,12 +25,14 @@ import {
 } from 'lucide-react';
 
 const EventCreationForm = () => {
+  const { user } = useAuth();
   const { darkMode, toggleDarkMode } = useTheme();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   
   const [formData, setFormData] = useState({
+    id : user._id,
     name: '',
     description: '',
     shortDescription: '',

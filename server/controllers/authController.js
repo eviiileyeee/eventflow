@@ -209,8 +209,6 @@ exports.uploadDetails = async (req, res) => {
 
 exports.getMe = async (req, res) => {
   try {
-    console.log("inside getMe");
-    console.log(req.user)
     // Find the user by ID, which is available in req.userId from the middleware
     const user = await User.findById(req.user._id).select('-password'); // Exclude the password from the response
     if (!user) {

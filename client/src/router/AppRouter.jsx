@@ -1,27 +1,29 @@
-import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { AuthProvider } from "../context/AuthContext";
-import ProtectedRoute from "./ProtectedRoute";
-import DashboardLayout from "../components/layout/DashboardLayout";
-import Hero from "../pages/Hero";
-import LoginPage from "../pages/auth/LoginPage";
-import RegisterPage from "../pages/auth/Register";
-import ProfilePage from "../pages/nav/ProfilePage";
-import NotificationPage from "../pages/nav/NotificationPage";
-import Events from "../pages/eventPages/Events";
-import EventCreationForm from "../pages/eventPages/EventCreationForm";
-import EventFullView from "../components/eventComponents/EventFullView";
-import About from "../components/layout/footer/footerLinks/About";
-import ContactPage from "../pages/contactPages/ContactPage";
-import SearchUserPage from "../pages/contactPages/SearchUserPage";
-import SearchedUserPage from "../pages/contactPages/SearchedUserPage";
-import ServicesPage from "../pages/nav/ServicesPage";
-import PageNotFound from "../components/subComponents/PageNoteFound";
+import React, { lazy, Suspense } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import DashboardLayout from '../components/layout/DashboardLayout';
+import ProtectedRoute from './ProtectedRoute';
+import Loader from '../components/ui/Loader';
+
+// Lazy Load Pages
+const Hero = lazy(() => import('../pages/Hero'));
+const LoginPage = lazy(() => import('../pages/auth/LoginPage'));
+const RegisterPage = lazy(() => import('../pages/auth/Register'));
+const ProfilePage = lazy(() => import('../pages/nav/ProfilePage'));
+const NotificationPage = lazy(() => import('../pages/nav/NotificationPage'));
+const Events = lazy(() => import('../pages/eventPages/Events'));
+const EventCreationForm = lazy(() => import('../pages/eventPages/EventCreationForm'));
+const EventFullView = lazy(() => import('../components/eventComponents/EventFullView'));
+const About = lazy(() => import('../components/layout/footer/footerLinks/About'));
+const ContactPage = lazy(() => import('../pages/contactPages/ContactPage'));
+const SearchUserPage = lazy(() => import('../pages/contactPages/SearchUserPage'));
+const SearchedUserPage = lazy(() => import('../pages/contactPages/SearchedUserPage'));
+const ServicesPage = lazy(() => import('../pages/nav/ServicesPage'));
+const PageNotFound = lazy(() => import('../components/subComponents/PageNoteFound'));
 
 const AppRouter = () => {
   return (
-    <AuthProvider>
     <BrowserRouter>
+      <Suspense fallback={<Loader />}>
         <Routes>
           {/* Public routes */}
           <Route path="/login" element={<LoginPage />} />
@@ -45,8 +47,8 @@ const AppRouter = () => {
           {/* 404 route */}
           <Route path="*" element={<DashboardLayout><div className="flex items-center justify-center min-h-screen"><PageNotFound /></div></DashboardLayout>} />
         </Routes>
+      </Suspense>
     </BrowserRouter>
-    </AuthProvider>
   );
 };
 
