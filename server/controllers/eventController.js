@@ -1,6 +1,7 @@
 const Event = require('../models/eventModel');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
+const fs = require('fs'); // Added missing fs import
 const { uploadToCloudinary, deleteFromCloudinary } = require('../utils/cloudinary');
 
 exports.getAllEvents = catchAsync(async (req, res) => {
@@ -10,7 +11,7 @@ exports.getAllEvents = catchAsync(async (req, res) => {
 
   // Build query
   const queryObj = { ...req.query };
-  const excludedFields = ['page', 'sort', 'limit', 'fields'];
+  const excludedFields = ['page', 'sort', 'limit', 'fields', 'search'];
   excludedFields.forEach(field => delete queryObj[field]);
 
   // Advanced filtering
@@ -33,7 +34,11 @@ exports.getAllEvents = catchAsync(async (req, res) => {
   // Search functionality
   if (req.query.search) {
     query = query.find({
-      $text: { $search: req.query.search }
+      $or: [
+        { name: { $regex: req.query.search, $options: 'i' } },
+        { description: { $regex: req.query.search, $options: 'i' } },
+        { category: { $regex: req.query.search, $options: 'i' } }
+      ]
     });
   }
 
@@ -67,73 +72,54 @@ exports.getEvent = catchAsync(async (req, res, next) => {
 });
 
 exports.createEvent = catchAsync(async (req, res) => {
-  console.log("Inside createEvent",req.body);
-  // Parse the JSON data from the form
+  console.log("Inside createEvent", req.body);
+
   let eventData;
   
-  if (req.body.eventData) {
-    // If eventData is sent as a string (which is common with FormData)
-    try {
-      eventData = JSON.parse(req.body.eventData);
-    } catch (error) {
-      return res.status(400).json({
-        status: 'fail',
-        message: 'Invalid event data format'
-      });
-    }
-  } else {
-    // If data is sent as regular JSON
-    eventData = req.body;
+  // Parse JSON if sent as a string
+  try {
+    eventData = req.body.eventData ? JSON.parse(req.body.eventData) : req.body;
+  } catch (error) {
+    return res.status(400).json({ status: "fail", message: "Invalid event data format" });
   }
 
-  // Add organizer (current user) to the event data
+  // Ensure user is authenticated
+  if (!req.user) {
+    return res.status(401).json({ status: "fail", message: "Unauthorized" });
+  }
+
   eventData.organizer = req.user._id;
   
   // Handle image uploads
-  if (req.files && req.files.images) {
+  if (req.files?.images) {
     try {
-      // Ensure images is always an array
-      const imageFiles = Array.isArray(req.files.images) 
-        ? req.files.images 
-        : [req.files.images];
-      
-      // Process each image
-      const imagePromises = imageFiles.map(async file => {
-        const result = await uploadToCloudinary(file.path);
-        
-        // Clean up the temporary file after upload
-        fs.unlink(file.path, err => {
-          if (err) console.error('Error deleting temporary file:', err);
-        });
-        
-        return {
-          url: result.url,
-          public_id: result.public_id
-        };
-      });
-      
-      // Wait for all uploads to complete
-      eventData.images = await Promise.all(imagePromises);
+      const imageFiles = Array.isArray(req.files.images) ? req.files.images : [req.files.images];
+      eventData.images = await Promise.all(
+        imageFiles.map(async (file) => {
+          const result = await uploadToCloudinary(file.path);
+          fs.unlink(file.path, (err) => err && console.error("Error deleting temp file:", err));
+          if (!result?.url) throw new Error("Image upload failed");
+          return { url: result.url, public_id: result.public_id };
+        })
+      );
     } catch (error) {
-      return res.status(400).json({
-        status: 'fail',
-        message: 'Error uploading images',
-        error: error.message
-      });
+      return res.status(400).json({ status: "fail", message: "Error uploading images", error: error.message });
     }
   } else {
-    // No images provided
     eventData.images = [];
   }
-  
-  // Create the event in the database
-  const event = await Event.create(eventData);
-  
-  // Return the created event
-  res.status(201).json({
-    status: 'success',
-    data: event
-  });
+
+  // Validate and create the event
+  try {
+    const event = new Event(eventData);
+    await event.validate();
+    await event.save();
+
+    res.status(201).json({ status: "success", data: event });
+  } catch (error) {
+    console.log("error", error);
+    res.status(400).json({ status: "fail", message: "Event creation failed", error: error.message });
+  }
 });
 
 exports.updateEvent = catchAsync(async (req, res, next) => {
@@ -149,15 +135,18 @@ exports.updateEvent = catchAsync(async (req, res, next) => {
   }
 
   // Handle image updates
-  if (req.files) {
-    // Delete old images from cloudinary
-    const deletePromises = event.images.map(image => 
-      deleteFromCloudinary(image.public_id)
-    );
-    await Promise.all(deletePromises);
+  if (req.files && req.files.images) {
+    // Delete old images from cloudinary if they exist
+    if (event.images && event.images.length > 0) {
+      const deletePromises = event.images.map(image => 
+        deleteFromCloudinary(image.public_id)
+      );
+      await Promise.all(deletePromises);
+    }
 
     // Upload new images
-    const imagePromises = req.files.map(file => uploadToCloudinary(file.path));
+    const imageFiles = Array.isArray(req.files.images) ? req.files.images : [req.files.images];
+    const imagePromises = imageFiles.map(file => uploadToCloudinary(file.path));
     const uploadedImages = await Promise.all(imagePromises);
     req.body.images = uploadedImages.map(image => ({
       url: image.url,
@@ -185,17 +174,20 @@ exports.deleteEvent = catchAsync(async (req, res, next) => {
   }
 
   // Check if user is authorized to delete
-  if (event.organizer.toString() !== req.user._id.toString()) {
+  if (req.user && event.organizer && event.organizer.toString() !== req.user._id.toString()) {
     return next(new AppError('You are not authorized to delete this event', 403));
   }
 
-  // Delete images from cloudinary
-  const deletePromises = event.images.map(image => 
-    deleteFromCloudinary(image.public_id)
-  );
-  await Promise.all(deletePromises);
+  // Delete images from cloudinary if they exist
+  if (event.images && event.images.length > 0) {
+    const deletePromises = event.images.map(image => 
+      deleteFromCloudinary(image.public_id)
+    );
+    await Promise.all(deletePromises);
+  }
 
-  await event.remove();
+  // Use findByIdAndDelete instead of remove (which is deprecated)
+  await Event.findByIdAndDelete(req.params.id);
 
   res.status(204).json({
     status: 'success',
@@ -218,7 +210,7 @@ exports.registerForEvent = catchAsync(async (req, res, next) => {
 
   // Check if user is already registered
   const alreadyRegistered = event.registrations.some(
-    reg => reg.user.toString() === req.user._id.toString()
+    reg => reg.user && reg.user.toString() === req.user._id.toString()
   );
 
   if (alreadyRegistered) {

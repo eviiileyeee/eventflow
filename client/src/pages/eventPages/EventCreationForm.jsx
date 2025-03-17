@@ -32,7 +32,6 @@ const EventCreationForm = () => {
   const [error, setError] = useState('');
   
   const [formData, setFormData] = useState({
-    id : user._id,
     name: '',
     description: '',
     shortDescription: '',
@@ -154,7 +153,7 @@ const EventCreationForm = () => {
         eventFormData.append('images', image);
       });
       
-      console.log(eventFormData);
+      console.log("form Data",eventFormData);
       // Send the form data to the API
       const response = await eventService.createEvent(eventFormData);
       

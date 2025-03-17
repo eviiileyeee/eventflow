@@ -3,6 +3,7 @@ import api from '../api/api';
 export const eventService = {
   getAllEvents: async () => {
     const response = await api.get('/api/v1/events');
+    console.log(response)
     return response.data;
   },
 

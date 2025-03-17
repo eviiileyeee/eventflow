@@ -46,7 +46,7 @@ const NotificationPage = () => {
       setLoading(false);
     }
   };
-
+  
   const iconType = (type) => {
     // Fix: Map based on notification type instead of icon number
     switch (type) {
