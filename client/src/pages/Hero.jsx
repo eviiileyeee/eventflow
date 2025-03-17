@@ -3,13 +3,15 @@ import { useNavigate } from "react-router-dom";
 import { motion, easeOut } from "framer-motion";
 import Goals from "../components/subPages/Goals";
 import { useTheme } from "../context/ThemeContext/ThemeContext";
-import Button from "../components/ui/Button.jsx"; // Import the new Button component
+import Button from "../components/ui/Button.jsx";
 import AddEventCard from "../components/ui/addEventCard.jsx";
 
 const Hero = () => {
   const navigate = useNavigate();
   const { darkMode } = useTheme();
   const [isLoading, setIsLoading] = useState(true);
+  // Add a state for screen size
+  const [windowWidth, setWindowWidth] = useState(0);
 
   const handleClick = () => {
     navigate("/events");
@@ -26,20 +28,33 @@ const Hero = () => {
       window.addEventListener("load", handleLoad);
     }
 
-    return () => window.removeEventListener("load", handleLoad);
+    // Set initial window width
+    setWindowWidth(window.innerWidth);
+
+    // Add window resize listener
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("load", handleLoad);
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   // Animation Variants - Reduced y distance for mobile
   const textVariants = (delay = 0) => ({
     hidden: { 
-      y: window.innerWidth < 640 ? 50 : 100, 
+      y: windowWidth < 640 ? 50 : 100, 
       opacity: 0 
     },
     visible: {
       y: 0,
       opacity: 1,
       transition: { 
-        duration: window.innerWidth < 640 ? 0.6 : 0.8, 
+        duration: windowWidth < 640 ? 0.6 : 0.8, 
         ease: easeOut, 
         delay 
       }
@@ -53,6 +68,13 @@ const Hero = () => {
     const options = { month: "long", day: "numeric", year: "numeric" };
     return new Intl.DateTimeFormat("en-US", options).format(date);
   }
+
+  // Determine button size based on window width
+  const getButtonSize = () => {
+    if (windowWidth < 640) return "sm";
+    if (windowWidth < 768) return "md";
+    return "lg";
+  };
 
   return (
     <>
@@ -135,7 +157,7 @@ const Hero = () => {
             <div className="flex justify-start mt-8 sm:mt-2">
               <Button 
                 onClick={handleClick}
-                size={window.innerWidth < 640 ? "md" : window.innerWidth < 768 ? "md" : "lg"}
+                size={getButtonSize()}
               >
                 GET STARTED
               </Button>
