@@ -3,7 +3,7 @@ import { useTheme } from "../../context/ThemeContext/ThemeContext";
 import { useAuth } from "../../context/AuthContext";
 import { Sun, Moon } from "lucide-react";
 import { ToastContainer, toast } from 'react-toastify';
-
+import { notificationService } from "../../services/notificationService";
 
 const GeneralSettings = () => {
   const { updateUser, user, checkAuth } = useAuth();
@@ -58,7 +58,16 @@ const GeneralSettings = () => {
           progress: undefined,
           theme: "light",
         });
-        console.log("Form submitted:", formData);
+
+        await notificationService.postNotifications({
+          id: user._id,
+          type: 'success',
+          title: 'Profile updated',
+          message: 'Profile updated successfully',
+          timestamp: new Date().toISOString(),
+          read: false,
+          icon: 4,
+        });
       } catch (error) {
         console.error("Error updating user:", error);
       } finally {
