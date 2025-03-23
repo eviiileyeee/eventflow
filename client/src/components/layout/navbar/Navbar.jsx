@@ -50,7 +50,7 @@ const Navbar = () => {
                 to={link.path}
                 className={`text-sm font-bold uppercase tracking-wide ${activeTab === link.path.substring(1) ?
                   (darkMode ? 'text-white' : 'text-black') :
-                  (darkMode ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-black')
+                  (darkMode ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-indigo-600')
                   }`}
               >
                 {link.name}
@@ -62,12 +62,12 @@ const Navbar = () => {
           <div className="hidden md:flex items-center space-x-4">
             <button
               onClick={toggleDarkMode}
-              className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition"
+              className="p-2 rounded-full hover:bg-gray-300 dark:hover:bg-gray-700 transition"
             >
               {darkMode ? (
                 <Sun className="h-6 w-6 text-yellow-400" />
               ) : (
-                <Moon className="h-6 w-6 text-gray-700" />
+                <Moon className="h-6 w-6 text-gray-600" style={{ fill: "rgba(75, 85, 99, 1)" }} />
               )}
             </button>
             {user ? (
@@ -112,13 +112,13 @@ const Navbar = () => {
               <>
                 <Link
                   to="/login"
-                  className={`px-4 py-2 text-sm font-medium transition-colors ${darkMode ? "text-white hover:text-blue-400" : "text-gray-700 hover:text-blue-600"}`}
+                  className={`px-4 py-2 text-sm font-medium transition-colors ${darkMode ? "text-white hover:text-indigo-400" : "text-gray-700 hover:text-indigo-600"}`}
                 >
                   Login
                 </Link>
                 <Link
                   to="/register"
-                  className="px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-full transition"
+                  className="px-4 py-2 text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-full transition"
                 >
                   Sign Up
                 </Link>

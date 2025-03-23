@@ -148,7 +148,7 @@ const Hero = () => {
             </div>
 
             {/* Location Info - Adjusted spacing and size */}
-            <div className="flex flex-col items-end mt-8 sm:mt-6 text-gray-600 text-sm sm:text-xl md:text-2xl font-semibold">
+            <div className="flex flex-col items-end mt-8 sm:mt-6 text-indigo-600 dark:text-gray-600 text-sm sm:text-xl md:text-2xl font-semibold">
               PRAVA CENTER, SAN FRANCISCO, CA
               <br />
               IN PERSON &amp; ONLINE
