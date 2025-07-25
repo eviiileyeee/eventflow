@@ -72,7 +72,7 @@ exports.login = async (req, res) => {
     // Find user by email and explicitly select password
     const user = await User.findOne({ email }).select('+password');
     if (!user) {
-      return res.status(401).json({ message: 'Invalid credentials' });
+      return res.status(401).json({ message: 'Invalid credentials'  });
     }
 
     // Compare password using the method from User model
@@ -232,4 +232,12 @@ exports.getAllUsers = async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: 'Server error' });
   }
+}
+
+
+exports.handleGoogleAuth = async (req, res) => {
+  const { token, user } = req.user;
+
+  // Redirect with token to frontend
+  res.redirect(`${process.env.FRONTEND_URL}/auth/google/success?token=${token}`);
 }

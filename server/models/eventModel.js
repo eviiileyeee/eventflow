@@ -42,10 +42,10 @@ const eventSchema = new mongoose.Schema({
     country: String,
     virtualLink: String,
   },
-  images: [{
+  image: {
     url: String,
     public_id: String,
-  }],
+  },
   category: {
     type: String,
     required: true,

@@ -1,10 +1,11 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, lazy } from 'react';
 import { ThemeProvider } from './context/ThemeContext/ThemeContext';
 import { AuthProvider } from './context/AuthContext';
 import AppRouter from './router/AppRouter';
-import Cursor from './components/ui/Cursor';
 import Loader from './components/ui/Loader';
 import './index.css';
+
+const Cursor = lazy(() => import('./components/ui/Cursor'));
 
 const App = () => {
   return (
@@ -12,7 +13,9 @@ const App = () => {
       <AuthProvider>
         <Suspense fallback={<Loader />}>
           <AppRouter />
-          <Cursor />
+          <Suspense fallback={null}>
+            <Cursor />
+          </Suspense>
         </Suspense>
       </AuthProvider>
     </ThemeProvider>

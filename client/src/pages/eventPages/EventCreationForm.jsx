@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState , useCallback } from 'react';
 import { useTheme } from '../../context/ThemeContext/ThemeContext';
 import { useNavigate } from 'react-router-dom';
 import ImageUpload from '../../components/eventComponents/ImageUpload';
@@ -24,147 +24,162 @@ import {
   AlertCircle
 } from 'lucide-react';
 
+
+// Initial form state
+const INITIAL_FORM_STATE = {
+  name: '',
+  description: '',
+  shortDescription: '',
+  date: '',
+  time: { start: '', end: '' },
+  location: {
+    type: '',
+    venue: '',
+    address: '',
+    city: '',
+    state: '',
+    country: '',
+    virtualLink: ''
+  },
+  image: null,
+  category: '',
+  price: 0,
+  capacity: 0,
+  status: 'draft',
+  agenda: [{ time: '', title: '', description: '', speaker: '' }],
+  tags: '',
+  featured: false
+};
+
+
+
+
 const EventCreationForm = () => {
   const { user } = useAuth();
   const { darkMode, toggleDarkMode } = useTheme();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  
-  const [formData, setFormData] = useState({
-    name: '',
-    description: '',
-    shortDescription: '',
-    date: '',
-    time: {
-      start: '',
-      end: ''
-    },
-    location: {
-      type: '',
-      venue: '',
-      address: '',
-      city: '',
-      state: '',
-      country: '',
-      virtualLink: ''
-    },
-    images: [],
-    category: '',
-    price: 0,
-    capacity: 0,
-    status: 'draft',
-    agenda: [{ time: '', title: '', description: '', speaker: '' }],
-    tags: '',
-    featured: false
-  });
+  const [formData, setFormData] = useState(INITIAL_FORM_STATE);
 
-  const handleChange = (e) => {
+
+
+ const handleChange = useCallback((e) => {
     const { name, value, type, checked } = e.target;
     
-    if (name.includes('.')) {
-      // Handle nested objects like time.start or location.venue
-      const [parent, child] = name.split('.');
-      setFormData({
-        ...formData,
-        [parent]: {
-          ...formData[parent],
-          [child]: value
-        }
-      });
-    } else {
-      // Handle regular fields
-      setFormData({
-        ...formData,
+    setFormData(prevData => {
+      // Handle nested object updates
+      if (name.includes('.')) {
+        const [parent, child] = name.split('.');
+        return {
+          ...prevData,
+          [parent]: {
+            ...prevData[parent],
+            [child]: value
+          }
+        };
+      }
+      
+      // Handle regular and checkbox fields
+      return {
+        ...prevData,
         [name]: type === 'checkbox' ? checked : value
-      });
-    }
-  };
+      };
+    });
+  }, []);
 
-  const handleAgendaChange = (index, field, value) => {
-    const updatedAgenda = [...formData.agenda];
+
+// Agenda item management
+const handleAgendaChange = useCallback((index, field, value) => {
+  setFormData(prevData => {
+    const updatedAgenda = [...prevData.agenda];
     updatedAgenda[index] = {
       ...updatedAgenda[index],
       [field]: value
     };
     
-    setFormData({
-      ...formData,
+    return {
+      ...prevData,
       agenda: updatedAgenda
-    });
-  };
+    };
+  });
+}, []);
 
-  const addAgendaItem = () => {
-    setFormData({
-      ...formData,
-      agenda: [...formData.agenda, { time: '', title: '', description: '', speaker: '' }]
-    });
-  };
+const addAgendaItem = useCallback(() => {
+  setFormData(prevData => ({
+    ...prevData,
+    agenda: [...prevData.agenda, { time: '', title: '', description: '', speaker: '' }]
+  }));
+}, []);
 
-  const removeAgendaItem = (index) => {
-    const updatedAgenda = formData.agenda.filter((_, i) => i !== index);
-    setFormData({
-      ...formData,
-      agenda: updatedAgenda
-    });
-  };
+const removeAgendaItem = useCallback((index) => {
+  setFormData(prevData => ({
+    ...prevData,
+    agenda: prevData.agenda.filter((_, i) => i !== index)
+  }));
+}, []);
 
-  const handleImageChange = (files) => {
-    setFormData({
-      ...formData,
-      images: files
-    });
-  };
+// Image handling
+const handleImageChange = useCallback((file) => {
+  setFormData(prevData => ({
+    ...prevData,
+    image: file
+  }));
+}, []);
 
-  const removeImage = (index) => {
-    const updatedImages = formData.images.filter((_, i) => i !== index);
-    setFormData({
-      ...formData,
-      images: updatedImages
-    });
-  };
+const removeImage = useCallback(() => {
+  setFormData(prevData => ({
+    ...prevData,
+    image: null
+  }));
+}, []);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setError('');
+// Form submission handler
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setLoading(true);
+  setError('');
+  
+  try {
+    // Prepare form data for submission
+    const tagsArray = formData.tags 
+      ? formData.tags.split(',').map(tag => tag.trim()).filter(tag => tag)
+      : [];
     
-    try {
-      // Parse tags from comma-separated string to array
-      const tagsArray = formData.tags ? formData.tags.split(',').map(tag => tag.trim()) : [];
-      
-      // Create FormData object for file uploads
-      const eventFormData = new FormData();
-      
-      // Append all non-file data
-      const eventDataForApi = {
-        ...formData,
-        tags: tagsArray
-      };
-      
-      // Remove images from the JSON data as they'll be handled separately
-      delete eventDataForApi.images;
-      
-      // Append the JSON data
-      eventFormData.append('eventData', JSON.stringify(eventDataForApi));
-      
-      // Append each image file
-      formData.images.forEach((image, index) => {
-        eventFormData.append('images', image);
-      });
-      
-      console.log("form Data",eventFormData);
-      // Send the form data to the API
-      const response = await eventService.createEvent(eventFormData);
-      
-      // Navigate to the event detail page or events list
-      navigate(`/events/${response.data._id}`);
-    } catch (err) {
-      setError(err.response?.data?.message || 'Failed to create event. Please try again.');
-    } finally {
-      setLoading(false);
+    // Create FormData for multipart/form-data
+    const formSubmissionData = new FormData();
+    
+    // Prepare event data (excluding image)
+    const eventData = {
+      ...formData,
+      tags: tagsArray
+    };
+    delete eventData.image;
+    
+    // Append event data as JSON
+    formSubmissionData.append('eventData', JSON.stringify(eventData));
+    
+    // Append image file if present
+    if (formData.image) {
+      formSubmissionData.append('image', formData.image);
     }
-  };
+
+    // Submit event
+    const response = await eventService.createEvent(formSubmissionData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
+    
+    // Navigate to event details or list
+    navigate(`/events/${response.data._id}`);
+  } catch (err) {
+    console.error('Event creation error:', err);
+    setError(err.response?.data?.message || 'Failed to create event. Please try again.');
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div className={`min-h-screen ${darkMode ? 'bg-gray-900 text-white' : 'bg-gray-50'} py-8 px-4 sm:px-6 lg:px-8`}>
@@ -238,7 +253,7 @@ const EventCreationForm = () => {
               <ImageUpload 
                 className="mt-4" 
                 onChange={handleImageChange} 
-                currentImages={formData.images}
+                currentImage={formData.image}
                 onRemove={removeImage}
                 darkMode={darkMode}
               />

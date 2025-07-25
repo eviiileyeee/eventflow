@@ -72,6 +72,7 @@ const NotificationPage = () => {
     if (filter === 'security') return notif.type === 'security';
     if (filter === 'alerts') return notif.type === 'alert';
     if (filter === 'messages') return notif.type === 'message';
+     if (filter === 'success') return notif.type === 'success'
     return true;
   });
 
@@ -93,7 +94,9 @@ const NotificationPage = () => {
 
   const deleteNotification = async (id) => {
     try {
+      setLoading(true);
       const response = await notificationService.deleteNotification(id);
+      setLoading(false);
       // Fix: Check if response was successful
       if (response !== null) {
         setNotifications(notifications.filter(notif => notif._id !== id));
@@ -101,6 +104,7 @@ const NotificationPage = () => {
     } catch (err) {
       setError('Failed to delete notification');
       console.error('Failed to delete notification:', err);
+      setLoading(false);
     }
   };
 
@@ -166,7 +170,7 @@ const NotificationPage = () => {
 
         {/* Filters */}
         <div className="flex items-center gap-4 mb-6 overflow-x-auto pb-2">
-          {['all', 'unread', 'read', 'security', 'alerts', 'messages'].map((filterType) => (
+          {['all', 'unread', 'read', 'security', 'alerts', 'messages' , 'success'].map((filterType) => (
             <button
               key={filterType}
               onClick={() => setFilter(filterType)}

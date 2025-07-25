@@ -1,8 +1,8 @@
 import React, { lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import DashboardLayout from '../components/layout/DashboardLayout';
 import ProtectedRoute from './ProtectedRoute';
 import Loader from '../components/ui/Loader';
+import EventFullViewWrapper from '../components/eventComponents/EventFullViewWrapper';
 
 // Lazy Load Pages
 const Hero = lazy(() => import('../pages/Hero'));
@@ -12,13 +12,13 @@ const ProfilePage = lazy(() => import('../pages/nav/ProfilePage'));
 const NotificationPage = lazy(() => import('../pages/nav/NotificationPage'));
 const Events = lazy(() => import('../pages/eventPages/Events'));
 const EventCreationForm = lazy(() => import('../pages/eventPages/EventCreationForm'));
-const EventFullView = lazy(() => import('../components/eventComponents/EventFullView'));
 const About = lazy(() => import('../components/layout/footer/footerLinks/About'));
 const ContactPage = lazy(() => import('../pages/contactPages/ContactPage'));
 const SearchUserPage = lazy(() => import('../pages/contactPages/SearchUserPage'));
 const SearchedUserPage = lazy(() => import('../pages/contactPages/SearchedUserPage'));
 const ServicesPage = lazy(() => import('../pages/nav/ServicesPage'));
 const PageNotFound = lazy(() => import('../components/subComponents/PageNoteFound'));
+const DashboardLayout = lazy(() => import('../components/layout/DashboardLayout'));
 
 const AppRouter = () => {
   return (
@@ -28,24 +28,24 @@ const AppRouter = () => {
           {/* Public routes */}
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
-          <Route path="/" element={<DashboardLayout><Hero /></DashboardLayout>} />
+          <Route path="/" element={<Suspense fallback={<Loader />}><DashboardLayout><Hero /></DashboardLayout></Suspense>} />
 
           {/* Protected routes */}
           <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
           <Route path="/notification" element={<NotificationPage />} />
-          <Route path="/events" element={<ProtectedRoute><DashboardLayout><Events /></DashboardLayout></ProtectedRoute>} />
-          <Route path="/create" element={<ProtectedRoute><DashboardLayout><EventCreationForm /></DashboardLayout></ProtectedRoute>} />
-          <Route path="/events/:id" element={<EventFullView />} />
+          <Route path="/events" element={<ProtectedRoute><Suspense fallback={<Loader />}><DashboardLayout><Events /></DashboardLayout></Suspense></ProtectedRoute>} />
+          <Route path="/create" element={<ProtectedRoute><Suspense fallback={<Loader />}><DashboardLayout><EventCreationForm /></DashboardLayout></Suspense></ProtectedRoute>} />
+          <Route path="/events/:id" element={<EventFullViewWrapper />} />
 
           {/* Other routes */}
-          <Route path="/about" element={<DashboardLayout><About /></DashboardLayout>} />
-          <Route path="/contact" element={<DashboardLayout><ContactPage /></DashboardLayout>} />
-          <Route path="/search" element={<DashboardLayout><SearchUserPage /></DashboardLayout>} />
+          <Route path="/about" element={<Suspense fallback={<Loader />}><DashboardLayout><About /></DashboardLayout></Suspense>} />
+          <Route path="/contact" element={<Suspense fallback={<Loader />}><DashboardLayout><ContactPage /></DashboardLayout></Suspense>} />
+          <Route path="/search" element={<Suspense fallback={<Loader />}><DashboardLayout><SearchUserPage /></DashboardLayout></Suspense>} />
           <Route path="/search/:username" element={<SearchedUserPage />} />
-          <Route path="/services" element={<DashboardLayout><ServicesPage /></DashboardLayout>} />
+          <Route path="/services" element={<Suspense fallback={<Loader />}><DashboardLayout><ServicesPage /></DashboardLayout></Suspense>} />
 
           {/* 404 route */}
-          <Route path="*" element={<DashboardLayout><div className="flex items-center justify-center min-h-screen"><PageNotFound /></div></DashboardLayout>} />
+          <Route path="*" element={<Suspense fallback={<Loader />}><DashboardLayout><div className="flex items-center justify-center min-h-screen"><PageNotFound /></div></DashboardLayout></Suspense>} />
         </Routes>
       </Suspense>
     </BrowserRouter>

@@ -9,6 +9,12 @@ const userSchema = new mongoose.Schema({
     unique: [true, "user with this username already exists"],
     trim: true
   },
+  googleId: {
+     type: String,
+      unique: true, 
+      sparse: true 
+    }, // For Google Auth
+
  /* name: {
     type: String,
     required: [true, 'Please provide a name'],

@@ -27,41 +27,10 @@ const EventCard = ({ event }) => {
       {/* Image Carousel */}
       <div className="relative h-64 w-full">
         <img
-          src={event?.images[currentImageIndex]}
-          alt={`${event.name} - Image ${currentImageIndex + 1}`}
+          src={event?.image?.url}
+          alt={event.name}
           className="w-full h-full object-cover"
         />
-
-        {/* Carousel Controls */}
-        {event.images.length > 1 && (
-          <>
-            <button
-              onClick={prevImage}
-              className="absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/30 text-white hover:bg-black/50 transition-all"
-            >
-              <ChevronLeft size={20} />
-            </button>
-            <button
-              onClick={nextImage}
-              className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/30 text-white hover:bg-black/50 transition-all"
-            >
-              <ChevronRight size={20} />
-            </button>
-
-            {/* Image Indicators */}
-            <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1">
-              {event.images.map((_, index) => (
-                <div
-                  key={index}
-                  className={`w-2 h-2 rounded-full transition-all ${index === currentImageIndex
-                      ? 'bg-white scale-125'
-                      : 'bg-white/50'
-                    }`}
-                />
-              ))}
-            </div>
-          </>
-        )}
       </div>
 
       {/* Content */}

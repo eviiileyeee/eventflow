@@ -1,43 +1,20 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
-  Calendar,
-  Clock,
-  MapPin,
-  Share2,
-  Users,
-  Ticket,
-  ArrowLeft,
-  ChevronLeft,
-  ChevronRight,
-  ExternalLink,
-  BookOpen
+  Calendar, Clock, MapPin, Share2, Users, Ticket,
+  ArrowLeft, ExternalLink, BookOpen
 } from 'lucide-react';
 
 const EventFullView = ({ event }) => {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isRegistering, setIsRegistering] = useState(false);
   const navigate = useNavigate();
-
-  // Carousel Navigation
-  const nextImage = () => {
-    setCurrentImageIndex((prev) => 
-      prev === event.images.length - 1 ? 0 : prev + 1
-    );
-  };
-
-  const prevImage = () => {
-    setCurrentImageIndex((prev) => 
-      prev === 0 ? event.images.length - 1 : prev - 1
-    );
-  };
 
   const handleShare = async () => {
     if (navigator.share) {
       try {
         await navigator.share({
-          title: event.name,
-          text: event.description,
+          title: event?.name,
+          text: event?.description,
           url: window.location.href,
         });
       } catch (err) {
@@ -73,40 +50,16 @@ const EventFullView = ({ event }) => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Main Content */}
           <div className="lg:col-span-2">
-            {/* Image Carousel */}
-            <div className="relative h-[400px] rounded-2xl overflow-hidden mb-8">
-              <img
-                src={event?.images[currentImageIndex]}
-                alt={`Event ${currentImageIndex + 1}`}
-                className="w-full h-full object-cover"
-              />
-              
-              {event?.images.length > 1 && (
-                <>
-                  <button
-                    onClick={prevImage}
-                    className="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 text-white hover:bg-black/70"
-                  >
-                    <ChevronLeft className="w-6 h-6" />
-                  </button>
-                  <button
-                    onClick={nextImage}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 text-white hover:bg-black/70"
-                  >
-                    <ChevronRight className="w-6 h-6" />
-                  </button>
-                  
-                  <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
-                    {event.images.map((_, idx) => (
-                      <div
-                        key={idx}
-                        className={`w-2 h-2 rounded-full ${idx === currentImageIndex ? 'bg-white' : 'bg-white/50'}`}
-                      />
-                    ))}
-                  </div>
-                </>
-              )}
-            </div>
+            {/* Single Event Image */}
+            {event?.image?.url && (
+              <div className="relative h-[400px] rounded-2xl overflow-hidden mb-8">
+                <img
+                  src={event.image.url}
+                  alt={event?.name}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            )}
 
             {/* Event Details */}
             <div className="bg-gray-200 dark:bg-gray-800 rounded-2xl p-6 mb-8">
@@ -117,28 +70,27 @@ const EventFullView = ({ event }) => {
               <div className="flex flex-wrap gap-6 mb-8">
                 <div className="flex items-center text-gray-600 dark:text-gray-300">
                   <Calendar className="w-5 h-5 mr-2" />
-                  <span>{new Date(event?.date).toLocaleDateString('en-US', {
-                    weekday: 'long',
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-                  })}</span>
+                  <span>{new Date(event?.date).toLocaleDateString()}</span>
                 </div>
                 <div className="flex items-center text-gray-600 dark:text-gray-300">
                   <Clock className="w-5 h-5 mr-2" />
-                  <span>{event?.time}</span>
+                  <span>{event?.time?.start} - {event?.time?.end}</span>
                 </div>
                 <div className="flex items-center text-gray-600 dark:text-gray-300">
                   <MapPin className="w-5 h-5 mr-2" />
-                  <span>{event?.location}</span>
+                  <span>
+                    {event?.location?.type === 'Virtual'
+                      ? 'Online Event'
+                      : `${event?.location?.venue}, ${event?.location?.city}`}
+                  </span>
                 </div>
                 <div className="flex items-center text-gray-600 dark:text-gray-300">
                   <Users className="w-5 h-5 mr-2" />
-                  <span>{event?.attendees} attendees</span>
+                  <span>{event?.registrations?.length || 0} attendees</span>
                 </div>
               </div>
 
-              {/* Event Description */}
+              {/* Description */}
               <div className="prose dark:prose-invert max-w-none">
                 <h2 className="text-xl font-semibold mb-4">About this event</h2>
                 <p className="text-gray-600 dark:text-gray-300 whitespace-pre-line">
@@ -147,33 +99,29 @@ const EventFullView = ({ event }) => {
               </div>
             </div>
 
-            {/* Agenda/Schedule */}
-            <div className="bg-gray-200 dark:bg-gray-800 rounded-2xl p-6 mb-8">
-              <h2 className="text-xl font-semibold mb-4 flex items-center">
-                <BookOpen className="w-5 h-5 mr-2" />
-                Event Schedule
-              </h2>
-              <div className="space-y-4">
-                {event?.agenda?.map((item, index) => (
-                  <div key={index} className="flex gap-4">
-                    <div className="w-24 text-gray-500 dark:text-gray-400">
-                      {item.time}
+            {/* Agenda */}
+            {event?.agenda?.length > 0 && (
+              <div className="bg-gray-200 dark:bg-gray-800 rounded-2xl p-6 mb-8">
+                <h2 className="text-xl font-semibold mb-4 flex items-center">
+                  <BookOpen className="w-5 h-5 mr-2" />
+                  Event Schedule
+                </h2>
+                <div className="space-y-4">
+                  {event.agenda.map((item, index) => (
+                    <div key={index} className="flex gap-4">
+                      <div className="w-24 text-gray-500 dark:text-gray-400">{item.time}</div>
+                      <div>
+                        <h3 className="font-medium text-gray-900 dark:text-white">{item.title}</h3>
+                        <p className="text-gray-600 dark:text-gray-300 text-sm">{item.description}</p>
+                      </div>
                     </div>
-                    <div>
-                      <h3 className="font-medium text-gray-900 dark:text-white">
-                        {item.title}
-                      </h3>
-                      <p className="text-gray-600 dark:text-gray-300 text-sm">
-                        {item.description}
-                      </p>
-                    </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
           </div>
 
-          {/* Sidebar - Registration */}
+          {/* Sidebar */}
           <div className="lg:col-span-1">
             <div className="sticky top-24">
               <div className="bg-gray-200 dark:bg-gray-800 rounded-2xl p-6 shadow-lg">
@@ -181,15 +129,13 @@ const EventFullView = ({ event }) => {
                   <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
                     {event?.price === 0 ? 'Free' : `$${event?.price}`}
                   </h3>
-                  <p className="text-gray-600 dark:text-gray-300">
-                    per ticket
-                  </p>
+                  <p className="text-gray-600 dark:text-gray-300">per ticket</p>
                 </div>
 
                 <div className="space-y-4 mb-6">
                   <div className="flex items-center text-gray-600 dark:text-gray-300">
                     <Ticket className="w-5 h-5 mr-2" />
-                    <span>{event?.ticketsAvailable} tickets remaining</span>
+                    <span>{event?.ticketsAvailable || 0} tickets remaining</span>
                   </div>
                 </div>
 
@@ -200,9 +146,9 @@ const EventFullView = ({ event }) => {
                   Register Now
                 </button>
 
-                {event?.virtualEventUrl && (
+                {event?.location?.virtualLink && (
                   <a
-                    href={event.virtualEventUrl}
+                    href={event.location.virtualLink}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="mt-4 w-full inline-flex items-center justify-center text-blue-600 hover:text-blue-700"

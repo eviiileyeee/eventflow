@@ -22,10 +22,10 @@ const Card = ({ className = '', children, ...props }) => {
 
 
 
-const ImageUpload = () => {
+const ImageUpload = ({ onChange, currentImage = null, onRemove, darkMode, ...props }) => {
   const [isDragging, setIsDragging] = useState(false);
-  const [files, setFiles] = useState([]);
   const [error, setError] = useState('');
+  const file = currentImage;
 
   const handleDragEnter = useCallback((e) => {
     e.preventDefault();
@@ -62,26 +62,30 @@ const ImageUpload = () => {
     e.stopPropagation();
     setIsDragging(false);
     setError('');
-    
-    const droppedFiles = Array.from(e.dataTransfer.files);
-    const validFiles = droppedFiles.filter(validateFile);
-    
-    setFiles(prev => [...prev, ...validFiles]);
-  }, []);
+    const droppedFile = e.dataTransfer.files[0];
+    if (validateFile(droppedFile) && onChange) {
+      onChange(droppedFile);
+    }
+  }, [onChange]);
 
   const handleFileInput = (e) => {
     setError('');
-    const selectedFiles = Array.from(e.target.files);
-    const validFiles = selectedFiles.filter(validateFile);
-    setFiles(prev => [...prev, ...validFiles]);
+    const selectedFile = e.target.files[0];
+    if (validateFile(selectedFile) && onChange) {
+      onChange(selectedFile);
+    }
   };
 
-  const removeFile = (index) => {
-    setFiles(prev => prev.filter((_, i) => i !== index));
+  const removeFile = () => {
+    if (onRemove) {
+      onRemove();
+    } else if (onChange) {
+      onChange(null);
+    }
   };
 
   return (
-    <Card className="w-full max-w-2xl mx-auto">
+    <Card className="w-full max-w-2xl mx-auto" {...props}>
       <CardContent className="p-6">
         <div
           onDragEnter={handleDragEnter}
@@ -92,12 +96,11 @@ const ImageUpload = () => {
             relative border-2 border-dashed rounded-lg p-8 
             transition-colors duration-200 ease-in-out
             ${isDragging ? 'border-blue-500 bg-blue-50' : 'border-gray-300'}
-            ${files.length > 0 ? 'pb-4' : 'pb-8'}
+            ${file ? 'pb-4' : 'pb-8'}
           `}
         >
           <input
             type="file"
-            multiple
             accept="image/*"
             onChange={handleFileInput}
             className="absolute inset-0 w-full h-full opacity-0 cursor-pointer px-4 py-2"
@@ -122,28 +125,16 @@ const ImageUpload = () => {
             </div>
           )}
 
-          {files.length > 0 && (
-            <div className="mt-6 space-y-2">
-              {files.map((file, index) => (
-                <div
-                  key={index}
-                  className="flex items-center justify-between p-2 bg-gray-50 rounded"
-                >
-                  <div className="flex items-center space-x-2">
-                    <ImageIcon className="h-5 w-5 text-gray-400" />
-                    <span className="text-sm text-gray-700 truncate max-w-xs">
-                      {file.name}
-                    </span>
-                    <CheckCircle className="h-4 w-4 text-green-500" />
-                  </div>
-                  <button
-                    onClick={() => removeFile(index)}
-                    className="p-1 hover:bg-gray-200 rounded"
-                  >
-                    <X className="h-4 w-4 text-gray-500" />
-                  </button>
-                </div>
-              ))}
+          {file && (
+            <div className="mt-4 flex items-center justify-between bg-gray-100 rounded-lg p-2">
+              <span className="text-sm text-gray-700">{file.name}</span>
+              <button
+                type="button"
+                onClick={removeFile}
+                className="ml-2 px-2 py-1 text-xs bg-red-500 text-white rounded hover:bg-red-600"
+              >
+                Remove
+              </button>
             </div>
           )}
         </div>

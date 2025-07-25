@@ -14,12 +14,12 @@ router.get('/:id', eventController.getEvent);
 
 
 router.post('/',
-  uploadMiddleware.array('images', 5),
+  uploadMiddleware.single('image'),
   eventController.createEvent
 );
 
 router.patch('/:id',
-  uploadMiddleware.array('images', 5),
+  uploadMiddleware.single('image'),
   eventController.updateEvent
 );
 

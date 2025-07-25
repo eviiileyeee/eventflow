@@ -4,8 +4,8 @@ const API_URL = import.meta.env.VITE_API_URL;
 
 const api = axios.create({
   baseURL: API_URL,
+  // Do not set 'Content-Type' here; let axios/browser set it automatically for FormData
   headers: {
-    'Content-Type': 'application/json',
     'Cache-Control': 'no-cache, no-store, must-revalidate',
     'Pragma': 'no-cache',
     'Expires': '0'
