@@ -1,9 +1,6 @@
 const User = require('../models/userModel');
-const bcryptjs = require('bcryptjs'); // Change to bcryptjs for consistency
 const jwt = require('jsonwebtoken');
-const verifyToken = require('../middleware/authMiddleware');
 const { v4: uuidv4 } = require('uuid');
-const cloudinary = require("../utils/cloudinary"); // Cloudinary utility
 const mongoose = require('mongoose'); // Mongoose utility
 const { uploadToCloudinary, deleteFromCloudinary } = require('../utils/cloudinary'); // Assuming your cloudinary functions are in this file
 const fs = require('fs');
@@ -235,9 +232,3 @@ exports.getAllUsers = async (req, res) => {
 }
 
 
-exports.handleGoogleAuth = async (req, res) => {
-  const { token, user } = req.user;
-
-  // Redirect with token to frontend
-  res.redirect(`${process.env.FRONTEND_URL}/auth/google/success?token=${token}`);
-}
