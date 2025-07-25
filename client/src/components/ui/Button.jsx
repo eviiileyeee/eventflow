@@ -23,8 +23,8 @@ const Button = ({
         "relative flex items-center justify-center rounded-full font-bold transition duration-300 ease-in-out",
         sizeClasses[size],
         fullWidth ? "w-full" : "w-auto",
-        "bg-black text-white border border-blue-500",
-        "shadow-[0_0_10px_rgba(50,117,248,0.5)]",
+        "bg-black text-white border border-indigo-500",
+        "shadow-[0_0_10px_rgba(90,80,235,0.8)]",
         className
       )}
       whileHover={{ scale: 1.05 }}

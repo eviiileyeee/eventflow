@@ -4,7 +4,8 @@ import { motion, easeOut } from "framer-motion";
 import Goals from "../components/subPages/Goals";
 import { useTheme } from "../context/ThemeContext/ThemeContext";
 import Button from "../components/ui/Button.jsx";
-import AddEventCard from "../components/ui/addEventCard.jsx";
+import AddEventCard from "../components/ui/AddEventCard.jsx";
+import About from "../components/layout/footer/footerLinks/About.jsx";
 
 const Hero = () => {
   const navigate = useNavigate();
@@ -90,7 +91,7 @@ const Hero = () => {
             overflow-hidden 
             transition-all 
             duration-500 
-            ${darkMode ? "bg-gray-900" : "bg-gradient-to-br from-[#b6cbed] to-[#f1f2f4] text-black"}
+            ${darkMode ? "bg-gray-900" : "bg-white text-black"}
           `}
         >
           {/* Date - Positioned for visibility on mobile */}
@@ -147,7 +148,7 @@ const Hero = () => {
             </div>
 
             {/* Location Info - Adjusted spacing and size */}
-            <div className="flex flex-col items-end mt-8 sm:mt-6 text-gray-600 text-sm sm:text-xl md:text-2xl font-semibold">
+            <div className="flex flex-col items-end mt-8 sm:mt-6 text-indigo-600 dark:text-gray-600 text-sm sm:text-xl md:text-2xl font-semibold">
               PRAVA CENTER, SAN FRANCISCO, CA
               <br />
               IN PERSON &amp; ONLINE
@@ -183,6 +184,7 @@ const Hero = () => {
 
           </div>
         </section>
+        <About/>
        <AddEventCard/>
         
       <Goals />
