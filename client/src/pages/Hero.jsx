@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, easeOut } from "framer-motion";
 import Goals from "../components/subPages/Goals";
@@ -11,14 +11,16 @@ const Hero = () => {
   const navigate = useNavigate();
   const { darkMode } = useTheme();
   const [isLoading, setIsLoading] = useState(true);
-  // Add a state for screen size
-  const [windowWidth, setWindowWidth] = useState(0);
+  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 0);
 
   const handleClick = () => {
     navigate("/events");
   };
 
   useEffect(() => {
+    // Only run on client side
+    if (typeof window === 'undefined') return;
+
     const handleLoad = () => {
       setIsLoading(false);
     };
@@ -29,12 +31,13 @@ const Hero = () => {
       window.addEventListener("load", handleLoad);
     }
 
-    // Set initial window width
-    setWindowWidth(window.innerWidth);
-
-    // Add window resize listener
+    // Add window resize listener with debouncing
+    let resizeTimeout;
     const handleResize = () => {
-      setWindowWidth(window.innerWidth);
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        setWindowWidth(window.innerWidth);
+      }, 100);
     };
     
     window.addEventListener("resize", handleResize);
@@ -42,11 +45,12 @@ const Hero = () => {
     return () => {
       window.removeEventListener("load", handleLoad);
       window.removeEventListener("resize", handleResize);
+      clearTimeout(resizeTimeout);
     };
   }, []);
 
-  // Animation Variants - Reduced y distance for mobile
-  const textVariants = (delay = 0) => ({
+  // Memoize animation variants to prevent unnecessary re-renders
+  const textVariants = useMemo(() => (delay = 0) => ({
     hidden: { 
       y: windowWidth < 640 ? 50 : 100, 
       opacity: 0 
@@ -60,7 +64,7 @@ const Hero = () => {
         delay 
       }
     }
-  });
+  }), [windowWidth]);
   
   function formatDate(dateString) {
     const date = new Date(dateString);
@@ -70,12 +74,23 @@ const Hero = () => {
     return new Intl.DateTimeFormat("en-US", options).format(date);
   }
 
-  // Determine button size based on window width
-  const getButtonSize = () => {
+  // Memoize button size calculation
+  const buttonSize = useMemo(() => {
     if (windowWidth < 640) return "sm";
     if (windowWidth < 768) return "md";
     return "lg";
-  };
+  }, [windowWidth]);
+
+  // Don't render until loaded
+  if (isLoading) {
+    return (
+      <section className={`relative h-screen flex items-center justify-center ${darkMode ? "bg-gray-900" : "bg-gradient-to-b from-white to-[#f4f0ff]"}`}>
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600 mx-auto"></div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <>
@@ -91,7 +106,7 @@ const Hero = () => {
             overflow-hidden 
             transition-all 
             duration-500 
-            ${darkMode ? "bg-gray-900" : "bg-white text-black"}
+            ${darkMode ? "bg-gray-900" : "bg-gradient-to-b from-white to-[#f4f0ff] text-black"}
           `}
         >
           {/* Date - Positioned for visibility on mobile */}
@@ -158,7 +173,7 @@ const Hero = () => {
             <div className="flex justify-start mt-8 sm:mt-2">
               <Button 
                 onClick={handleClick}
-                size={getButtonSize()}
+                size={buttonSize}
               >
                 GET STARTED
               </Button>
