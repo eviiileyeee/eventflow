@@ -24,7 +24,7 @@ const EventFullView = ({ event }) => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#91A5CA] via-[#C8CDD4] to-[#91A5CA] dark:bg-gradient-to-br dark:from-gray-900 dark:via-gray-800 dark:to-black">
+    <div className="min-h-screen bg-gradient-to-b from-white to-[#fce7f3] dark:bg-gradient-to-br dark:from-gray-900 dark:via-gray-800 dark:to-black">
       {/* Navigation Bar */}
       <nav className="sticky top-0 z-50 bg-gradient-to-br from-transparent via-[rgba(145,165,202,0.4)] to-transparent dark:bg-gradient-to-br dark:from-transparent dark:via-[rgba(55,65,81,0.4)] dark:to-transparent shadow-sm backdrop-blur-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

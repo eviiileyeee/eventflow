@@ -8,7 +8,7 @@ import { Bell, Menu, X, Sun, Moon, CirclePlus, UserRoundPlus } from "lucide-reac
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("");
-  const { user, logout } = useAuth();
+  const { user } = useAuth();
   const { darkMode, toggleDarkMode } = useTheme();
   const location = useLocation();
   const navigate = useNavigate();
@@ -33,7 +33,7 @@ const Navbar = () => {
           {/* Logo */}
           <div className="flex items-center">
             <Link to="/" className="flex items-center">
-              <span className={`text-4xl font-extrabold uppercase tracking-wide font-['FoundersGrotesk-Semibold'] ${darkMode ? 'text-primary' : 'text-black'}`}>
+              <span className={`text-4xl font-semibold  uppercase tracking-wide font-['FoundersGrotesk-Semibold'] ${darkMode ? 'text-primary' : 'text-black'}`}>
                 EVENTFLOW
               </span>
             </Link>
@@ -145,7 +145,7 @@ const Navbar = () => {
         className={`absolute top-16 left-0 w-full transform transition-transform duration-300 ease-in-out ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
           } md:hidden`}
       >
-        <div className={`${darkMode ? 'bg-gray-900' : 'bg-gradient-to-br from-[#b6cbed] to-[#f1f2f4] '} py-4`}>
+        <div className={`${darkMode ? 'bg-gray-900' : 'bg-gradient-to-b from-white to-[#f4f0ff] '} py-4`}>
           {/* User Profile if logged in */}
           {user && (
             <div className="px-4 py-3 border-b border-white/10">

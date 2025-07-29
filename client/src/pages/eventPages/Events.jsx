@@ -33,7 +33,7 @@ const Events = () => {
   }, [fetchEvents]);
 
   if (loading) return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-[#91A5CA] via-[#C8CDD4] to-[#91A5CA] dark:from-gray-900 dark:via-gray-800 dark:to-black">
+    <div className="flex min-h-screen items-center justify-center bg-gradient-to-b from-white to-[#f4f0ff] dark:from-gray-900 dark:via-gray-800 dark:to-black">
       <div className="text-center text-gray-800 dark:text-white">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-800 dark:border-white mx-auto mb-4"></div>
         <p>Loading events...</p>
@@ -57,9 +57,9 @@ const Events = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#91A5CA] via-[#C8CDD4] to-[#91A5CA] dark:from-gray-900 dark:via-gray-800 dark:to-black p-8">
+    <div className="min-h-screen bg-gradient-to-b from-white to-[#f4f0ff] dark:from-gray-900 dark:via-gray-800 dark:to-black p-2 md:p-8 pb-20">
       <div className="relative top-10 max-w-6xl mx-auto">
-        <h1 className="text-4xl uppercase font-bold text-gray-800 dark:text-white mb-8">
+        <h1 className="text-2xl md:text-4xl uppercase font-bold text-gray-800 dark:text-white m-8">
           Events
         </h1>
 

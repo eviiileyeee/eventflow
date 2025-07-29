@@ -3,31 +3,42 @@ import React, { lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ProtectedRoute from './ProtectedRoute';
 import Loader from '../components/ui/Loader';
+import DashboardLayout from '../components/layout/DashboardLayout';
 
-// Lazy Load Pages
-const Hero = lazy(() => import('../pages/Hero'));
+// Lazy Load Pages - Grouped by functionality for better code splitting
+// Auth pages
 const LoginPage = lazy(() => import('../pages/auth/LoginPage'));
 const RegisterPage = lazy(() => import('../pages/auth/Register'));
+
+// Main pages
+const Hero = lazy(() => import('../pages/Hero'));
+
+// User pages
 const ProfilePage = lazy(() => import('../pages/nav/ProfilePage'));
 const NotificationPage = lazy(() => import('../pages/nav/NotificationPage'));
+
+// Event pages
 const Events = lazy(() => import('../pages/eventPages/Events'));
 const EventCreationForm = lazy(() => import('../pages/eventPages/EventCreationForm'));
 const EventFullViewWrapper = lazy(() => import('../components/eventComponents/EventFullViewWrapper'));
-const About = lazy(() => import('../components/layout/footer/footerLinks/About'));
+
+// Contact pages
 const ContactPage = lazy(() => import('../pages/contactPages/ContactPage'));
 const SearchUserPage = lazy(() => import('../pages/contactPages/SearchUserPage'));
 const SearchedUserPage = lazy(() => import('../pages/contactPages/SearchedUserPage'));
+
+// Other pages
+const About = lazy(() => import('../components/layout/footer/footerLinks/About'));
 const ServicesPage = lazy(() => import('../pages/nav/ServicesPage'));
-const PageNotFound = lazy(() => import('../components/subComponents/PageNoteFound')); // Using original filename
-const DashboardLayout = lazy(() => import('../components/layout/DashboardLayout'));
+const PageNotFound = lazy(() => import('../components/subComponents/PageNoteFound'));
 
 // Layout wrapper component for cleaner code
 const DashboardWrapper = ({ children }) => (
-  <Suspense fallback={<Loader />}>
-    <DashboardLayout>
+  <DashboardLayout>
+    <Suspense fallback={<Loader />}>
       {children}
-    </DashboardLayout>
-  </Suspense>
+    </Suspense>
+  </DashboardLayout>
 );
 
 const AppRouter = () => {
@@ -35,101 +46,119 @@ const AppRouter = () => {
     <BrowserRouter>
       <Routes>
         {/* Public routes */}
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route 
-          path="/" 
+        <Route path="/login" element={
+          <Suspense fallback={<Loader />}>
+            <LoginPage />
+          </Suspense>
+        } />
+        <Route path="/register" element={
+          <Suspense fallback={<Loader />}>
+            <RegisterPage />
+          </Suspense>
+        } />
+        <Route
+          path="/"
           element={
             <DashboardWrapper>
               <Hero />
             </DashboardWrapper>
-          } 
+          }
         />
-        
+
         {/* Protected routes */}
-        <Route 
-          path="/profile" 
+        <Route
+          path="/profile"
           element={
             <ProtectedRoute>
-              <ProfilePage />
+              <Suspense fallback={<Loader />}>
+                <ProfilePage />
+              </Suspense>
             </ProtectedRoute>
-          } 
+          }
         />
-        <Route 
-          path="/notification" 
+        <Route
+          path="/notification"
           element={
             <ProtectedRoute>
-              <NotificationPage />
+              <Suspense fallback={<Loader />}>
+                <NotificationPage />
+              </Suspense>
             </ProtectedRoute>
-          } 
+          }
         />
-        <Route 
-          path="/events" 
+        <Route
+          path="/events"
           element={
             <ProtectedRoute>
               <DashboardWrapper>
                 <Events />
               </DashboardWrapper>
             </ProtectedRoute>
-          } 
+          }
         />
-        <Route 
-          path="/create" 
+        <Route
+          path="/create"
           element={
             <ProtectedRoute>
               <DashboardWrapper>
                 <EventCreationForm />
               </DashboardWrapper>
             </ProtectedRoute>
-          } 
+          }
         />
-        <Route 
-          path="/events/:id" 
+        <Route
+          path="/events/:id"
           element={
             <ProtectedRoute>
-              <EventFullViewWrapper />
+              <Suspense fallback={<Loader />}>
+                <EventFullViewWrapper />
+              </Suspense>
             </ProtectedRoute>
-          } 
+          }
         />
-        
+
         {/* Other routes */}
-        <Route 
-          path="/about" 
+        <Route
+          path="/about"
           element={
             <DashboardWrapper>
               <About />
             </DashboardWrapper>
-          } 
+          }
         />
-        <Route 
-          path="/contact" 
+        <Route
+          path="/contact"
           element={
             <DashboardWrapper>
               <ContactPage />
             </DashboardWrapper>
-          } 
+          }
         />
-        <Route 
-          path="/search" 
+        <Route
+          path="/search"
           element={
+            <Suspense fallback={<Loader />}>
               <SearchUserPage />
-          } 
+            </Suspense>
+          }
         />
-        <Route 
-          path="/search/:username" 
+        <Route
+          path="/search/:username"
           element={
+            <Suspense fallback={<Loader />}>
               <SearchedUserPage />
-          } 
+            </Suspense>
+          }
         />
-        <Route 
-          path="/services" 
+        <Route
+          path="/services"
           element={
             <DashboardWrapper>
               <ServicesPage />
             </DashboardWrapper>
-          } 
+          }
         />
-        
+
         {/* 404 route - temporarily disabled until component is created */}
         {/* 
         <Route 

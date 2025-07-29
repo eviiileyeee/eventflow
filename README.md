@@ -1,8 +1,8 @@
 
-# 🌟 **Event Flow** 🌟  
+# 🌟 **FlowEvent** 🌟  
 
 ### 🚀 **About Us**
-Event Flow is a vibrant community of passionate developers, designers, and tech enthusiasts.  
+FlowEvent is a vibrant community of passionate developers, designers, and tech enthusiasts.  
 Our mission is to **foster innovation, collaboration**, and continuous learning through impactful **projects**, hands-on **workshops**, and exciting **events**.  
 
 ---
@@ -21,14 +21,14 @@ Quarterly hackathons to solve real-world problems, inspire creativity, and build
 
 ## 💻 **Installation Instructions**
 
-To get started with  project locally, follow these steps:
+To get started with FlowEvent locally, follow these steps:
 
 ```bash
 # 1️⃣ Create a new project directory
-mkdir eventflow
+mkdir flowevent
 
 # 2️⃣ Clone the repository
-git clone https://github.com/eviiileyeee/EDC-LandingPage.git
+git clone https://github.com/eviiileyeee/FlowEvent.git
 
 # 3️⃣ Navigate to the client folder
 cd client
@@ -61,13 +61,13 @@ npm run dev
 ---
 
 ## 🌍 **Live Preview**  
-👉 **View the Live Project Here**: [**EDC Landing Page**](https://flowevent.netlify.app)  
+👉 **View the Live Project Here**: [**FlowEvent Landing Page**](https://flowevent.netlify.app)  
 
 ---
 
 ## 🖼️ **Preview of the Website**  
 
-![EDC Landing Page Preview](https://via.placeholder.com/1024x512.png?text=EDC+Landing+Page+Preview)  
+![FlowEvent Landing Page Preview](https://via.placeholder.com/1024x512.png?text=FlowEvent+Landing+Page+Preview)  
 *(Add a screenshot or gif of your website for a better user impression!)*  
 
 ---

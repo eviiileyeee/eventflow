@@ -22,7 +22,7 @@ const About = () => {
   }, []);
 
   return (
-    <div className={`min-h-screen font-normal transition-colors duration-300" ${darkMode ? "bg-gray-900" : "bg-white text-black"}`}>
+    <div className={`min-h-screen font-normal transition-colors duration-300" ${darkMode ? "bg-gray-900" : "bg-gradient-to-b from-[#f4f0ff] to-white text-black"}`}>
       <div className="container mx-auto px-4 py-24">
         <div className="flex flex-col lg:flex-row items-center gap-12">
           <motion.div 

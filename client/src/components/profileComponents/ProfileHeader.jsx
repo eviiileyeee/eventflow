@@ -5,7 +5,7 @@ import {
 
 export default function ProfileHeader(props){
     return (
-    <div className="flex items-center space-x-4 mb-8 p-4 bg-gray-200 dark:bg-gray-800 rounded-lg shadow">
+    <div className="flex items-center space-x-4 mb-8 p-4 bg-white dark:bg-gray-800 rounded-lg ">
       <img
         src={ props.user.profileImage || "https://tse3.mm.bing.net/th?id=OIP.JttmcrrQ9_XqrY60bFEfgQHaHa&pid=Api&P=0&h=180"}
         alt=" User Avtar"
