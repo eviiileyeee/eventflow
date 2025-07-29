@@ -79,7 +79,7 @@ const Footer = () => {
               <FooterLink to="/tutorials">Tutorials</FooterLink>
               <FooterLink to="/workshops">Workshops</FooterLink>
               <FooterLink to="/faqs">FAQs</FooterLink>
-              <FooterLink to="/support">Support</FooterLink>
+              <FooterLink to="/contact">Contact</FooterLink>
               <FooterLink to="/community">Community</FooterLink>
             </div>
           </FooterSection>

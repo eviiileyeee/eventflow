@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useAuth } from "../../../context/AuthContext";
 import { useTheme } from "../../../context/ThemeContext/ThemeContext";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Bell, User, Menu, X, Sun, Moon, CirclePlus, UserRoundPlus, Home, Calendar, Phone, Briefcase } from "lucide-react";
+import { Bell, Menu, X, Sun, Moon, CirclePlus, UserRoundPlus } from "lucide-react";
+
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -17,16 +18,12 @@ const Navbar = () => {
     setActiveTab(path === "/" ? "home" : path.substring(1));
   }, [location]);
 
-  const handleLogout = () => {
-    logout();
-    navigate("/login");
-  };
+  
 
   const navLinks = [
-    { name: "Home", path: "/", icon: Home },
-    { name: "Events", path: "/events", icon: Calendar },
-    { name: "Contact", path: "/contact", icon: Phone },
-    { name: "Services", path: "/services", icon: Briefcase },
+    { name: "Home", path: "/" },
+    { name: "Events", path: "/events" },
+    { name: "Services", path: "/services" },
   ];
 
   return (
@@ -88,12 +85,12 @@ const Navbar = () => {
                   </button>
                 ) : (
                   <>
-                  <button
-                    className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
-                    onClick={() => navigate("/notification")}
-                  >
-                    <Bell className="h-6 w-6 text-gray-600 dark:text-gray-300" />
-                  </button>
+                    <button
+                      className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
+                      onClick={() => navigate("/notification")}
+                    >
+                      <Bell className="h-6 w-6 text-gray-600 dark:text-gray-300" />
+                    </button>
                   </>
                 )}
 
@@ -134,9 +131,9 @@ const Navbar = () => {
               className="p-2 rounded-md hover:bg-white/10 transition-colors"
             >
               {isMobileMenuOpen ? (
-                <X className="h-6 w-6 text-white" />
+                <X className="h-6 w-6 text-black dark:text-white" />
               ) : (
-                <Menu className="h-6 w-6 text-white" />
+                <Menu className="h-6 w-6 text-black dark:text-white" />
               )}
             </button>
           </div>
@@ -144,22 +141,21 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Menu */}
-      <div 
-        className={`absolute top-16 left-0 w-full transform transition-transform duration-300 ease-in-out ${
-          isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
-        } md:hidden`}
+      <div
+        className={`absolute top-16 left-0 w-full transform transition-transform duration-300 ease-in-out ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
+          } md:hidden`}
       >
-        <div className={`${darkMode ? 'bg-gray-900'  : 'bg-gradient-to-br from-[#b6cbed] to-[#f1f2f4] '} py-4`}>
+        <div className={`${darkMode ? 'bg-gray-900' : 'bg-gradient-to-br from-[#b6cbed] to-[#f1f2f4] '} py-4`}>
           {/* User Profile if logged in */}
           {user && (
             <div className="px-4 py-3 border-b border-white/10">
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-3"
-                onClick={()=> navigate("/profile")}
+                  onClick={() => navigate("/profile")}
                 >
-                  <img 
+                  <img
                     src={user.profileImage || "https://tse3.mm.bing.net/th?id=OIP.JttmcrrQ9_XqrY60bFEfgQHaHa&pid=Api&P=0&h=180"}
-                    alt="Profile" 
+                    alt="Profile"
                     className="w-12 h-12 rounded-full object-cover"
                   />
                   <div className="text-xl text-black dark:text-white">
@@ -187,52 +183,36 @@ const Navbar = () => {
                 key={link.path}
                 to={link.path}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className=" py-2 text-sm font-bold text-black dark:text-white hover:text-white/80 transition-colors flex items-center"
+                className=" py-1 text-sm font-bold text-black dark:text-white hover:text-white/80 transition-colors flex items-center"
               >
-                <link.icon className="mr-2 h-5 w-5" /> {/* Add the icon here */}
                 {link.name}
               </Link>
             ))}
-            
+
             {!user && (
-              <div className="pt-4 border-t border-white/10 mt-4">
+              <div className=" border-t border-white/10 mt-4 text-black dark:text-white">
                 <Link
                   to="/login"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className=" py-2 text-lg font-semibold text-white hover:text-white/80 flex items-center"
+                  className="mb-2 text-sm text-black dark:text-white font-semibold hover:text-white/80 flex items-center"
                 >
-                  <User className="mr-2 h-5 w-5" /> {/* Login Icon */}
                   Login
                 </Link>
                 <Link
                   to="/register"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className=" pl-2 py-2 text-sm font-semibold text-blue-400 hover:text-blue-300 flex items-center"
+                  className=" text-sm font-semibold text-blue-400 hover:text-blue-300 flex items-center"
                 >
-                  <UserRoundPlus className="mr-2 h-5 w-5" /> {/* Sign Up Icon */}
                   Sign Up
                 </Link>
               </div>
             )}
 
-            {user && (
-              <button
-                onClick={() => {
-                  handleLogout();
-                  setIsMobileMenuOpen(false);
-                }}
-                className=" w-full text-left py-2 pl-1 text-lg font-semibold text-red-400 hover:text-red-300 transition-colors flex items-center"
-                >
-                  <X className="mr-2 h-5 w-5" /> {/* Logout Icon */}
-                  Log out
-                </button>
-              )}
-            </div>
           </div>
         </div>
-      </nav>
-    );
-  };
-  
-  export default Navbar;
-  
+      </div>
+    </nav>
+  );
+};
+
+export default Navbar;

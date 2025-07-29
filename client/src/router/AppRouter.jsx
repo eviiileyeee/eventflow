@@ -112,17 +112,13 @@ const AppRouter = () => {
         <Route 
           path="/search" 
           element={
-            <DashboardWrapper>
               <SearchUserPage />
-            </DashboardWrapper>
           } 
         />
         <Route 
           path="/search/:username" 
           element={
-            <ProtectedRoute>
               <SearchedUserPage />
-            </ProtectedRoute>
           } 
         />
         <Route 
