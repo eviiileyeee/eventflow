@@ -9,19 +9,15 @@ import UserProfile from '../../components/profileComponents/UserProfile';
 import SecuritySettings from '../../components/profileComponents/SecuritySettings';
 import ProfileHeader from '../../components/profileComponents/ProfileHeader';
 import BillingSettings from '../../components/profileComponents/BillingSettings';
+import SearchPage from '../contactPages/SearchUserPage';
 import {
   User,
   Settings,
-  Key,
   Shield,
-  CreditCard,
-  Github,
-  Building,
-  ChevronRight,
+  CreditCard, 
   Bell,
-  LogOut,
-  Moon,
-  Sun,
+  LogOut, 
+  Search,
 } from 'lucide-react';
 
 const ProfilePage = () => {
@@ -61,7 +57,7 @@ const ProfilePage = () => {
 
   return (
     <div className={darkMode ? 'dark' : ''}>
-      <div className="min-h-screen bg-gradient-to-b from-white to-[#f4f0ff] dark:bg-gradient-to-br dark:from-gray-900 dark:via-gray-800 dark:to-black p-6">
+      <div className="min-h-screen  bg-gradient-to-b from-white to-[#f4f0ff] dark:bg-gradient-to-br dark:from-gray-900 dark:via-gray-800 dark:to-black p-0 md:p-6">
         <div className="max-w-6xl mx-auto">
         <ProfileHeader user = {currentUser} />
           
@@ -73,6 +69,8 @@ const ProfilePage = () => {
               <SidebarLink icon={CreditCard} text="Billing" tab="billing" />
               <SidebarLink icon={Bell} text="Notifications" tab="notifications" />
               <SidebarLink icon={Settings} text="Settings" tab="settings" />
+              <SidebarLink icon={Search} text="Search" tab="search" />
+
               
               <div className="pt-4 mt-4 border-t dark:border-gray-700">
                 <button className="w-full flex items-center bg-gray-200
@@ -91,6 +89,7 @@ const ProfilePage = () => {
               {activeTab === 'security' && <SecuritySettings />}
               {activeTab === 'billing' && <BillingSettings />}
               { activeTab === 'notifications' && <NotificationPage /> }
+              { activeTab === 'search' && <SearchPage /> }
             </div>
           </div>
         </div>

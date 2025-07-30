@@ -182,7 +182,7 @@ const handleSubmit = async (e) => {
 };
 
   return (
-    <div className={`min-h-screen ${darkMode ? 'bg-gray-900 text-white' : 'bg-gray-50'} py-8 px-4 sm:px-6 lg:px-8`}>
+    <div className={`min-h-screen ${darkMode ? 'bg-gray-900 text-white' : 'bg-gray-50'} py-8 px-0 md:px-8`}>
       <div className="mt-10 max-w-4xl mx-auto">
         <div className={`${darkMode ? 'bg-gray-800' : 'bg-white'} rounded-lg shadow-lg overflow-hidden`}>
           {/* Header */}
@@ -560,7 +560,6 @@ const handleSubmit = async (e) => {
                 {loading ? 'Creating...' : 'Create Event'}
               </button>
             </div>
-            <p className="text-red-500 text-center mt-6">! service unavailable. since it is in developing stage</p>
 
           </form>
         </div>
