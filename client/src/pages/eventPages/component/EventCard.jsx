@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Calendar, MapPin, Upload, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Calendar, MapPin } from 'lucide-react';
 
 
 
@@ -36,13 +36,13 @@ const EventCard = ({ event }) => {
       {/* Content */}
       <div className="p-6">
         <div className="flex justify-between items-start mb-4">
-          <h3 className="text-xl font-semibold text-gray-800 dark:text-white">
+          <h3 className="text-xl font-medium text-gray-800 dark:text-gray-200">
             {event.name}
           </h3>
           <span
             className={`px-3 py-1 rounded-full text-sm font-medium ${event.status === 'upcoming'
-                ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-100'
-                : 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-100'
+              ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-100'
+              : 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-100'
               }`}
           >
             {event.status.charAt(0).toUpperCase() + event.status.slice(1)}
@@ -71,22 +71,21 @@ const EventCard = ({ event }) => {
                   ? `${event.location.venue}, ${event.location.city}, ${event.location.state}`
                   : "Location not available"}
               </span>
-
             </div>
             <div>
-              <button
-                onClick={handleClick}
-                className="bg-[#151C29] text-white px-4 py-2 rounded-lg hover:bg-[#A6B8D6] hover:text-black transition-all"
-              >
-                View
-              </button>
-            </div>
+                <button
+                  onClick={handleClick}
+                  className="bg-[#151C29] text-white px-4 py-2 rounded-lg hover:bg-white
+                 hover:text-black transition-all duration-300"
+                >
+                  View
+                </button>
+              </div>
           </div>
         </div>
       </div>
     </div>
   );
 };
-
 
 export default EventCard;

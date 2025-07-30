@@ -5,7 +5,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Bell, Menu, X, Sun, Moon, CirclePlus, UserRoundPlus } from "lucide-react";
 
 
-const Navbar = () => {
+export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("");
   const { user } = useAuth();
@@ -27,13 +27,13 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className={`fixed top-0 left-0 w-full ${darkMode ? 'bg-secondary/60' : 'bg-primary/60'} backdrop-blur-lg z-50`}>
-      <div className="max-w-7xl mx-auto px-4">
+    <nav className={`fixed top-0 left-0 w-full ${darkMode ? 'bg-secondary/60' : 'bg-primary/60'} backdrop-blur-lg z-50 `}>
+      <div className="max-w-7xl mx-auto px-2 md:px-14">
         <div className="flex justify-between h-16 items-center">
           {/* Logo */}
           <div className="flex items-center">
             <Link to="/" className="flex items-center">
-              <span className={`text-4xl font-semibold  uppercase tracking-wide font-['FoundersGrotesk-Semibold'] ${darkMode ? 'text-primary' : 'text-black'}`}>
+              <span className={`text-3xl font-semibold  uppercase tracking-wide font-['FoundersGrotesk-Semibold'] ${darkMode ? 'text-primary' : 'text-black'}`}>
                 EVENTFLOW
               </span>
             </Link>
@@ -215,4 +215,3 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;

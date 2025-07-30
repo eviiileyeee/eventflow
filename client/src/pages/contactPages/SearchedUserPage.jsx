@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import {
-    User, Mail, Calendar, MapPin, Link as LinkIcon, Twitter, Triangle, ArrowLeft
+     Link as LinkIcon, Twitter, Triangle, ArrowLeft
 } from 'lucide-react';
 import { searchServices } from '../../services/searchServices';
 import GitHubStatsCard from '../../components/profileComponents/GithubStatsCard';
@@ -57,7 +57,7 @@ const SearchedUserPage = () => {
     }
 
     return (
-        <div className=" min-h-screen flex flex-col  bg-white dark:bg-gray-800  w-full p-8 transition-all duration-300 animate-fade-in">
+        <div className=" min-h-screen flex flex-col  bg-white dark:bg-gray-800  w-full p-0 md:p-8 transition-all duration-300 animate-fade-in">
             <nav className="sticky top-0 z-50 bg-gradient-to-br from-transparent via-[rgba(145,165,202,0.4)] to-transparent dark:bg-gradient-to-br dark:from-transparent dark:via-[rgba(55,65,81,0.4)] dark:to-transparent shadow-sm backdrop-blur-md">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex items-center justify-between h-16">
@@ -71,7 +71,7 @@ const SearchedUserPage = () => {
                     </div>
                 </div>
             </nav>
-            <div className="flex flex-col md:flex-row m-10">
+            <div className="flex flex-col md:flex-row m-2 md:m-10">
                 <div className="md:w-1/3 text-center mb-8 md:mb-0">
                     <img src={userData.profileImage} alt="Profile" className="rounded-full object-cover w-48 h-48 mx-auto mb-4 border-4 border-indigo-800 dark:border-blue-900 transition-transform duration-300 hover:scale-105" />
                     <h1 className="text-2xl font-bold text-indigo-800 dark:text-white mb-2">{userData.username}</h1>
@@ -80,7 +80,7 @@ const SearchedUserPage = () => {
 
                 </div>
                 <div className="md:w-2/3 md:pl-8">
-                    <h2 className="text-xl font-semibold text-indigo-800 dark:text-white mb-4">About Me</h2>
+                    <h2 className="text-xl font-medium text-indigo-800 dark:text-white mb-4">About Me</h2>
                     <p className="text-gray-700 dark:text-gray-300 mb-6">
                         {userData.discription}
                     </p>
@@ -94,13 +94,13 @@ const SearchedUserPage = () => {
                         Show github stats <Triangle className="h-3 rotate-180" />
                     </button>
                     {openMenu ? <GitHubStatsCard user={userData} /> : ""}
-                    <h2 className="text-xl font-semibold text-indigo-800 dark:text-white mb-4">Skills</h2>
+                    <h2 className="text-xl font-medium text-indigo-800 dark:text-white mb-4">Skills</h2>
                     <div className="flex flex-wrap gap-2 mb-6">
                         {['JavaScript', 'React', 'Node.js', 'Python', 'SQL'].map((skill, index) => (
                             <span key={index} className="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm hover:bg-blue-900 hover:text-white transition-colors duration-300">{skill}</span>
                         ))}
                     </div>
-                    <h2 className="text-xl font-semibold text-indigo-800 dark:text-white mb-4">Contact Information</h2>
+                    <h2 className="text-xl font-medium text-indigo-800 dark:text-white mb-4">Contact Information</h2>
                     <ul className="space-y-2 text-gray-700 dark:text-gray-300">
                         <li className="flex items-center">
                             {userData.email || ""}

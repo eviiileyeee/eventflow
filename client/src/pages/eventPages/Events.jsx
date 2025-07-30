@@ -57,18 +57,14 @@ const Events = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-[#f4f0ff] dark:from-gray-900 dark:via-gray-800 dark:to-black p-2 md:p-8 pb-20">
+    <div className="min-h-screen bg-gradient-to-b from-white to-[#f4f0ff] dark:from-gray-900 dark:via-gray-800 dark:to-black p-2 md:p-8 md:pb-20 pb-20">
       <div className="relative top-10 max-w-6xl mx-auto">
-        <h1 className="text-2xl md:text-4xl uppercase font-bold text-gray-800 dark:text-white m-8">
-          Events
-        </h1>
-
         {events.length === 0 ? (
           <div className="text-center p-8 bg-white dark:bg-gray-800 rounded-lg shadow-lg">
             <p className="text-gray-800 dark:text-white">No events available at this time.</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
             {events.map(event => (
               <EventCard key={event.id} event={event} />
             ))}
